@@ -1,0 +1,22 @@
+{
+  "Index": {
+    "title": "Explore your city",
+    "description": "A modern, visually engaging city guide platform.",
+    "explore_btn": "Explore your city",
+    "local_services": "Emergency & Local Services",
+    "tourist_police": "Tourist Police",
+    "tourist_police_desc": "English speaking assistance.",
+    "medical_emergency": "Ambulance / Medical",
+    "medical_emergency_desc": "Immediate medical dispatch.",
+    "local_police": "Local Police (General)",
+    "local_police_desc": "Report crimes and incidents.",
+    "fire_rescue": "Fire & Rescue",
+    "fire_rescue_desc": "Fire, flooding, snake removal."
+  },
+  "Navigation": {
+    "explore": "Explore",
+    "events": "Events",
+    "itinerary": "Itinerary",
+    "home": "Home"
+  }
+}
