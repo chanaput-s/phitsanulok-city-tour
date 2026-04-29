@@ -11,6 +11,8 @@ const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "Ju
 export function EventCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 9, 1)); // Oct 2026
   const [selectedDate, setSelectedDate] = useState<number | null>(15);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [currentWeekIndex, setCurrentWeekIndex] = useState(2); // Default to week containing 15th
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -18,13 +20,61 @@ export function EventCalendar() {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
 
-  const prevMonth = () => {
-    setCurrentDate(new Date(year, month - 1, 1));
-    setSelectedDate(null);
+  // Generate cells array
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstDayOfMonth; i++) cells.push(null);
+  for (let i = 1; i <= daysInMonth; i++) cells.push(i);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const prev = () => {
+    if (isExpanded) {
+      setCurrentDate(new Date(year, month - 1, 1));
+      setCurrentWeekIndex(0);
+      setSelectedDate(null);
+    } else {
+      if (currentWeekIndex > 0) {
+        setCurrentWeekIndex(currentWeekIndex - 1);
+      } else {
+        const prevMonthDate = new Date(year, month - 1, 1);
+        setCurrentDate(prevMonthDate);
+        const prevDaysInMonth = new Date(year, month, 0).getDate();
+        const prevFirstDay = prevMonthDate.getDay();
+        const prevCellsLength = prevDaysInMonth + prevFirstDay;
+        const prevWeeksCount = Math.ceil(prevCellsLength / 7);
+        setCurrentWeekIndex(prevWeeksCount - 1);
+      }
+    }
   };
-  const nextMonth = () => {
-    setCurrentDate(new Date(year, month + 1, 1));
-    setSelectedDate(null);
+
+  const next = () => {
+    const weeksInMonth = cells.length / 7;
+    if (isExpanded) {
+      setCurrentDate(new Date(year, month + 1, 1));
+      setCurrentWeekIndex(0);
+      setSelectedDate(null);
+    } else {
+      if (currentWeekIndex < weeksInMonth - 1) {
+        setCurrentWeekIndex(currentWeekIndex + 1);
+      } else {
+        setCurrentDate(new Date(year, month + 1, 1));
+        setCurrentWeekIndex(0);
+      }
+    }
+  };
+
+  // Determine which cells to show
+  const currentWeekStart = currentWeekIndex * 7;
+  const visibleCells = isExpanded ? cells : cells.slice(currentWeekStart, currentWeekStart + 7);
+
+  const handleDateClick = (date: number) => {
+    setSelectedDate(selectedDate === date ? null : date);
+    if (!isExpanded) {
+      // Find the index of the clicked date to ensure the week index stays correct
+      const idx = cells.indexOf(date);
+      if (idx !== -1) {
+        setCurrentWeekIndex(Math.floor(idx / 7));
+      }
+    }
   };
 
   // Determine events for the selected date
@@ -37,39 +87,36 @@ export function EventCalendar() {
 
       {/* Left Column: Calendar UI */}
       <div className="lg:w-1/2 flex flex-col">
-        <div className="bg-card border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 md:p-8 shadow-xl">
+        <div className="bg-card border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 md:p-6 shadow-lg">
 
           {/* Calendar Header */}
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500">
               {MONTH_NAMES[month]} {year}
             </h2>
-            <div className="flex items-center gap-2">
-              <button onClick={prevMonth} className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-                <ChevronLeft className="w-5 h-5" />
+            <div className="flex items-center gap-1.5">
+              <button onClick={prev} className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+                <ChevronLeft className="w-4 h-4" />
               </button>
-              <button onClick={nextMonth} className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-                <ChevronRight className="w-5 h-5" />
+              <button onClick={next} className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
 
           {/* Calendar Grid */}
-          <div className="grid grid-cols-7 gap-y-4 gap-x-1 sm:gap-x-2 text-center mb-2">
+          <div className="grid grid-cols-7 gap-y-2 gap-x-1 sm:gap-x-1.5 text-center mb-1">
             {DAYS.map(day => (
-              <div key={day} className="text-[10px] sm:text-xs font-bold text-neutral-400 uppercase tracking-wider">{day}</div>
+              <div key={day} className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-wider">{day}</div>
             ))}
           </div>
 
-          <div className="grid grid-cols-7 gap-y-3 sm:gap-y-4 gap-x-1 sm:gap-x-2">
-            {/* Empty padding days */}
-            {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-              <div key={`empty-${i}`} className="h-12 sm:h-14 md:h-16 pointer-events-none"></div>
-            ))}
+          <div className="grid grid-cols-7 gap-y-2 sm:gap-y-2.5 gap-x-1 sm:gap-x-1.5">
+            {visibleCells.map((date, index) => {
+              if (date === null) {
+                return <div key={`empty-${index}`} className="h-9 sm:h-10 md:h-11 pointer-events-none"></div>;
+              }
 
-            {/* Actual Days */}
-            {Array.from({ length: daysInMonth }).map((_, i) => {
-              const date = i + 1;
               // Check if this date has events
               const dayEvents = MOCK_EVENTS.filter(e => e.year === year && e.month === month && e.date === date);
               const hasEvents = dayEvents.length > 0;
@@ -78,9 +125,9 @@ export function EventCalendar() {
               return (
                 <button
                   key={date}
-                  onClick={() => setSelectedDate(isSelected ? null : date)}
-                  className={`relative h-12 sm:h-14 md:h-16 rounded-2xl flex flex-col items-center justify-center text-sm sm:text-lg font-bold transition-all duration-300 ${isSelected
-                    ? 'bg-primary text-white shadow-xl scale-110 z-10 border-2 border-primary ring-4 ring-primary/20'
+                  onClick={() => handleDateClick(date)}
+                  className={`relative h-9 sm:h-10 md:h-11 rounded-xl flex flex-col items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 ${isSelected
+                    ? 'bg-primary text-white shadow-md scale-110 z-10 border-2 border-primary ring-2 ring-primary/20'
                     : hasEvents
                       ? 'bg-primary/5 text-primary hover:bg-primary/10 dark:bg-primary/10 dark:hover:bg-primary/20 border-2 border-transparent'
                       : 'text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800 border-2 border-transparent'
@@ -90,15 +137,25 @@ export function EventCalendar() {
 
                   {/* Event indicators (dots) */}
                   {hasEvents && !isSelected && (
-                    <div className="absolute bottom-1.5 md:bottom-2 flex gap-0.5">
+                    <div className="absolute bottom-1 md:bottom-1.5 flex gap-0.5">
                       {dayEvents.slice(0, 3).map((e, idx) => (
-                        <div key={idx} className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${e.color}`}></div>
+                        <div key={idx} className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${e.color}`}></div>
                       ))}
                     </div>
                   )}
                 </button>
               );
             })}
+          </div>
+
+          {/* Toggle View Button */}
+          <div className="mt-4 flex justify-center">
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)} 
+              className="text-[11px] sm:text-xs font-bold text-neutral-500 hover:text-primary transition-colors flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full"
+            >
+              {isExpanded ? "Show Week Only" : "Show Full Month"}
+            </button>
           </div>
         </div>
       </div>

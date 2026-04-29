@@ -11,7 +11,9 @@
     "type": "Art & Culture",
     "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
     "color": "bg-purple-500",
-    "rating": "4.9"
+    "rating": "4.9",
+    "isHighlight": false,
+    "description": "Experience the majestic Wat Phra Si illuminated by thousands of colorful lights in this annual cultural celebration."
   },
   {
     "id": "2",
@@ -25,7 +27,9 @@
     "type": "Food & Shop",
     "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
     "color": "bg-amber-500",
-    "rating": "4.7"
+    "rating": "4.7",
+    "isHighlight": true,
+    "description": "Discover unique local crafts, handmade goods, and street food at the city's largest seasonal night market."
   },
   {
     "id": "3",
@@ -39,7 +43,9 @@
     "type": "Sports",
     "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
     "color": "bg-blue-500",
-    "rating": "4.8"
+    "rating": "4.8",
+    "isHighlight": true,
+    "description": "Cheer on your favorite teams as traditional longboats race down the Nan River in this thrilling historical event."
   },
   {
     "id": "4",
@@ -53,7 +59,9 @@
     "type": "Food & Shop",
     "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
     "color": "bg-amber-500",
-    "rating": "4.6"
+    "rating": "4.6",
+    "isHighlight": false,
+    "description": "Taste over 100 different authentic local dishes prepared by master chefs from across the province."
   },
   {
     "id": "5",
@@ -67,7 +75,9 @@
     "type": "Education",
     "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
     "color": "bg-emerald-500",
-    "rating": "4.5"
+    "rating": "4.5",
+    "isHighlight": false,
+    "description": "Get your hands dirty and learn the ancient art of local pottery and weaving from certified local artisans."
   },
   {
     "id": "6",
@@ -81,6 +91,8 @@
     "type": "Sports",
     "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
     "color": "bg-blue-500",
-    "rating": "4.9"
+    "rating": "4.9",
+    "isHighlight": false,
+    "description": "Join the grand birthday celebration featuring traditional sports, music, and community activities."
   }
 ]

@@ -10,6 +10,7 @@ function cn(...inputs: ClassValue[]) {
 
 const sections = [
   { id: "hero", label: "Welcome" },
+  { id: "events", label: "City Events" },
   { id: "services", label: "Local Services" },
   { id: "explore", label: "Explore" },
 ];
