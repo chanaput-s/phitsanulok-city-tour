@@ -18,5 +18,23 @@
     "events": "Events",
     "itinerary": "Itinerary",
     "home": "Home"
+  },
+  "Events": {
+    "upcoming_events": "Upcoming Events",
+    "see_all": "See all",
+    "featured_event": "Featured Event",
+    "high_turnout": "High Turnout",
+    "view_details": "View Details",
+    "show_week_only": "Show Week Only",
+    "show_full_month": "Show Full Month",
+    "all_types": "All Types",
+    "events_count": "Events",
+    "no_events_scheduled": "No events scheduled for this date.",
+    "view_all_month_events": "View all month events",
+    "all_events_in": "All Events in",
+    "get_tickets": "Get Tickets / Info",
+    "explore_month": "Explore Month",
+    "no_events_today": "No events scheduled today.",
+    "rating": "Rating"
   }
 }
