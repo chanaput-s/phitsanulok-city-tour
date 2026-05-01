@@ -21,14 +21,12 @@ export default async function ExplorePage({
   const t = await getTranslations("Navigation");
 
   return (
-    <main className="h-[100dvh] pt-0 md:pt-24 px-0 md:px-8 pb-0 md:pb-8 flex flex-col overflow-hidden bg-background">
-        <div className="hidden md:flex items-center gap-3 mb-4 px-4 md:px-0">
-          <h1 className="text-3xl font-extrabold">{t("explore")}</h1>
-          <span className="bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-sm">Interactive Map</span>
+    <main className="h-[100dvh] pt-16 md:pt-24 px-4 md:px-8 pb-20 md:pb-8 flex flex-col overflow-hidden bg-background">
+        <div className="flex items-center mt-2 mb-4 md:mt-0 md:mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">{t("explore")}</h1>
         </div>
-        
-        {/* Wrap split view in flex-grow container so it stretches tightly to bounds */}
-        <div className="flex-grow min-h-0 relative rounded-none md:rounded-3xl overflow-hidden border border-transparent md:border-neutral-200 md:dark:border-neutral-800 shadow-none md:shadow-2xl">
+
+        <div className="flex-grow min-h-0 relative rounded-2xl md:rounded-3xl overflow-hidden border border-neutral-200 dark:border-neutral-800 md:border-neutral-200 md:dark:border-neutral-800 shadow-md md:shadow-2xl">
            <ExploreSplitView />
         </div>
     </main>

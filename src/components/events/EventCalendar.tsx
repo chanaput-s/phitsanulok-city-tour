@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, Clock } from "lucide-react";
+import { Link } from "@/i18n/routing";
 
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations, useLocale } from "next-intl";
@@ -295,9 +296,11 @@ export function EventCalendar() {
                   </div>
 
                   <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
-                    <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
-                      {t("get_tickets")} <ChevronRight className="w-4 h-4" />
-                    </button>
+                    <Link href={`/events/${event.id}`}>
+                      <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
+                        {t("get_tickets")} <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

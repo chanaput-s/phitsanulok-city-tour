@@ -1,178 +1,338 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { Star, MapPin } from "lucide-react";
-import { Link } from "@/i18n/routing";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import {
+  Coffee, Landmark, UtensilsCrossed, TreePine, Wine,
+  Hammer, Building2, ShoppingBag, X, Phone, Navigation,
+} from "lucide-react";
 
-// Dynamically import MapView to prevent Server-Side Rendering (SSR) issues with Leaflet
 const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
-  loading: () => <div className="w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl"><div className="flex flex-col items-center gap-2"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div><span className="text-neutral-500 font-medium">Loading Map Data...</span></div></div>
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
+      <div className="flex flex-col items-center gap-2">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <span className="text-neutral-500 font-medium text-sm">Loading Map...</span>
+      </div>
+    </div>
+  ),
 });
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 type Place = {
   id: string;
   name: string;
   category: string;
-  subcategory?: string;
-  rating: number | string;
+  hashtags: string[];
+  phone: string;
   img: string;
   position: [number, number];
-  isEvent?: boolean;
 };
 
+// ─── Category config ──────────────────────────────────────────────────────────
+
+type CategoryConfig = {
+  label: string;
+  icon: React.ReactNode;
+  color: string;
+  pinColor: string;
+  textColor: string;
+};
+
+const CATEGORIES: Record<string, CategoryConfig> = {
+  Cafe:         { label: "Cafe",       icon: <Coffee size={14} />,          color: "bg-amber-500",   pinColor: "bg-amber-500",   textColor: "text-amber-600" },
+  Temple:       { label: "Temple",     icon: <Landmark size={14} />,        color: "bg-yellow-500",  pinColor: "bg-yellow-500",  textColor: "text-yellow-600" },
+  Restaurant:   { label: "Restaurant", icon: <UtensilsCrossed size={14} />, color: "bg-red-500",     pinColor: "bg-red-500",     textColor: "text-red-600" },
+  Park:         { label: "Park",       icon: <TreePine size={14} />,        color: "bg-green-500",   pinColor: "bg-green-500",   textColor: "text-green-600" },
+  Bar:          { label: "Bar",        icon: <Wine size={14} />,            color: "bg-purple-500",  pinColor: "bg-purple-500",  textColor: "text-purple-600" },
+  Workshop:     { label: "Workshop",   icon: <Hammer size={14} />,          color: "bg-blue-500",    pinColor: "bg-blue-500",    textColor: "text-blue-600" },
+  Museum:       { label: "Museum",     icon: <Building2 size={14} />,       color: "bg-indigo-500",  pinColor: "bg-indigo-500",  textColor: "text-indigo-600" },
+  "Local shop": { label: "Local shop", icon: <ShoppingBag size={14} />,     color: "bg-pink-500",    pinColor: "bg-pink-500",    textColor: "text-pink-600" },
+};
+
+const CATEGORY_KEYS = Object.keys(CATEGORIES);
+
+// ─── Mock places (1 per category) ────────────────────────────────────────────
+
 const PLACES: Place[] = [
-  { id: "1", name: "Wat Phra Si Rattana Mahathat", category: "Temple", rating: 4.9, img: "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800", position: [16.8235, 100.2608] },
-  { id: "2", name: "River Nan Night Market", category: "Food & Shop", rating: 4.7, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800", position: [16.8200, 100.2640] },
-  { id: "3", name: "Phitsanulok City Pillar Shrine", category: "Historical", rating: 4.8, img: "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800", position: [16.8250, 100.2665] },
-  { id: "4", name: "Sergeant Major Thawee Folk Museum", category: "Museum", rating: 4.6, img: "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800", position: [16.8120, 100.2740] },
-  { id: "5", name: "Chan Royal Palace", category: "Historical", rating: 4.5, img: "https://images.unsplash.com/photo-1552353617-3bfd679b10b0?q=80&w=800", position: [16.8270, 100.2580] },
-  { id: "6", name: "Naresuan University Art Gallery", category: "Art", rating: 4.6, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=800", position: [16.7431, 100.1983] },
+  {
+    id: "cafe-1",
+    name: "Made for Mouth Cafe",
+    category: "Cafe",
+    hashtags: ["#คาเฟ่พิษณุโลก", "#ร้านดัง", "#minimalist"],
+    phone: "055-123-456",
+    img: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=800",
+    position: [16.8210, 100.2550],
+  },
+  {
+    id: "temple-1",
+    name: "วัดพระศรีรัตนมหาธาตุ",
+    category: "Temple",
+    hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
+    phone: "055-258-013",
+    img: "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    position: [16.8235, 100.2608],
+  },
+  {
+    id: "restaurant-1",
+    name: "Pae the River",
+    category: "Restaurant",
+    hashtags: ["#ริมน้ำน่าน", "#อาหารไทย", "#วิวสวย"],
+    phone: "055-301-789",
+    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800",
+    position: [16.8150, 100.2670],
+  },
+  {
+    id: "park-1",
+    name: "สวนสมเด็จพระนเรศวร",
+    category: "Park",
+    hashtags: ["#สวนสาธารณะ", "#พักผ่อน", "#ออกกำลังกาย"],
+    phone: "055-244-100",
+    img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=800",
+    position: [16.8300, 100.2620],
+  },
+  {
+    id: "bar-1",
+    name: "Riverside Bar & Lounge",
+    category: "Bar",
+    hashtags: ["#barพิษณุโลก", "#ริมน้ำ", "#nightlife"],
+    phone: "092-456-7890",
+    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800",
+    position: [16.8185, 100.2635],
+  },
+  {
+    id: "workshop-1",
+    name: "Phitsanulok Craft Workshop",
+    category: "Workshop",
+    hashtags: ["#handmade", "#งานฝีมือ", "#DIY"],
+    phone: "081-234-5678",
+    img: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=800",
+    position: [16.8170, 100.2590],
+  },
+  {
+    id: "museum-1",
+    name: "พิพิธภัณฑ์พื้นบ้านจ่าทวี",
+    category: "Museum",
+    hashtags: ["#museum", "#ประวัติศาสตร์", "#วัฒนธรรม"],
+    phone: "055-258-858",
+    img: "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    position: [16.8120, 100.2740],
+  },
+  {
+    id: "localshop-1",
+    name: "ตลาดริมน้ำน่าน",
+    category: "Local shop",
+    hashtags: ["#ตลาดพิษณุโลก", "#ของฝาก", "#streetfood"],
+    phone: "086-789-0123",
+    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    position: [16.8200, 100.2640],
+  },
 ];
 
-const EVENT_PLACES: Place[] = MOCK_EVENTS.map((e: any) => ({
-  id: `event-${e.id}`,
-  name: e.title,
-  category: "Event",
-  subcategory: e.type,
-  rating: "Event",
-  img: e.img,
-  position: e.position as [number, number],
-  isEvent: true
-}));
+// ─── Haversine distance (km) ──────────────────────────────────────────────────
 
-const ALL_PLACES: Place[] = [...PLACES, ...EVENT_PLACES];
+function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export function ExploreSplitView() {
-  const [activeLocation, setActiveLocation] = useState<[number, number] | undefined>(undefined);
-  const [activeFilter, setActiveFilter] = useState("All Places");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([...CATEGORY_KEYS]);
+  const [nearMe, setNearMe] = useState(false);
+  const [userPos, setUserPos] = useState<[number, number] | null>(null);
+  const [gpsError, setGpsError] = useState<string | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
 
-  const categories = ["All Places", ...Array.from(new Set(ALL_PLACES.map(p => p.category)))];
+  const toggleCategory = (cat: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
 
-  const filteredPlaces = activeFilter === "All Places" 
-    ? ALL_PLACES 
-    : ALL_PLACES.filter(p => p.category === activeFilter);
+  const toggleNearMe = () => {
+    if (!nearMe) {
+      if (!navigator.geolocation) {
+        setGpsError("อุปกรณ์ไม่รองรับ GPS");
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setUserPos([pos.coords.latitude, pos.coords.longitude]);
+          setGpsError(null);
+          setNearMe(true);
+        },
+        () => setGpsError("ไม่สามารถเข้าถึง GPS ได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง")
+      );
+    } else {
+      setNearMe(false);
+    }
+  };
+
+  const visiblePlaces = PLACES.filter((p) => {
+    const categoryMatch = selectedCategories.includes(p.category);
+    if (!categoryMatch) return false;
+    if (nearMe && userPos) {
+      return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
+    }
+    return true;
+  });
+
+  const handleSelectId = useCallback(
+    (id: string) => {
+      const place = PLACES.find((p) => p.id === id) ?? null;
+      setSelectedPlace(place);
+    },
+    []
+  );
+
+  const catConfig = selectedPlace ? CATEGORIES[selectedPlace.category] : null;
 
   return (
-    <div className="flex flex-col md:flex-row absolute inset-0 w-full overflow-hidden">
-      
-      {/* Left Panel: Scrollable List (Hidden on purely Mobile Maps) */}
-      <div className="hidden md:flex flex-col w-full md:w-[450px] lg:w-[500px] h-full bg-background border-r border-neutral-200 dark:border-neutral-800 z-10 shadow-xl relative overflow-y-auto shrink-0 custom-scrollbar">
-        <div className="sticky top-0 left-0 right-0 bg-background/95 backdrop-blur-xl py-4 z-20 border-b border-neutral-100 dark:border-neutral-800 shadow-sm flex flex-col justify-center">
-            <h2 className="text-xl font-bold mb-3 px-6">Popular Recommendations</h2>
-            <div className="flex flex-wrap gap-2 pb-1 px-6 w-full">
-                {categories.map((cat) => (
-                  <span 
-                    key={cat}
-                    onClick={() => setActiveFilter(cat)}
-                    className={`px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer transition border ${
-                      activeFilter === cat 
-                        ? 'bg-primary text-primary-foreground border-transparent shadow-sm' 
-                        : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 border-transparent dark:border-neutral-700'
-                    }`}
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+
+      {/* ── Map (full screen) ── */}
+      <div className="absolute inset-0 z-0">
+        <MapView
+          locations={visiblePlaces}
+          onSelectId={handleSelectId}
+          userPosition={userPos ?? undefined}
+        />
+      </div>
+
+      {/* ── Category chips + Near Me (top overlay) ── */}
+      <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none">
+        <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-wrap md:flex-nowrap">
+          {/* All / None toggle */}
+          <button
+            onClick={() =>
+              selectedCategories.length === 0
+                ? setSelectedCategories([...CATEGORY_KEYS])
+                : setSelectedCategories([])
+            }
+            className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 bg-neutral-800 dark:bg-white text-white dark:text-neutral-900 border-transparent"
+          >
+            {selectedCategories.length === 0 ? "All" : "None"}
+          </button>
+
+          {CATEGORY_KEYS.map((cat) => {
+            const cfg = CATEGORIES[cat];
+            const active = selectedCategories.includes(cat);
+            return (
+              <button
+                key={cat}
+                onClick={() => toggleCategory(cat)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${
+                  active
+                    ? `${cfg.color} text-white border-transparent`
+                    : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+                }`}
+              >
+                {cfg.icon}
+                {cfg.label}
+              </button>
+            );
+          })}
+
+          {/* Near Me */}
+          <button
+            onClick={toggleNearMe}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${
+              nearMe
+                ? "bg-primary text-white border-transparent"
+                : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+            }`}
+          >
+            <Navigation size={13} className={nearMe ? "text-white" : "text-primary"} />
+            Near Me
+            {nearMe && <span className="ml-1 text-[10px] opacity-80">3 km</span>}
+          </button>
+        </div>
+
+        {/* GPS error */}
+        {gpsError && (
+          <div className="pointer-events-auto bg-red-500/90 text-white text-xs px-3 py-1.5 rounded-full shadow-md w-max backdrop-blur-md">
+            {gpsError}
+          </div>
+        )}
+      </div>
+
+      {/* ── Place Card (bottom overlay) ── */}
+      <div
+        className={`absolute left-0 right-0 z-[600] transition-all duration-300 ease-out ${
+          selectedPlace
+            ? "bottom-4 md:bottom-6 opacity-100 translate-y-0"
+            : "bottom-0 opacity-0 translate-y-8 pointer-events-none"
+        }`}
+      >
+        {selectedPlace && catConfig && (
+          <div className="mx-3 md:mx-auto md:max-w-md bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+            {/* Image */}
+            <div className="relative h-40 w-full">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${selectedPlace.img})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+              {/* Close btn */}
+              <button
+                onClick={() => setSelectedPlace(null)}
+                className="absolute top-3 right-3 w-8 h-8 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X size={16} />
+              </button>
+
+              {/* Category badge */}
+              <span
+                className={`absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white ${catConfig.color}`}
+              >
+                {catConfig.icon}
+                {selectedPlace.category}
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="p-4">
+              <h3 className="font-extrabold text-lg leading-tight mb-2">
+                {selectedPlace.name}
+              </h3>
+
+              {/* Hashtags */}
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {selectedPlace.hashtags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 ${catConfig.textColor}`}
                   >
-                    {cat}
+                    {tag}
                   </span>
                 ))}
-            </div>
-        </div>
-
-        <div className="p-4 flex flex-col gap-3 pb-10">
-          {filteredPlaces.length === 0 && (
-            <div className="text-center text-neutral-500 py-10">No places found for this category.</div>
-          )}
-          {filteredPlaces.map((place) => (
-            <div 
-              key={place.id}
-              className="flex gap-4 p-3 rounded-2xl cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800/60 transition-all border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700 group hover:shadow-md"
-              onMouseEnter={() => setActiveLocation(place.position as [number, number])}
-              onClick={() => setActiveLocation(place.position as [number, number])}
-            >
-              {/* Thumbnail */}
-              <div className="w-28 h-28 shrink-0 rounded-xl overflow-hidden relative shadow-inner">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
-                <div className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500 ease-out" style={{ backgroundImage: `url(${place.img})` }}></div>
               </div>
-              
-              {/* Content */}
-              <div className="flex flex-col flex-grow py-1">
-                <div className="text-xs font-bold text-primary mb-1 tracking-wider uppercase bg-primary/10 rounded-full px-2 py-0.5 inline-block w-max">{place.category}</div>
-                <h3 className="font-bold text-lg mb-1 leading-tight group-hover:text-primary transition-colors">{place.name}</h3>
-                
-                <div className="mt-auto flex items-center justify-between text-sm">
-                  <Link 
-                    href={place.isEvent ? `/events` : `/place/${place.id}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-lg font-bold transition-colors"
-                  >
-                    <span className="text-xs">View detail</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                  </Link>
-                  <div className="flex items-center gap-1 font-bold text-amber-500">
-                    {!place.isEvent && <Star className="w-4 h-4 fill-current" />}
-                    <span className={place.isEvent ? "text-primary text-xs" : ""}>{place.rating}</span>
-                  </div>
+
+              {/* Phone */}
+              <a
+                href={`tel:${selectedPlace.phone}`}
+                className="flex items-center gap-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:text-primary transition-colors"
+              >
+                <div className="w-7 h-7 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+                  <Phone size={14} />
                 </div>
-              </div>
+                {selectedPlace.phone}
+              </a>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile Card Carousel (overlaid on bottom of map) */}
-      <div className="md:hidden flex flex-col absolute bottom-24 left-0 right-0 z-[1000] pointer-events-none">
-          {/* Mobile Filters */}
-          <div className="flex gap-2 overflow-x-auto hide-scrollbar px-4 mb-3 pointer-events-auto">
-             {categories.map((cat) => (
-                <span 
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold cursor-pointer whitespace-nowrap shadow-lg backdrop-blur-md border ${
-                    activeFilter === cat 
-                      ? 'bg-primary text-white border-primary' 
-                      : 'bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-800'
-                  }`}
-                >
-                  {cat}
-                </span>
-             ))}
           </div>
-
-          <div className="overflow-x-auto flex gap-4 px-4 snap-x snap-mandatory pb-4 hide-scrollbar pointer-events-auto">
-              {filteredPlaces.map((place) => (
-                <div 
-                    key={place.id}
-                    onClick={() => setActiveLocation(place.position as [number, number])}
-                    className="w-[85vw] sm:w-72 shrink-0 snap-center bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl p-3 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 flex gap-3 active:scale-95 transition-transform"
-                >
-                    <div className="w-20 h-20 shrink-0 rounded-xl bg-cover bg-center shadow-md relative overflow-hidden">
-                      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${place.img})` }}></div>
-                    </div>
-                    <div className="flex flex-col py-1 flex-grow">
-                        <span className="text-[10px] font-bold text-primary uppercase bg-primary/10 px-1.5 py-0.5 rounded-full inline-block w-max mb-1">{place.category}</span>
-                        <h3 className="font-extrabold text-sm leading-tight line-clamp-2 md:line-clamp-1 mb-1">{place.name}</h3>
-                        <div className="mt-auto flex items-center justify-between text-xs">
-                            <Link 
-                              href={place.isEvent ? `/events` : `/place/${place.id}`}
-                              className="text-primary font-bold flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-md active:bg-primary/20"
-                            >
-                              View <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                            </Link>
-                            <div className="font-bold text-amber-500 flex items-center gap-1">
-                                {!place.isEvent && <Star className="w-3 h-3 fill-current" />}
-                                <span className={place.isEvent ? "text-primary text-[10px]" : ""}>{place.rating}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              ))}
-          </div>
-      </div>
-
-      {/* Right Panel: Map */}
-      <div className="w-full h-[100dvh] md:h-full md:flex-1 relative bg-neutral-200 dark:bg-neutral-800 z-0">
-        <MapView locations={filteredPlaces} activeLocation={activeLocation} />
+        )}
       </div>
 
     </div>
