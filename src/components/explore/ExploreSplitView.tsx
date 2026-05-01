@@ -148,7 +148,7 @@ function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number) {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ExploreSplitView() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([...CATEGORY_KEYS]);
   const [nearMe, setNearMe] = useState(false);
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [gpsError, setGpsError] = useState<string | null>(null);
@@ -180,8 +180,7 @@ export function ExploreSplitView() {
   };
 
   const visiblePlaces = PLACES.filter((p) => {
-    const categoryMatch =
-      selectedCategories.length === 0 || selectedCategories.includes(p.category);
+    const categoryMatch = selectedCategories.includes(p.category);
     if (!categoryMatch) return false;
     if (nearMe && userPos) {
       return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
@@ -214,6 +213,18 @@ export function ExploreSplitView() {
       {/* ── Category chips + Near Me (top overlay) ── */}
       <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-wrap md:flex-nowrap">
+          {/* All / None toggle */}
+          <button
+            onClick={() =>
+              selectedCategories.length === 0
+                ? setSelectedCategories([...CATEGORY_KEYS])
+                : setSelectedCategories([])
+            }
+            className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 bg-neutral-800 dark:bg-white text-white dark:text-neutral-900 border-transparent"
+          >
+            {selectedCategories.length === 0 ? "All" : "None"}
+          </button>
+
           {CATEGORY_KEYS.map((cat) => {
             const cfg = CATEGORIES[cat];
             const active = selectedCategories.includes(cat);
@@ -236,7 +247,7 @@ export function ExploreSplitView() {
           {/* Near Me */}
           <button
             onClick={toggleNearMe}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ml-1 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${
               nearMe
                 ? "bg-primary text-white border-transparent"
                 : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
@@ -260,7 +271,7 @@ export function ExploreSplitView() {
       <div
         className={`absolute left-0 right-0 z-[600] transition-all duration-300 ease-out ${
           selectedPlace
-            ? "bottom-20 md:bottom-6 opacity-100 translate-y-0"
+            ? "bottom-4 md:bottom-6 opacity-100 translate-y-0"
             : "bottom-0 opacity-0 translate-y-8 pointer-events-none"
         }`}
       >
