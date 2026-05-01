@@ -47,7 +47,7 @@ export function UpcomingCarousel({ events }: CarouselProps) {
     <div className="relative w-full group flex flex-col">
       <div className="relative w-full">
         {/* Navigation Controls */}
-        <button 
+        <button
           onClick={scrollLeft}
           className="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 md:-ml-5 z-10 w-10 h-10 bg-white dark:bg-neutral-800 rounded-full shadow-lg border border-neutral-100 dark:border-neutral-700 flex items-center justify-center text-teal-900 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/50 hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden sm:flex"
         >
@@ -55,24 +55,24 @@ export function UpcomingCarousel({ events }: CarouselProps) {
         </button>
 
         {/* Carousel Track */}
-        <div 
+        <div
           ref={scrollRef}
           onScroll={handleScroll}
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4 pt-2 px-1"
         >
           {events.map((event) => (
-            <Link 
+            <Link
               key={event.id}
               href={`/events/${event.id}`}
               className="flex flex-col bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-neutral-100 dark:border-neutral-800 overflow-hidden shrink-0 snap-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group/card w-[260px] h-[320px] md:w-[280px] md:h-[350px]"
             >
               {/* Visual Header (Top 80%) */}
               <div className="relative w-full h-[80%] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-110"
                   style={{ backgroundImage: `url(${event.img})` }}
                 ></div>
-                
+
                 {/* Subtle gradient overlay for better badge contrast */}
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/40 to-transparent"></div>
 
@@ -88,20 +88,20 @@ export function UpcomingCarousel({ events }: CarouselProps) {
                 <h3 className="font-bold text-neutral-900 dark:text-neutral-100 text-sm md:text-base leading-none mb-1.5 truncate">
                   {isThai ? event.title_th : event.title}
                 </h3>
-                
+
                 {/* Metadata */}
                 <div className="flex items-center gap-3 text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-                    <span className="truncate">{event.date} {MONTH_NAMES[event.month]}</span>
+                    <span className="truncate pt-[3px]">{event.date} {MONTH_NAMES[event.month]}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-                    <span className="truncate">{event.time}</span>
+                    <span className="truncate pt-[3px]">{event.time}</span>
                   </div>
                   <div className="flex items-center gap-1 min-w-0">
                     <MapPin className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-                    <span className="truncate">{isThai ? event.location_th : event.location}</span>
+                    <span className="truncate pt-[3px]">{isThai ? event.location_th : event.location}</span>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export function UpcomingCarousel({ events }: CarouselProps) {
         </div>
 
         {/* Right Navigation Control */}
-        <button 
+        <button
           onClick={scrollRight}
           className="absolute right-0 top-1/2 -translate-y-1/2 -mr-3 md:-mr-5 z-10 w-10 h-10 bg-white dark:bg-neutral-800 rounded-full shadow-lg border border-neutral-100 dark:border-neutral-700 flex items-center justify-center text-teal-900 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/50 hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden sm:flex"
         >
@@ -121,11 +121,11 @@ export function UpcomingCarousel({ events }: CarouselProps) {
       {/* Slide Bar Progress Indicator */}
       {events.length > 1 && (
         <div className="w-16 h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full mx-auto mt-3 relative overflow-hidden">
-          <div 
-            className="absolute top-0 bottom-0 bg-teal-800 dark:bg-teal-500 rounded-full transition-all duration-100 ease-linear" 
-            style={{ 
+          <div
+            className="absolute top-0 bottom-0 bg-teal-800 dark:bg-teal-500 rounded-full transition-all duration-100 ease-linear"
+            style={{
               width: `${100 / events.length}%`,
-              left: `${scrollProgress * (1 - 1/events.length)}%` 
+              left: `${scrollProgress * (1 - 1 / events.length)}%`
             }}
           ></div>
         </div>

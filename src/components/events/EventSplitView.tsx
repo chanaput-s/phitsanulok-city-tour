@@ -31,7 +31,7 @@ export function EventSplitView() {
   const MONTH_NAMES = isThai ? MONTH_NAMES_TH : MONTH_NAMES_EN;
   const DAYS = isThai ? DAYS_TH : DAYS_EN;
   const [activeLocation, setActiveLocation] = useState<[number, number] | undefined>(undefined);
-  const [currentDate, setCurrentDate] = useState(new Date()); 
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
 
   const year = currentDate.getFullYear();
@@ -55,7 +55,7 @@ export function EventSplitView() {
   // Determine events for the selected date
   const activeEvents = MOCK_EVENTS.filter(e => {
     if (e.year !== year || e.month !== month) return false;
-    
+
     if (selectedDate !== null) {
       return e.date === selectedDate;
     } else {
