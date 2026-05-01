@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
+import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, useMap, CircleMarker } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Fix generic Leaflet icons not loading correctly in Webpack/Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -13,162 +12,114 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-function MapController({ center }: { center: [number, number] }) {
+// Phitsanulok city bounding box
+const PHITSANULOK_BOUNDS: L.LatLngBoundsLiteral = [
+  [16.78, 100.20],
+  [16.87, 100.33],
+];
+const PHITSANULOK_CENTER: [number, number] = [16.823, 100.263];
+
+function BoundsController() {
   const map = useMap();
   useEffect(() => {
-    map.flyTo(center, 15, { animate: true, duration: 1.5 });
-  }, [center, map]);
+    map.setMaxBounds(PHITSANULOK_BOUNDS);
+    map.on("drag", () => map.panInsideBounds(PHITSANULOK_BOUNDS, { animate: false }));
+  }, [map]);
   return null;
 }
 
-interface MapViewProps {
-  locations: { id: string; name: string; position: [number, number]; category?: string; subcategory?: string }[];
-  activeLocation?: [number, number];
-  showRoute?: boolean;
+// ─── Category → pin color map ─────────────────────────────────────────────────
+
+const CATEGORY_COLORS: Record<string, string> = {
+  Cafe:         "#f59e0b",
+  Temple:       "#eab308",
+  Restaurant:   "#ef4444",
+  Park:         "#22c55e",
+  Bar:          "#a855f7",
+  Workshop:     "#3b82f6",
+  Museum:       "#6366f1",
+  "Local shop": "#ec4899",
+};
+
+const CATEGORY_ICONS: Record<string, string> = {
+  Cafe:         '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/>',
+  Temple:       '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  Restaurant:   '<path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"/><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"/><path d="m2.1 21.8 6.4-6.3"/>',
+  Park:         '<path d="M11 20a7 7 0 0 1-7-7 4 4 0 0 1 4-4 4 4 0 0 1 4 4"/><path d="M11 20V8"/><path d="M16.5 8.5a4 4 0 0 1 1.5 7.5"/><path d="M16.5 8.5 17 20"/>',
+  Bar:          '<path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="m17 3-5 7-5-7Z"/>',
+  Workshop:     '<path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 5.6a5.009 5.009 0 0 0-6.16.88l3.26 3.26 1.79 1.79 1.73 1.73L20.91 11.7Z"/>',
+  Museum:       '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
+  "Local shop": '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+};
+
+function createCategoryIcon(category: string) {
+  const color = CATEGORY_COLORS[category] ?? "#6b7280";
+  const iconPath = CATEGORY_ICONS[category] ?? '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>';
+  const html = `
+    <div style="background:${color}" class="w-9 h-9 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPath}</svg>
+    </div>`;
+  return new L.DivIcon({
+    html,
+    className: "bg-transparent border-0",
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36],
+  });
 }
 
-const getIconSvg = (category: string = "", subcategory: string = "") => {
-  const cat = category.toLowerCase();
-  const sub = subcategory.toLowerCase();
-  let color = "bg-primary";
-  let path = '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'; // MapPin
+// ─── Props ────────────────────────────────────────────────────────────────────
 
-  if (cat.includes("food") || sub.includes("food")) {
-    color = "bg-orange-500";
-    path = '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>'; // Utensils
-  } else if (cat.includes("temple") || cat.includes("history") || cat.includes("museum") || sub.includes("culture")) {
-    color = "bg-amber-500";
-    path = '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>'; // Landmark
-  } else if (cat === "event") {
-    color = "bg-pink-500";
-    path = '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>'; // Calendar
-  } else if (cat.includes("shop") || sub.includes("shop")) {
-    color = "bg-blue-500";
-    path = '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>'; // ShoppingBag
-  }
+interface MapViewProps {
+  locations: { id: string; name: string; position: [number, number]; category?: string }[];
+  onSelectId?: (id: string) => void;
+  userPosition?: [number, number];
+}
 
-  return `
-    <div class="${color} w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white transform transition-transform hover:scale-110">
-       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>
-    </div>
-  `;
-};
+// ─── Component ────────────────────────────────────────────────────────────────
 
-const createCustomIcon = (category?: string, subcategory?: string) => {
-  return new L.DivIcon({
-    html: getIconSvg(category, subcategory),
-    className: "custom-leaflet-marker bg-transparent border-0",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32],
-  });
-};
-
-export default function MapView({ locations, activeLocation, showRoute = false }: MapViewProps) {
-  const defaultCenter = locations.length > 0 ? locations[0].position : [16.8211, 100.2659];
-  const [routeSegments, setRouteSegments] = useState<[number, number][][]>([]);
-
-  useEffect(() => {
-    if (showRoute && locations.length > 1) {
-      const fetchRoute = async () => {
-        try {
-          const coordinates = locations.map(loc => `${loc.position[1]},${loc.position[0]}`).join(";");
-          const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordinates}?overview=false&steps=true&geometries=geojson`);
-          const data = await res.json();
-          if (data.routes && data.routes.length > 0) {
-            const segments = data.routes[0].legs.map((leg: any) => {
-              const legCoords: [number, number][] = [];
-              if (leg.steps) {
-                leg.steps.forEach((step: any) => {
-                  if (step.geometry && step.geometry.coordinates) {
-                    step.geometry.coordinates.forEach((c: [number, number]) => {
-                      legCoords.push([c[1], c[0]]);
-                    });
-                  }
-                });
-              }
-              return legCoords;
-            });
-            setRouteSegments(segments);
-          }
-        } catch (error) {
-          console.error("Error fetching route from OSRM:", error);
-          // Fallback to straight lines, 1 segment for each pair
-          const fallbackSegments = [];
-          for (let i = 0; i < locations.length - 1; i++) {
-            fallbackSegments.push([locations[i].position as [number, number], locations[i+1].position as [number, number]]);
-          }
-          setRouteSegments(fallbackSegments);
-        }
-      };
-      fetchRoute();
-    } else {
-      setRouteSegments([]);
-    }
-  }, [showRoute, locations]);
-
+export default function MapView({ locations, onSelectId, userPosition }: MapViewProps) {
   return (
     <>
       <style>{`
-        @media (max-width: 768px) {
-          .leaflet-control-zoom {
-            display: none !important;
-          }
-        }
+        @media (max-width: 768px) { .leaflet-control-zoom { display: none !important; } }
+        .bg-transparent.border-0 { background: transparent !important; border: none !important; }
       `}</style>
       <MapContainer
-        center={defaultCenter as [number, number]}
+        center={PHITSANULOK_CENTER}
         zoom={14}
-        scrollWheelZoom={true}
-        zoomControl={true}
+        minZoom={13}
+        scrollWheelZoom
+        zoomControl
         className="w-full h-full z-0 font-sans"
       >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" // Modern light theme map tile
-      />
-      {locations.map((loc) => (
-        <Marker key={loc.id} position={loc.position} icon={createCustomIcon(loc.category, loc.subcategory)}>
-          <Popup className="font-sans">
-              <strong className="text-base">{loc.name}</strong>
-          </Popup>
-        </Marker>
-      ))}
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        />
+        <BoundsController />
 
-      {showRoute && routeSegments.map((segment, index) => {
-        let activeIndex = -1;
-        if (activeLocation) {
-          activeIndex = locations.findIndex(loc => loc.position[0] === activeLocation[0] && loc.position[1] === activeLocation[1]);
-        }
-        
-        // Default to all segments blue if nothing explicitly picked
-        let color = "#3b82f6"; // Blue
-        let weight = 4;
-        let dashArray = undefined;
-
-        if (activeLocation && activeIndex !== -1) {
-          if (index < activeIndex - 1) {
-            color = "#10b981"; // Emerald green for completed segments
-          } else if (index === activeIndex - 1) {
-            color = "#3b82f6"; // Blue for the active routing segment
-            weight = 6; // Thicker line for the active route
-          } else {
-            color = "#9ca3af"; // Gray for upcoming segments
-            dashArray = "8, 8";
-          }
-        }
-
-        return (
-          <Polyline 
-            key={`segment-${index}`} 
-            positions={segment} 
-            pathOptions={{ color, weight, dashArray }} 
+        {/* Place markers */}
+        {locations.map((loc) => (
+          <Marker
+            key={loc.id}
+            position={loc.position}
+            icon={createCategoryIcon(loc.category ?? "")}
+            eventHandlers={{
+              click: () => onSelectId?.(loc.id),
+            }}
           />
-        );
-      })}
+        ))}
 
-      {activeLocation && <MapController center={activeLocation} />}
-    </MapContainer>
+        {/* User position dot */}
+        {userPosition && (
+          <CircleMarker
+            center={userPosition}
+            radius={8}
+            pathOptions={{ color: "#fff", weight: 2, fillColor: "#3b82f6", fillOpacity: 1 }}
+          />
+        )}
+      </MapContainer>
     </>
   );
 }
