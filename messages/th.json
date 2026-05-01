@@ -18,5 +18,23 @@
     "events": "กิจกรรม",
     "itinerary": "แผนการเดินทาง",
     "home": "หน้าแรก"
+  },
+  "Events": {
+    "upcoming_events": "กิจกรรมที่กำลังจะมาถึง",
+    "see_all": "ดูทั้งหมด",
+    "featured_event": "กิจกรรมแนะนำ",
+    "high_turnout": "คนร่วมงานเยอะ",
+    "view_details": "ดูรายละเอียด",
+    "show_week_only": "แสดงเฉพาะสัปดาห์",
+    "show_full_month": "แสดงทั้งเดือน",
+    "all_types": "ทุกประเภท",
+    "events_count": "กิจกรรม",
+    "no_events_scheduled": "ไม่มีกิจกรรมในวันนี้",
+    "view_all_month_events": "ดูกิจกรรมทั้งหมดในเดือนนี้",
+    "all_events_in": "กิจกรรมทั้งหมดใน",
+    "get_tickets": "รับตั๋ว / ข้อมูลเพิ่มเติม",
+    "explore_month": "สำรวจเดือนนี้",
+    "no_events_today": "ไม่มีกิจกรรมในวันนี้",
+    "rating": "คะแนน"
   }
 }

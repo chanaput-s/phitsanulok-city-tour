@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { NextIntlClientProvider } from "next-intl";
@@ -9,9 +9,10 @@ import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const ibmPlexSansThai = IBM_Plex_Sans_Thai({
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex",
+  subsets: ["latin", "thai"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased min-h-screen bg-background text-foreground`}>
+      <body className={`${ibmPlexSansThai.variable} antialiased min-h-screen bg-background text-foreground`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
