@@ -42,14 +42,14 @@ type CategoryConfig = {
 };
 
 const CATEGORIES: Record<string, CategoryConfig> = {
-  Cafe:         { label: "Cafe",       icon: <Coffee size={14} />,          color: "bg-amber-500",   pinColor: "bg-amber-500",   textColor: "text-amber-600" },
-  Temple:       { label: "Temple",     icon: <Landmark size={14} />,        color: "bg-yellow-500",  pinColor: "bg-yellow-500",  textColor: "text-yellow-600" },
-  Restaurant:   { label: "Restaurant", icon: <UtensilsCrossed size={14} />, color: "bg-red-500",     pinColor: "bg-red-500",     textColor: "text-red-600" },
-  Park:         { label: "Park",       icon: <TreePine size={14} />,        color: "bg-green-500",   pinColor: "bg-green-500",   textColor: "text-green-600" },
-  Bar:          { label: "Bar",        icon: <Wine size={14} />,            color: "bg-purple-500",  pinColor: "bg-purple-500",  textColor: "text-purple-600" },
-  Workshop:     { label: "Workshop",   icon: <Hammer size={14} />,          color: "bg-blue-500",    pinColor: "bg-blue-500",    textColor: "text-blue-600" },
-  Museum:       { label: "Museum",     icon: <Building2 size={14} />,       color: "bg-indigo-500",  pinColor: "bg-indigo-500",  textColor: "text-indigo-600" },
-  "Local shop": { label: "Local shop", icon: <ShoppingBag size={14} />,     color: "bg-pink-500",    pinColor: "bg-pink-500",    textColor: "text-pink-600" },
+  Cafe: { label: "Cafe", icon: <Coffee size={14} />, color: "bg-amber-500", pinColor: "bg-amber-500", textColor: "text-amber-600" },
+  Temple: { label: "Temple", icon: <Landmark size={14} />, color: "bg-yellow-500", pinColor: "bg-yellow-500", textColor: "text-yellow-600" },
+  Restaurant: { label: "Restaurant", icon: <UtensilsCrossed size={14} />, color: "bg-red-500", pinColor: "bg-red-500", textColor: "text-red-600" },
+  Park: { label: "Park", icon: <TreePine size={14} />, color: "bg-green-500", pinColor: "bg-green-500", textColor: "text-green-600" },
+  Bar: { label: "Bar", icon: <Wine size={14} />, color: "bg-purple-500", pinColor: "bg-purple-500", textColor: "text-purple-600" },
+  Workshop: { label: "Workshop", icon: <Hammer size={14} />, color: "bg-blue-500", pinColor: "bg-blue-500", textColor: "text-blue-600" },
+  Museum: { label: "Museum", icon: <Building2 size={14} />, color: "bg-indigo-500", pinColor: "bg-indigo-500", textColor: "text-indigo-600" },
+  "Local shop": { label: "Local shop", icon: <ShoppingBag size={14} />, color: "bg-pink-500", pinColor: "bg-pink-500", textColor: "text-pink-600" },
 };
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
@@ -140,8 +140,8 @@ function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number) {
   const a =
     Math.sin(dLat / 2) ** 2 +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLng / 2) ** 2;
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
@@ -232,11 +232,10 @@ export function ExploreSplitView() {
               <button
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${
-                  active
-                    ? `${cfg.color} text-white border-transparent`
-                    : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${active
+                  ? `${cfg.color} text-white border-transparent`
+                  : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+                  }`}
               >
                 {cfg.icon}
                 {cfg.label}
@@ -247,11 +246,10 @@ export function ExploreSplitView() {
           {/* Near Me */}
           <button
             onClick={toggleNearMe}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${
-              nearMe
-                ? "bg-primary text-white border-transparent"
-                : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
-            }`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${nearMe
+              ? "bg-primary text-white border-transparent"
+              : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+              }`}
           >
             <Navigation size={13} className={nearMe ? "text-white" : "text-primary"} />
             Near Me
@@ -269,11 +267,10 @@ export function ExploreSplitView() {
 
       {/* ── Place Card (bottom overlay) ── */}
       <div
-        className={`absolute left-0 right-0 z-[600] transition-all duration-300 ease-out ${
-          selectedPlace
-            ? "bottom-4 md:bottom-6 opacity-100 translate-y-0"
-            : "bottom-0 opacity-0 translate-y-8 pointer-events-none"
-        }`}
+        className={`absolute left-0 right-0 z-[600] transition-all duration-300 ease-out ${selectedPlace
+          ? "bottom-4 md:bottom-6 opacity-100 translate-y-0"
+          : "bottom-0 opacity-0 translate-y-8 pointer-events-none"
+          }`}
       >
         {selectedPlace && catConfig && (
           <div className="mx-3 md:mx-auto md:max-w-md bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">

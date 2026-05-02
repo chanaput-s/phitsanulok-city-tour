@@ -36,5 +36,30 @@
     "explore_month": "Explore Month",
     "no_events_today": "No events scheduled today.",
     "rating": "Rating"
+  },
+  "Home": {
+    "eyebrow": "Mueang Phitsanulok City Guide",
+    "hero_headline_discover": "Discover",
+    "hero_headline_place": "Phitsanulok",
+    "hero_sub": "Uncover hidden gems, authentic street food, and rich history with our curated local guide.",
+    "hero_plan_btn": "Plan Your Trip",
+    "hero_explore_btn": "Explore Local Spots",
+    "scroll": "Scroll",
+    "spots_eyebrow": "Trending",
+    "spots_title": "Trending Local Spots",
+    "spots_desc": "Discover where the locals go, from historic temples to bustling night markets.",
+    "spots_view_all": "View all spots",
+    "why_eyebrow": "Why Mueang Phitsanulok",
+    "why_title": "Experience the Heart of the Lower North",
+    "why_body": "Phitsanulok blends centuries of history with a thriving modern lifestyle. Walk beside the Nan River, taste legendary boat noodles, and celebrate festivals that have shaped this region for generations.",
+    "stat_spots": "Local Spots Covered",
+    "stat_itineraries": "Curated Itineraries",
+    "stat_insights": "Updated Local Insights",
+    "feat_expertise_title": "Local Expertise",
+    "feat_expertise_desc": "Hand-picked spots vetted by residents who know every corner of the city.",
+    "feat_food_title": "Best Food",
+    "feat_food_desc": "From boat noodles to hidden rooftop bars — the real Phitsanulok food scene.",
+    "feat_events_title": "Local Events",
+    "feat_events_desc": "Stay up-to-date on temple fairs, markets, and community gatherings."
   }
 }

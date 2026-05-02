@@ -483,6 +483,29 @@
     "description_th": "เรียนรู้สิ่งใหม่ๆ และสัมผัสประสบการณ์ตรงจากผู้เชี่ยวชาญในท้องถิ่น"
   },
   {
+    "id": "19995",
+    "title": "Mocking",
+    "date": 2,
+    "month": 4,
+    "year": 2026,
+    "time": "8:00 PM",
+    "location": "Folk Museum",
+    "position": [
+      16.821,
+      100.263
+    ],
+    "type": "Health & Wellness",
+    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "color": "bg-rose-500",
+    "rating": "5.0",
+    "isHighlight": true,
+    "description": "Join our community for a refreshing session focused on your well-being.",
+    "title_th": "โยคะยามเช้า",
+    "location_th": "พิพิธภัณฑ์พื้นบ้าน",
+    "type_th": "สุขภาพและเวลเนส",
+    "description_th": "เข้าร่วมกิจกรรมเพื่อสุขภาพและความเป็นอยู่ที่ดีของคุณไหมนะ"
+  },
+  {
     "id": "22",
     "title": "Morning Yoga",
     "date": 12,

@@ -125,25 +125,25 @@ export function EventCalendar() {
       <div className="w-full flex flex-col">
         {/* Calendar Header Moved to Top */}
         <div className="flex items-center justify-between mb-4 px-2">
-          <h2 className={`font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500 ${isThai ? 'text-3xl' : 'text-2xl'}`}>
+          <h2 className={`font-extrabold tracking-tight text-[#1D1D2B] ${isThai ? 'text-3xl' : 'text-2xl'}`}>
             {MONTH_NAMES[month]} {isThai ? year + 543 : year}
           </h2>
           <div className="flex items-center gap-2">
-            <button onClick={prev} className="w-10 h-10 rounded-full bg-white dark:bg-neutral-800 shadow-sm border border-neutral-200 dark:border-neutral-700 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors text-neutral-600 dark:text-neutral-300 hover:text-primary">
+            <button onClick={prev} className="w-10 h-10 rounded-full bg-[#F9EFEF] shadow-sm border border-[#1D1D2B]/10 flex items-center justify-center hover:bg-[#AEADF0] transition-colors text-[#1D1D2B]/80 hover:text-[#1D1D2B]">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={next} className="w-10 h-10 rounded-full bg-white dark:bg-neutral-800 shadow-sm border border-neutral-200 dark:border-neutral-700 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors text-neutral-600 dark:text-neutral-300 hover:text-primary">
+            <button onClick={next} className="w-10 h-10 rounded-full bg-[#F9EFEF] shadow-sm border border-[#1D1D2B]/10 flex items-center justify-center hover:bg-[#AEADF0] transition-colors text-[#1D1D2B]/80 hover:text-[#1D1D2B]">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        <div className="bg-card border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 md:p-6 shadow-lg">
+        <div className="bg-[#F9EFEF] border border-[#1D1D2B]/10 rounded-2xl p-4 md:p-6 shadow-lg">
 
           {/* Calendar Grid */}
           <div className="grid grid-cols-7 gap-y-2 gap-x-1 sm:gap-x-1.5 text-center mb-1">
             {DAYS.map(day => (
-              <div key={day} className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-wider">{day}</div>
+              <div key={day} className="text-[9px] sm:text-[10px] font-bold text-[#1D1D2B]/40 uppercase tracking-wider">{day}</div>
             ))}
           </div>
 
@@ -160,7 +160,7 @@ export function EventCalendar() {
                   {week.map((cell, index) => {
                     if (cell.type !== 'current') {
                       return (
-                        <div key={`other-${index}`} className="h-8 sm:h-9 md:h-11 flex flex-col items-center justify-center text-[10px] sm:text-xs font-bold text-neutral-300 dark:text-neutral-700 pointer-events-none">
+                        <div key={`other-${index}`} className="h-8 sm:h-9 md:h-11 flex flex-col items-center justify-center text-[10px] sm:text-xs font-bold text-[#1D1D2B]/20 pointer-events-none">
                           {cell.date}
                         </div>
                       );
@@ -183,10 +183,10 @@ export function EventCalendar() {
                         key={date}
                         onClick={() => handleDateClick(date)}
                         className={`relative w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 mx-auto rounded-full flex flex-col items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 ${isSelected
-                          ? 'bg-primary text-white shadow-lg scale-110 z-10'
+                          ? 'bg-[#AEADF0] text-[#1D1D2B] shadow-lg scale-110 z-10'
                           : hasEvents
-                            ? 'bg-primary/15 text-primary hover:bg-primary/25 dark:bg-primary/20 dark:hover:bg-primary/30 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm'
-                            : 'bg-white/60 dark:bg-neutral-800/60 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm text-foreground hover:bg-white dark:hover:bg-neutral-700 hover:shadow-md'
+                            ? 'bg-[#AEADF0]/20 text-[#1D1D2B] hover:bg-[#AEADF0]/40 backdrop-blur-md border border-[#1D1D2B]/10 shadow-sm'
+                            : 'bg-white/60 backdrop-blur-md border border-[#1D1D2B]/5 shadow-sm text-[#1D1D2B]/80 hover:bg-white hover:shadow-md'
                           }`}
                       >
                         <span>{date}</span>
@@ -219,7 +219,7 @@ export function EventCalendar() {
                 setSelectedDate(null); // Reset selected date when expanding to show all
               }
             }}
-            className="text-[11px] sm:text-xs font-bold text-neutral-500 hover:text-primary transition-colors flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full"
+            className="text-[11px] sm:text-xs font-bold text-[#1D1D2B]/60 hover:text-[#AEADF0] transition-colors flex items-center gap-1 bg-white/60 hover:bg-white px-4 py-2 rounded-full border border-[#1D1D2B]/5"
           >
             {isExpanded ? t("show_week_only") : t("show_full_month")}
           </button>
@@ -229,11 +229,11 @@ export function EventCalendar() {
       {/* Bottom Row: Event List Details */}
       <div className="w-full flex flex-col">
         <div className="flex items-center justify-between mb-6">
-          <h3 className={`font-bold flex items-center gap-2 ${isThai ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}>
-            <CalendarIcon className="w-5 h-5 text-primary" />
+          <h3 className={`font-bold flex items-center gap-2 text-[#1D1D2B] ${isThai ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}>
+            <CalendarIcon className="w-5 h-5 text-[#AEADF0]" />
             {selectedDate ? `${MONTH_NAMES[month]} ${selectedDate}, ${isThai ? year + 543 : year}` : `${t("all_events_in")} ${MONTH_NAMES[month]}`}
           </h3>
-          <span className="bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 px-3 py-1 rounded-full text-xs font-bold">
+          <span className="bg-[#FCD091] text-[#1D1D2B] px-3 py-1 rounded-full text-xs font-bold shadow-sm">
             {activeEvents.length} {t("events_count")}
           </span>
         </div>
@@ -242,7 +242,7 @@ export function EventCalendar() {
         <div className="flex flex-wrap gap-2 mb-6">
           <button
             onClick={() => setSelectedType(null)}
-            className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === null ? 'bg-primary text-white shadow-md' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}
+            className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === null ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
           >
             {t("all_types")}
           </button>
@@ -252,7 +252,7 @@ export function EventCalendar() {
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
-                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === type ? 'bg-primary text-white shadow-md' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}
+                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === type ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
               >
                 {displayType}
               </button>
@@ -262,40 +262,40 @@ export function EventCalendar() {
 
         <div className="flex flex-col gap-4">
           {activeEvents.length === 0 ? (
-            <div className="h-64 rounded-3xl border-2 border-dashed border-neutral-200 dark:border-neutral-800 flex flex-col items-center justify-center text-neutral-400">
-              <CalendarIcon className="w-12 h-12 mb-3 opacity-20" />
-              <p>{t("no_events_scheduled")}</p>
-              <button onClick={() => setSelectedDate(null)} className="mt-4 text-primary font-bold hover:underline">{t("view_all_month_events")}</button>
+            <div className="h-64 rounded-3xl border-2 border-dashed border-[#1D1D2B]/20 bg-[#F9EFEF]/50 flex flex-col items-center justify-center text-[#1D1D2B]/40">
+              <CalendarIcon className="w-12 h-12 mb-3 opacity-30" />
+              <p className="font-medium">{t("no_events_scheduled")}</p>
+              <button onClick={() => setSelectedDate(null)} className="mt-4 text-[#AEADF0] font-bold hover:underline">{t("view_all_month_events")}</button>
             </div>
           ) : (
             activeEvents.map((event) => (
-              <div key={event.id} className="group grid grid-cols-1 sm:grid-cols-2 gap-6 bg-card border border-neutral-200 dark:border-neutral-800 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300">
+              <div key={event.id} className="group grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[#F9EFEF] border border-[#1D1D2B]/10 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300">
                 {/* Image */}
                 <div className="w-full h-48 sm:h-auto sm:aspect-video rounded-2xl bg-cover bg-center relative overflow-hidden sm:self-start" style={{ backgroundImage: `url(${event.img})` }}>
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg text-white text-[10px] font-bold uppercase tracking-wider">{isThai ? event.type_th : event.type}</div>
+                  <div className="absolute top-2 left-2 px-2 py-1 bg-[#1D1D2B]/80 backdrop-blur-md rounded-lg text-[#F9EFEF] text-[10px] font-bold uppercase tracking-wider">{isThai ? event.type_th : event.type}</div>
                 </div>
 
                 {/* Data */}
                 <div className="flex flex-col justify-center py-2">
-                  <h4 className={`font-bold mb-3 group-hover:text-primary transition-colors ${isThai ? 'text-2xl' : 'text-xl'}`}>{isThai ? event.title_th : event.title}</h4>
+                  <h4 className={`font-bold mb-3 text-[#1D1D2B] group-hover:text-[#AEADF0] transition-colors ${isThai ? 'text-2xl' : 'text-xl'}`}>{isThai ? event.title_th : event.title}</h4>
 
-                  <div className={`flex flex-col gap-2 text-neutral-500 dark:text-neutral-400 ${isThai ? 'text-base' : 'text-sm'}`}>
+                  <div className={`flex flex-col gap-2 text-[#1D1D2B]/60 ${isThai ? 'text-base' : 'text-sm'}`}>
                     <div className="flex items-center gap-2">
-                      <CalendarIcon className="w-4 h-4 text-primary" />
-                      <span className="font-medium text-foreground">{event.date} {MONTH_NAMES[event.month]} {isThai ? event.year + 543 : event.year}</span>
+                      <CalendarIcon className="w-4 h-4 text-[#AEADF0]" />
+                      <span className="font-medium text-[#1D1D2B]">{event.date} {MONTH_NAMES[event.month]} {isThai ? event.year + 543 : event.year}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-emerald-500" />
-                      <span className="font-medium text-foreground">{event.time}</span>
+                      <Clock className="w-4 h-4 text-[#FCD091]" />
+                      <span className="font-medium text-[#1D1D2B]">{event.time}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-secondary" />
+                      <MapPin className="w-4 h-4 text-[#AEADF0]" />
                       <span>{isThai ? event.location_th : event.location}</span>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
-                    <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
+                  <div className="mt-4 pt-4 border-t border-[#1D1D2B]/10 flex justify-end">
+                    <button className="text-sm font-bold text-[#AEADF0] flex items-center gap-1 hover:text-[#1D1D2B] transition-colors">
                       {t("get_tickets")} <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -306,6 +306,6 @@ export function EventCalendar() {
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }
