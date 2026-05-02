@@ -68,3 +68,65 @@ Each entry includes: date, branch, files changed, and a summary of changes.
 **ExploreSplitView.tsx:**
 - File was accidentally overwritten with Discord chat content — restored to correct code
 - Place Card bottom offset: `bottom-20` → `bottom-4` on mobile (card is inside padded map container)
+
+---
+
+## 2026-05-02 (session 1) — Branch: `P_branch1_Map`
+
+### Files Changed
+- `src/app/[locale]/itinerary/page.tsx` — Full rewrite (scrollable layout)
+- `src/components/itinerary/ItinerarySplitView.tsx` — Full rewrite (card list)
+- `src/data/activities.ts` — New file: activity data
+- `public/Plan_png/.gitkeep` — New folder for activity plan PNGs
+
+### Summary
+**Itinerary Page Redesign** — removed map, replaced with activity card list
+
+**itinerary/page.tsx:**
+- Changed from `h-[100dvh] overflow-hidden` (fixed) to `min-h-screen` (scrollable)
+- Layout now matches Events page style: `pt-16 md:pt-24 px-4 md:px-8 pb-20 md:pb-8`
+- Title uses same font as Events and Explore pages
+- Content constrained to `max-w-3xl mx-auto` for readability
+
+**ItinerarySplitView.tsx:**
+- Removed map and timeline layout entirely
+- New: category filter chips (All/None + same categories as Explore page)
+- New: scrollable list of ActivityCard components
+- ActivityCard: horizontal layout — image left, content right (category badge, name, hashtags, explanation)
+- Clicking a card opens `/Plan_png/{activity.id}.png` in a new browser tab
+
+**activities.ts:**
+- New data file with 8 mock activities (1 per category)
+- Each activity: id, name, category, hashtags[], explanation, img
+
+**public/Plan_png/:**
+- Folder created for plan PNG files
+- User will add PNG files named `{activity.id}.png` manually
+
+---
+
+## 2026-05-02 (session 2) — Branch: `P_branch1_Map`
+
+### Files Changed
+- `src/data/activities.ts` — Added detail fields to Activity type
+- `src/app/[locale]/itinerary/[id]/page.tsx` — New detail page
+- `src/components/itinerary/ItinerarySplitView.tsx` — Card click → Link navigation
+
+### Summary
+**Itinerary Activity Detail Page**
+
+**activities.ts:**
+- Added fields: `address`, `hours`, `phone`, `website`, `about`, `amenities[]`, `gallery[]`
+- Populated full mock data for "Cafe trip on Holiday" (all fields)
+- Other activities have basic fields only
+
+**itinerary/[id]/page.tsx (new):**
+- Hero section: full-width image + dark overlay, category badge, title, hashtags
+- Two-column layout (desktop): left = content, right = info card
+- Left: About, Amenities & Features (grid with checkmarks), Gallery (2-col grid)
+- Right: Contact card (address, hours, phone, website), Get Directions button (Google Maps link)
+- Download Plan button: `<a download>` pointing to `/Plan_png/{planPng}`
+- Uses `generateStaticParams` for static generation
+
+**ItinerarySplitView.tsx:**
+- Replaced `window.open` + `onClick` with `<Link href="/itinerary/{id}">` — navigates in same tab
