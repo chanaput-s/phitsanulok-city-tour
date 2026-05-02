@@ -67,15 +67,6 @@ const PLACES: Place[] = [
     position: [16.8210, 100.2550],
   },
   {
-    id: "temple-1",
-    name: "วัดพระศรีรัตนมหาธาตุ",
-    category: "Temple",
-    hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
-    phone: "055-258-013",
-    img: "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
-    position: [16.8235, 100.2608],
-  },
-  {
     id: "restaurant-1",
     name: "Pae the River",
     category: "Restaurant",
@@ -128,6 +119,42 @@ const PLACES: Place[] = [
     phone: "086-789-0123",
     img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
     position: [16.8200, 100.2640],
+  },
+  {
+  id: "temple-001",           // ห้ามซ้ำกับอันอื่น
+  name: "วัดพระศรีรัตนมหาธาตุวรมหาวิหาร",
+  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+  hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
+  phone: "055258966",
+  img: "https://image-tc.galaxy.tf/wijpeg-3fvrgksxjmddlgex2zime0tve/temple-of-wat-phra-si-rattana-mahathat-hop-inn-hotel_standard.jpg?crop=0%2C0%2C555%2C416",        // URL รูปภาพ
+  position: [16.823680921126684, 100.26191685462676],  // [latitude, longitude]
+  },
+  {
+  id: "temple-002",           // ห้ามซ้ำกับอันอื่น
+  name: "วัดนางพญา",
+  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+  hashtags: ["#วัดพิษณุโลก", "#unseen"],
+  phone: "No contact number",
+  img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGscDrVIz21hoBsWNi3tjQOHwDmht-g2Ad9UG59jzavArFmNqX1AQexlOWeTlEUveha7Pf_ryyGNFdVgQak_9Qk5O2NsOb0LjmqGPn_cAslVEzHeREo4M4UR7jlGeloSf1Sq-gIUvFK8w=w408-h306-k-no",        // URL รูปภาพ
+  position: [16.822688075959178, 100.2619532168755],  // [latitude, longitude]
+  },
+  {
+  id: "temple-003",           // ห้ามซ้ำกับอันอื่น
+  name: "วัดจันทร์ตะวันตก",
+  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+  hashtags: ["#วัดพิษณุโลก", "#unseen"],
+  phone: "055251729",
+  img: "https://ik.imagekit.io/tvlk/blog/2024/11/background-religious-attractions-phitsanulok-province-wat-1024x683.jpg?tr=q-70,c-at_max,w-1000,h-600",        // URL รูปภาพ
+  position: [16.807252424523515, 100.24638104171648],  // [latitude, longitude]
+  },
+  {
+  id: "temple-004",           // ห้ามซ้ำกับอันอื่น
+  name: "วัดจันทร์ตะวันออก",
+  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+  hashtags: ["#วัดพิษณุโลก", "#unseen"],
+  phone: "06101483",
+  img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1wQzuvEvZX4rcOSr5pjQnsU96u0Pwxu2K_oS24zDhNo8u0wzlFy5AzHPtiK6IssiaUT31FKpw3roeDkRJTmT9oelKs3FhKjlCvEZllSzMtdgXNOA3y_gaGk8BDyrWn_FWFZc62A=w408-h306-k-no",        // URL รูปภาพ
+  position: [16.8046704601266, 100.2450000975198],  // [latitude, longitude]
   },
 ];
 
