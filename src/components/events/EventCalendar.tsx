@@ -264,15 +264,9 @@ export function EventCalendar() {
             const displayType = getTypeDisplay(e);
             return (
               <button
-<<<<<<< HEAD
                 key={typeKey}
                 onClick={() => setSelectedType(typeKey)}
-                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === typeKey ? 'bg-primary text-white shadow-md' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}
-=======
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === type ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
->>>>>>> home_page_feature
+                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === typeKey ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
               >
                 {displayType}
               </button>
@@ -314,19 +308,12 @@ export function EventCalendar() {
                     </div>
                   </div>
 
-<<<<<<< HEAD
-                  <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
+                  <div className="mt-4 pt-4 border-t border-[#1D1D2B]/10 flex justify-end">
                     <Link href={`/events/${event.id}`}>
-                      <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
+                      <button className="text-sm font-bold text-[#AEADF0] flex items-center gap-1 hover:text-[#1D1D2B] transition-colors">
                         {t("get_tickets")} <ChevronRight className="w-4 h-4" />
                       </button>
                     </Link>
-=======
-                  <div className="mt-4 pt-4 border-t border-[#1D1D2B]/10 flex justify-end">
-                    <button className="text-sm font-bold text-[#AEADF0] flex items-center gap-1 hover:text-[#1D1D2B] transition-colors">
-                      {t("get_tickets")} <ChevronRight className="w-4 h-4" />
-                    </button>
->>>>>>> home_page_feature
                   </div>
                 </div>
               </div>
@@ -335,6 +322,6 @@ export function EventCalendar() {
         </div>
       </div>
 
-    </div >
+    </div>
   );
 }
