@@ -5,11 +5,24 @@ import { MapPin, Clock, Users } from "lucide-react";
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations, useLocale } from "next-intl";
 
+/** Resolves a field that may be a plain string OR a {en, th} object */
+function getLocalized(
+  field: string | { en: string; th: string } | undefined,
+  fallback: string | { en: string; th: string } | undefined,
+  locale: string
+): string {
+  const value = field ?? fallback ?? "";
+  if (typeof value === "object" && value !== null) {
+    return locale === "th" ? value.th : value.en;
+  }
+  return value as string;
+}
+
 export function EventHero() {
   const t = useTranslations("Events");
   const locale = useLocale();
   const isThai = locale === "th";
-  const [featuredEvent, setFeaturedEvent] = useState(MOCK_EVENTS[0]);
+  const [featuredEvent, setFeaturedEvent] = useState(MOCK_EVENTS[0] as any);
 
   useEffect(() => {
     // Filter events to only include highlights
@@ -61,19 +74,19 @@ export function EventHero() {
 
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-2 tracking-wide drop-shadow-lg uppercase">
-            {isThai ? featuredEvent.title_th : featuredEvent.title}
+            {getLocalized(isThai ? featuredEvent.title_th : featuredEvent.title, featuredEvent.title, locale)}
           </h1>
 
           {/* Subhead */}
           <p className="text-teal-50 text-sm md:text-lg font-medium mb-5 max-w-md drop-shadow-sm">
-            {isThai ? featuredEvent.type_th : featuredEvent.type} • {t("rating")} {featuredEvent.rating}
+            {getLocalized(isThai ? featuredEvent.type_th : featuredEvent.type, featuredEvent.type, locale)} • {t("rating")} {featuredEvent.rating}
           </p>
 
           {/* Quick Metadata Row */}
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-teal-50 text-xs md:text-sm font-medium mb-6">
             <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
               <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
-              <span className="truncate leading-none relative">{isThai ? featuredEvent.location_th : featuredEvent.location}</span>
+              <span className="truncate leading-none relative">{getLocalized(isThai ? featuredEvent.location_th : featuredEvent.location, featuredEvent.locationName ?? featuredEvent.location, locale)}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
               <Clock className="w-4 h-4 text-orange-400 shrink-0" />

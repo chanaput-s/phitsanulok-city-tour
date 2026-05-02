@@ -112,6 +112,15 @@ export function EventCalendar() {
     typeof e.type === "object" && e.type !== null ? (e.type as any).th : ((e as any).type_th ?? getTypeEn(e));
   const getTypeDisplay = (e: any): string => isThai ? getTypeTh(e) : getTypeEn(e);
 
+  /** Resolves a field that may be a plain string OR a {en, th} object */
+  const getLocalized = (field: any, fallback?: any): string => {
+    const value = field ?? fallback ?? "";
+    if (typeof value === "object" && value !== null) {
+      return locale === "th" ? value.th : value.en;
+    }
+    return value as string;
+  };
+
   // Determine events for the selected date
   const activeEvents = (MOCK_EVENTS as any[]).filter(e => {
     if (e.year !== year || e.month !== month) return false;
@@ -286,12 +295,12 @@ export function EventCalendar() {
               <div key={event.id} className="group grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[#F9EFEF] border border-[#1D1D2B]/10 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300">
                 {/* Image */}
                 <div className="w-full h-48 sm:h-auto sm:aspect-video rounded-2xl bg-cover bg-center relative overflow-hidden sm:self-start" style={{ backgroundImage: `url(${event.img})` }}>
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-[#1D1D2B]/80 backdrop-blur-md rounded-lg text-[#F9EFEF] text-[10px] font-bold uppercase tracking-wider">{isThai ? event.type_th : event.type}</div>
+                  <div className="absolute top-2 left-2 px-2 py-1 bg-[#1D1D2B]/80 backdrop-blur-md rounded-lg text-[#F9EFEF] text-[10px] font-bold uppercase tracking-wider">{getTypeDisplay(event)}</div>
                 </div>
 
                 {/* Data */}
                 <div className="flex flex-col justify-center py-2">
-                  <h4 className={`font-bold mb-3 text-[#1D1D2B] group-hover:text-[#AEADF0] transition-colors ${isThai ? 'text-2xl' : 'text-xl'}`}>{isThai ? event.title_th : event.title}</h4>
+                  <h4 className={`font-bold mb-3 text-[#1D1D2B] group-hover:text-[#AEADF0] transition-colors ${isThai ? 'text-2xl' : 'text-xl'}`}>{getLocalized(isThai ? event.title_th : event.title, event.title)}</h4>
 
                   <div className={`flex flex-col gap-2 text-[#1D1D2B]/60 ${isThai ? 'text-base' : 'text-sm'}`}>
                     <div className="flex items-center gap-2">
@@ -304,7 +313,7 @@ export function EventCalendar() {
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-[#AEADF0]" />
-                      <span>{isThai ? event.location_th : event.location}</span>
+                      <span>{getLocalized(isThai ? event.location_th : event.location, event.locationName ?? event.location)}</span>
                     </div>
                   </div>
 
