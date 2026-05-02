@@ -5,7 +5,7 @@ export type Activity = {
   hashtags: string[];
   explanation: string;
   img: string;
-  planPng?: string;
+  planPngs?: string[];
   // Detail page fields
   address?: string;
   hours?: string;
@@ -24,7 +24,7 @@ export const ACTIVITIES: Activity[] = [
     hashtags: ["#sweetvibes", "#คาเฟ่พิษณุโลก", "#morningcoffee"],
     explanation: "เริ่มวันหยุดด้วยการสำรวจคาเฟ่สวยๆ รอบเมือง บรรยากาศดี กาแฟหอม เหมาะกับการนั่งพักผ่อนหรือทำงาน",
     img: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=800",
-    planPng: "Cafe_Plan_1.png",
+    planPngs: ["Cafe_Plan_1.png"],
     address: "ถนนพุทธบูชา ตำบลในเมือง อำเภอเมืองพิษณุโลก",
     hours: "08:00 AM – 06:00 PM (Daily)",
     phone: "+66 55 123 456",
@@ -52,6 +52,8 @@ export const ACTIVITIES: Activity[] = [
     hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#สักการะ"],
     explanation: "เริ่มเช้าด้วยการไหว้พระขอพรที่วัดพระศรีรัตนมหาธาตุ สัมผัสความศักดิ์สิทธิ์และความงามทางสถาปัตยกรรมไทย",
     img: "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    about: "เส้นทางไหว้พระยามเช้าในพิษณุโลก เริ่มต้นที่วัดพระศรีรัตนมหาธาตุวรมหาวิหาร บ้านประดิษฐานพระพุทธชินราช พระพุทธรูปที่งดงามที่สุดในประเทศไทย จากนั้นต่อเนื่องสู่วัดนางพญา วัดคู่แฝดที่อยู่ในบริเวณเดียวกัน เส้นทางนี้เหมาะสำหรับผู้ที่ต้องการสัมผัสบรรยากาศยามเช้าสงบ กลิ่นธูปและเสียงระฆัง พร้อมชมความงามทางสถาปัตยกรรมไทยโบราณ",
+    planPngs: ["History_Plan_1.png", "History_Plan_2.png"],
     address: "ถนนพุทธบูชา ตำบลในเมือง อำเภอเมืองพิษณุโลก",
     hours: "06:00 AM – 06:00 PM (Daily)",
     phone: "+66 55 258 013",

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { Download } from "lucide-react";
 import { ACTIVITIES } from "@/data/activities";
+import { DownloadPlanButton } from "@/components/itinerary/DownloadPlanButton";
 import {
   Coffee, Landmark, UtensilsCrossed, TreePine, Wine,
   Hammer, Building2, ShoppingBag,
@@ -94,29 +94,25 @@ export default async function ActivityDetailPage({
 
         {activity.about && <hr className="border-neutral-200 dark:border-neutral-800" />}
 
-        {/* Itinerary plan image + Download button */}
-        {activity.planPng && (
+        {/* Itinerary plan images + Download button */}
+        {activity.planPngs && activity.planPngs.length > 0 && (
           <section>
             <h2 className="text-xl font-extrabold mb-3 tracking-tight">Itinerary</h2>
 
-            {/* Download Plan button — under heading */}
-            <a
-              href={`/Plan_png/${activity.planPng}`}
-              download={activity.planPng}
-              className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold px-5 py-2.5 rounded-xl hover:opacity-90 transition-opacity text-sm shadow-md mb-5"
-            >
-              <Download className="w-4 h-4" />
-              Download Plan
-            </a>
+            <DownloadPlanButton planPngs={activity.planPngs} />
 
-            {/* Full plan image */}
-            <div className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow-sm">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/Plan_png/${activity.planPng}`}
-                alt={`${activity.name} plan`}
-                className="w-full h-auto object-contain"
-              />
+            {/* Plan images stacked */}
+            <div className="flex flex-col gap-4">
+              {activity.planPngs.map((file) => (
+                <div key={file} className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow-sm">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/Plan_png/${file}`}
+                    alt={`${activity.name} plan`}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </section>
         )}
