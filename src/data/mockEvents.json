@@ -1,5 +1,244 @@
 [
   {
+    "id": "v2_001",
+    "status": "active",
+    "isHighlight": true,
+    "startDate": "2026-09-15",
+    "endDate": "2026-09-17",
+    "operatingHours": {
+      "en": "5:00 PM – 10:00 PM",
+      "th": "17:00 น. – 22:00 น."
+    },
+    "title": {
+      "en": "Nan River Long Boat Racing Festival",
+      "th": "ประเพณีแข่งเรือยาวลำน้ำน่าน"
+    },
+    "type": {
+      "en": "Festival",
+      "th": "เทศกาล"
+    },
+    "description": {
+      "en": "One of Phitsanulok's most spectacular annual traditions. Hundreds of crews race their beautifully decorated long-tail boats along the Nan River while local audiences cheer from the banks. Don't miss the evening light ceremonies and street food stalls lining the riverside promenade.",
+      "th": "หนึ่งในประเพณีประจำปีที่ยิ่งใหญ่ที่สุดของพิษณุโลก นักพายนับร้อยทีมแข่งขันเรือยาวที่ตกแต่งอย่างงดงามตามลำน้ำน่าน พร้อมชมพิธีจุดเทียนยามค่ำคืนและร้านอาหารริมฝั่งแม่น้ำ"
+    },
+    "isFree": true,
+    "priceDetail": {
+      "en": "Free Entry",
+      "th": "เข้าชมฟรี"
+    },
+    "tags": [
+      "family-friendly",
+      "outdoor",
+      "cultural",
+      "parking-limited"
+    ],
+    "locationName": {
+      "en": "Nan Riverside – Wat Phra Si Rattana Mahathat",
+      "th": "ริมน้ำน่าน หน้าวัดพระศรีรัตนมหาธาตุ"
+    },
+    "locationCoordinates": {
+      "lat": 16.8234,
+      "lng": 100.2600
+    },
+    "img": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=1800",
+    "rating": "4.9",
+    "contactFacebook": "https://www.facebook.com/phitsanulok.events",
+    "color": "bg-blue-500",
+    "date": 15,
+    "month": 8,
+    "year": 2026,
+    "time": "17:00 PM",
+    "location": "Nan Riverside",
+    "location_th": "ริมน้ำน่าน",
+    "title_th": "ประเพณีแข่งเรือยาวลำน้ำน่าน",
+    "type_th": "เทศกาล",
+    "description_th": "หนึ่งในประเพณีประจำปีที่ยิ่งใหญ่ที่สุดของพิษณุโลก",
+    "position": [
+      16.8234,
+      100.2600
+    ]
+  },
+  {
+    "id": "v2_002",
+    "status": "active",
+    "isHighlight": true,
+    "startDate": "2026-11-01",
+    "endDate": "2026-11-03",
+    "operatingHours": {
+      "en": "6:00 PM – 11:00 PM",
+      "th": "18:00 น. – 23:00 น."
+    },
+    "title": {
+      "en": "Loy Krathong Light Festival – Phitsanulok",
+      "th": "งานลอยกระทงพิษณุโลก"
+    },
+    "type": {
+      "en": "Cultural",
+      "th": "วัฒนธรรม"
+    },
+    "description": {
+      "en": "Float your krathong under a sky filled with thousands of sky lanterns on the Nan River. The city's Loy Krathong is renowned across Thailand for its scale and the breathtaking reflection of lantern light on the water. Traditional performances, fireworks, and local handicraft markets accompany the main event.",
+      "th": "ลอยกระทงใต้ท้องฟ้าที่เต็มไปด้วยโคมลอยนับพันดวงบนแม่น้ำน่าน งานลอยกระทงของพิษณุโลกเป็นที่ขึ้นชื่อทั่วประเทศไทย พร้อมการแสดงพื้นบ้าน ดอกไม้ไฟ และตลาดหัตถกรรมท้องถิ่น"
+    },
+    "isFree": true,
+    "priceDetail": {
+      "en": "Free (krathong sold on-site from ฿40)",
+      "th": "ฟรี (กระทงจำหน่ายในงาน เริ่มต้น ฿40)"
+    },
+    "tags": [
+      "romantic",
+      "outdoor",
+      "night-event",
+      "photography",
+      "family-friendly"
+    ],
+    "locationName": {
+      "en": "Nan River Promenade, City Center",
+      "th": "ถนนริมน้ำน่าน ใจกลางเมือง"
+    },
+    "locationCoordinates": {
+      "lat": 16.8188,
+      "lng": 100.2605
+    },
+    "img": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=1800",
+    "rating": "5.0",
+    "contactFacebook": "https://www.facebook.com/phitsanulok.events",
+    "color": "bg-amber-500",
+    "date": 1,
+    "month": 10,
+    "year": 2026,
+    "time": "18:00 PM",
+    "location": "Nan River Promenade",
+    "location_th": "ถนนริมน้ำน่าน",
+    "title_th": "งานลอยกระทงพิษณุโลก",
+    "type_th": "วัฒนธรรม",
+    "description_th": "ลอยกระทงใต้ท้องฟ้าที่เต็มไปด้วยโคมลอยนับพันดวงบนแม่น้ำน่าน",
+    "position": [
+      16.8188,
+      100.2605
+    ]
+  },
+  {
+    "id": "v2_003",
+    "status": "active",
+    "isHighlight": true,
+    "startDate": "2026-05-09",
+    "endDate": "2026-05-10",
+    "operatingHours": {
+      "en": "5:30 PM – 11:00 PM",
+      "th": "17:30 น. – 23:00 น."
+    },
+    "title": {
+      "en": "Phitsanulok Weekend Night Bazaar",
+      "th": "ไนท์บาซาร์พิษณุโลก"
+    },
+    "type": {
+      "en": "Food & Dining",
+      "th": "อาหารและเครื่องดื่ม"
+    },
+    "description": {
+      "en": "Every weekend the old city square transforms into a vibrant night market. Over 200 vendors offer authentic local dishes — from the legendary Phitsanulok boat noodles to spiced papaya salad and handcrafted desserts. Live acoustic music sets the atmosphere as locals and visitors mingle under string lights.",
+      "th": "ทุกสุดสัปดาห์ ลานเมืองเก่าแปลงโฉมเป็นตลาดนัดกลางคืนที่คึกคัก มีผู้ค้ากว่า 200 ร้านนำเสนออาหารท้องถิ่นสุดอร่อย ตั้งแต่ก๋วยเตี๋ยวเรือชื่อดังจนถึงส้มตำและขนมทำมือ บรรยากาศดนตรีสดใต้แสงไฟ"
+    },
+    "isFree": false,
+    "priceDetail": {
+      "en": "Free entry – dishes from ฿50",
+      "th": "เข้าฟรี – อาหารเริ่มต้น ฿50"
+    },
+    "tags": [
+      "food",
+      "local",
+      "night-event",
+      "pet-friendly",
+      "live-music"
+    ],
+    "locationName": {
+      "en": "Old City Square, Mueang District",
+      "th": "ลานเมืองเก่า อำเภอเมือง"
+    },
+    "locationCoordinates": {
+      "lat": 16.8188,
+      "lng": 100.2610
+    },
+    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1800",
+    "rating": "4.7",
+    "contactFacebook": "https://www.facebook.com/phitsanulok.nightbazaar",
+    "color": "bg-amber-400",
+    "date": 9,
+    "month": 4,
+    "year": 2026,
+    "time": "17:30 PM",
+    "location": "Old City Square",
+    "location_th": "ลานเมืองเก่า",
+    "title_th": "ไนท์บาซาร์พิษณุโลก",
+    "type_th": "อาหารและเครื่องดื่ม",
+    "description_th": "ตลาดนัดกลางคืนที่คึกคักทุกสุดสัปดาห์",
+    "position": [
+      16.8188,
+      100.2610
+    ]
+  },
+  {
+    "id": "v2_004",
+    "status": "active",
+    "isHighlight": true,
+    "startDate": "2026-12-25",
+    "endDate": "2026-12-26",
+    "operatingHours": {
+      "en": "7:00 AM – 9:00 AM",
+      "th": "07:00 น. – 09:00 น."
+    },
+    "title": {
+      "en": "Morning Wellness Yoga – Riverside Park",
+      "th": "โยคะยามเช้า ริมสวนสาธารณะแม่น้ำน่าน"
+    },
+    "type": {
+      "en": "Health & Wellness",
+      "th": "สุขภาพและเวลเนส"
+    },
+    "description": {
+      "en": "Start your holiday with a free guided sunrise yoga session in the riverside park. All levels are welcome — mats and water are provided. Certified instructors will lead you through gentle morning flow sequences with a stunning view of the Nan River as your backdrop.",
+      "th": "เริ่มต้นวันหยุดด้วยโยคะรับอรุณฟรีในสวนริมแม่น้ำ ทุกระดับยินดีต้อนรับ — มีเสื่อและน้ำให้บริการ ครูผู้สอนที่ได้รับการรับรองจะนำพวกคุณผ่านท่าโยคะยามเช้าพร้อมวิวแม่น้ำน่านอันงดงาม"
+    },
+    "isFree": true,
+    "priceDetail": {
+      "en": "Free – registration required",
+      "th": "ฟรี – ต้องลงทะเบียนก่อน"
+    },
+    "tags": [
+      "wellness",
+      "outdoor",
+      "beginner-friendly",
+      "free",
+      "morning"
+    ],
+    "locationName": {
+      "en": "Nan River Public Park (near Pratu Pha Bridge)",
+      "th": "สวนสาธารณะริมแม่น้ำน่าน (ใกล้สะพานประตูผา)"
+    },
+    "locationCoordinates": {
+      "lat": 16.8210,
+      "lng": 100.2620
+    },
+    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1800",
+    "rating": "4.8",
+    "contactFacebook": "https://www.facebook.com/phitsanulok.wellness",
+    "color": "bg-rose-400",
+    "date": 25,
+    "month": 11,
+    "year": 2026,
+    "time": "07:00 AM",
+    "location": "Nan River Public Park",
+    "location_th": "สวนสาธารณะริมแม่น้ำน่าน",
+    "title_th": "โยคะยามเช้า ริมสวนสาธารณะแม่น้ำน่าน",
+    "type_th": "สุขภาพและเวลเนส",
+    "description_th": "โยคะรับอรุณฟรีในสวนริมแม่น้ำ",
+    "position": [
+      16.8210,
+      100.2620
+    ]
+  },
+  {
     "id": "1",
     "title": "Temple Light Show",
     "date": 12,
