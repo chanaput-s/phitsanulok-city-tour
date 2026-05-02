@@ -130,3 +130,32 @@ Each entry includes: date, branch, files changed, and a summary of changes.
 
 **ItinerarySplitView.tsx:**
 - Replaced `window.open` + `onClick` with `<Link href="/itinerary/{id}">` — navigates in same tab
+
+---
+
+## 2026-04-29 (session 3) — Branch: `P_branch1_Map`
+
+### Files Changed
+- `src/components/home/TopSpotsCarousel.tsx` — Card redesign + Explore page linking
+- `src/app/[locale]/explore/page.tsx` — Added `searchParams` for `?place=` param
+- `src/components/explore/ExploreSplitView.tsx` — Added `initialPlaceId` prop + auto-open logic
+
+### Summary
+**Home → Explore deep-link: Trending Local Spots cards now navigate to specific map pins**
+
+**TopSpotsCarousel.tsx:**
+- Replaced 5-card mock data with 4 real cards mapped to temple-001–004 (Explore PLACES IDs)
+- Card 1: Wat Phra Si Rattana Mahathat → temple-001 (uses real Explore place image)
+- Cards 2–4: วัดนางพญา, วัดจันทร์ตะวันตก, วัดจันทร์ตะวันออก → temple-002/003/004 (location: "xxx, xxx")
+- Removed star rating and review count from all cards
+- Removed 5th card (Phitsanulok Craft Workshop)
+- Each card wrapped in `<Link href="/explore?place={exploreId}">` for same-tab navigation
+
+**explore/page.tsx:**
+- Added `searchParams: Promise<{ place?: string }>` to page props
+- Reads `place` value and passes it as `initialPlaceId` to `<ExploreSplitView>`
+
+**ExploreSplitView.tsx:**
+- Added `initialPlaceId?: string` prop
+- `useEffect` on mount: if `initialPlaceId` is set, finds the matching place and calls `setSelectedPlace` to auto-open its Place Card
+- `visiblePlaces` override: when `initialPlaceId` is provided, shows only that single place on the map (ignores category filter and Near Me)

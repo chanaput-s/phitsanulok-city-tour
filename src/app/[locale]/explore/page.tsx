@@ -13,10 +13,13 @@ export async function generateMetadata({
 
 export default async function ExplorePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ place?: string }>;
 }) {
   const { locale } = await params;
+  const { place } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("Navigation");
 
@@ -27,7 +30,7 @@ export default async function ExplorePage({
         </div>
 
         <div className="flex-grow min-h-0 relative rounded-2xl md:rounded-3xl overflow-hidden border border-neutral-200 dark:border-neutral-800 md:border-neutral-200 md:dark:border-neutral-800 shadow-md md:shadow-2xl">
-           <ExploreSplitView />
+           <ExploreSplitView initialPlaceId={place} />
         </div>
     </main>
   );

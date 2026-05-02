@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   Coffee, Landmark, UtensilsCrossed, TreePine, Wine,
@@ -174,12 +174,19 @@ function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number) {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function ExploreSplitView() {
+export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([...CATEGORY_KEYS]);
   const [nearMe, setNearMe] = useState(false);
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [gpsError, setGpsError] = useState<string | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
+
+  useEffect(() => {
+    if (initialPlaceId) {
+      const place = PLACES.find((p) => p.id === initialPlaceId) ?? null;
+      if (place) setSelectedPlace(place);
+    }
+  }, [initialPlaceId]);
 
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
@@ -206,14 +213,16 @@ export function ExploreSplitView() {
     }
   };
 
-  const visiblePlaces = PLACES.filter((p) => {
-    const categoryMatch = selectedCategories.includes(p.category);
-    if (!categoryMatch) return false;
-    if (nearMe && userPos) {
-      return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
-    }
-    return true;
-  });
+  const visiblePlaces = initialPlaceId
+    ? PLACES.filter((p) => p.id === initialPlaceId)
+    : PLACES.filter((p) => {
+        const categoryMatch = selectedCategories.includes(p.category);
+        if (!categoryMatch) return false;
+        if (nearMe && userPos) {
+          return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
+        }
+        return true;
+      });
 
   const handleSelectId = useCallback(
     (id: string) => {
