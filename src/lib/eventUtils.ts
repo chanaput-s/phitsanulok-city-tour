@@ -88,7 +88,12 @@ export function normalizeEvent(raw: EventV2): NormalizedEvent {
     (raw.date !== undefined && raw.month !== undefined && raw.year !== undefined
       ? toISO(raw.date, raw.month, raw.year)
       : "2026-01-01");
-  const endDate = raw.endDate ?? startDate;
+  
+  let endDate = raw.endDate ?? startDate;
+  if (new Date(endDate).getTime() < new Date(startDate).getTime()) {
+    console.warn(`Event ${raw.id} has endDate before startDate. Falling back to startDate only.`);
+    endDate = startDate;
+  }
 
   // Location coordinates — prefer new, fall back to position array
   let coords: { lat: number; lng: number } | null = null;
