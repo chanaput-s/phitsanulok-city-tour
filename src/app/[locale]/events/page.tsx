@@ -3,6 +3,7 @@ import { EventHero } from "@/components/events/EventHero";
 import { UpcomingCarousel } from "@/components/events/UpcomingCarousel";
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations } from "next-intl";
+import { normalizeEvent } from "@/lib/eventUtils";
 
 export default function EventsPage() {
   const t = useTranslations("Events");
@@ -15,12 +16,14 @@ export default function EventsPage() {
   // Get upcoming events: not highlighted, and within the next 2 weeks
   const upcomingEvents = MOCK_EVENTS.filter(e => {
     if (e.isHighlight) return false;
-    const eventDate = new Date(e.year, e.month, e.date);
+    const normEvent = normalizeEvent(e as any);
+    const eventDate = new Date(normEvent.startDate);
+    eventDate.setHours(0, 0, 0, 0);
     return eventDate >= todayDateOnly && eventDate <= twoWeeksFromNow;
   }).sort((a, b) => {
-    const dateA = new Date(a.year, a.month, a.date).getTime();
-    const dateB = new Date(b.year, b.month, b.date).getTime();
-    return dateA - dateB;
+    const normA = normalizeEvent(a as any);
+    const normB = normalizeEvent(b as any);
+    return new Date(normA.startDate).getTime() - new Date(normB.startDate).getTime();
   });
 
   return (

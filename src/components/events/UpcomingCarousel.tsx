@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
+import { formatDateRange, normalizeEvent, type Locale } from "@/lib/eventUtils";
 
 const MONTH_NAMES_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const MONTH_NAMES_TH = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
@@ -93,7 +94,7 @@ export function UpcomingCarousel({ events }: CarouselProps) {
                 <div className="flex items-center gap-3 text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-                    <span className="truncate pt-[3px]">{event.date} {MONTH_NAMES[event.month]}</span>
+                    <span className="truncate pt-[3px]">{formatDateRange(normalizeEvent(event), locale as Locale)}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-orange-400 shrink-0" />

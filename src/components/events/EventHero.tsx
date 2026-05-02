@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MapPin, Clock, Users } from "lucide-react";
+import { MapPin, Clock, Users, CalendarDays } from "lucide-react";
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations, useLocale } from "next-intl";
+import { formatDateRange, normalizeEvent, type Locale } from "@/lib/eventUtils";
 
 /** Resolves a field that may be a plain string OR a {en, th} object */
 function getLocalized(
@@ -84,6 +85,10 @@ export function EventHero() {
 
           {/* Quick Metadata Row */}
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-teal-50 text-xs md:text-sm font-medium mb-6">
+            <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
+              <CalendarDays className="w-4 h-4 text-orange-400 shrink-0" />
+              <span className="truncate leading-none relative">{formatDateRange(normalizeEvent(featuredEvent), locale as Locale)}</span>
+            </div>
             <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
               <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
               <span className="truncate leading-none relative">{getLocalized(isThai ? featuredEvent.location_th : featuredEvent.location, featuredEvent.locationName ?? featuredEvent.location, locale)}</span>
