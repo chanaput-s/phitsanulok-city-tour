@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, Clock } from "lucide-react";
+import { Link } from "@/i18n/routing";
 
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations, useLocale } from "next-intl";
@@ -104,15 +105,21 @@ export function EventCalendar() {
   const today = new Date();
   const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
+  // Normalize type to always be a string (handles old flat + new nested schema)
+  const getTypeEn = (e: any): string =>
+    typeof e.type === "object" && e.type !== null ? (e.type as any).en : (e.type as string);
+  const getTypeTh = (e: any): string =>
+    typeof e.type === "object" && e.type !== null ? (e.type as any).th : ((e as any).type_th ?? getTypeEn(e));
+  const getTypeDisplay = (e: any): string => isThai ? getTypeTh(e) : getTypeEn(e);
+
   // Determine events for the selected date
-  const activeEvents = MOCK_EVENTS.filter(e => {
+  const activeEvents = (MOCK_EVENTS as any[]).filter(e => {
     if (e.year !== year || e.month !== month) return false;
-    if (selectedType !== null && e.type !== selectedType) return false;
+    if (selectedType !== null && getTypeEn(e) !== selectedType) return false;
 
     if (selectedDate !== null) {
       return e.date === selectedDate;
     } else {
-      // If no selected date, show all events from today onwards in the current month
       const eventDate = new Date(e.year, e.month, e.date);
       return eventDate >= todayDateOnly;
     }
@@ -169,11 +176,11 @@ export function EventCalendar() {
                     const date = cell.date;
 
                     // Check if this date has events
-                    const dayEvents = MOCK_EVENTS.filter(e =>
+                    const dayEvents = (MOCK_EVENTS as any[]).filter(e =>
                       e.year === year &&
                       e.month === month &&
                       e.date === date &&
-                      (selectedType === null || e.type === selectedType)
+                      (selectedType === null || getTypeEn(e) === selectedType)
                     );
                     const hasEvents = dayEvents.length > 0;
                     const isSelected = selectedDate === date;
@@ -246,13 +253,20 @@ export function EventCalendar() {
           >
             {t("all_types")}
           </button>
-          {Array.from(new Set(MOCK_EVENTS.map(e => e.type))).map(type => {
-            const displayType = isThai ? MOCK_EVENTS.find(e => e.type === type)?.type_th : type;
+          {Array.from(
+            new Map(
+              (MOCK_EVENTS as any[])
+                .filter(e => e.year === year && e.month === month)
+                .map(e => [getTypeEn(e), e])
+            ).values()
+          ).map(e => {
+            const typeKey = getTypeEn(e);
+            const displayType = getTypeDisplay(e);
             return (
               <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === type ? 'bg-primary text-white shadow-md' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}
+                key={typeKey}
+                onClick={() => setSelectedType(typeKey)}
+                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === typeKey ? 'bg-primary text-white shadow-md' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'}`}
               >
                 {displayType}
               </button>
@@ -295,9 +309,11 @@ export function EventCalendar() {
                   </div>
 
                   <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
-                    <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
-                      {t("get_tickets")} <ChevronRight className="w-4 h-4" />
-                    </button>
+                    <Link href={`/events/${event.id}`}>
+                      <button className="text-sm font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors">
+                        {t("get_tickets")} <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
