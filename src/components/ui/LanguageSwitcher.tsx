@@ -17,10 +17,10 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLocale}
-      className="flex items-center gap-1.5 p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors font-medium text-sm"
+      className="group flex items-center gap-1.5 p-2 rounded-full transition-colors font-medium text-sm"
     >
-      <Globe className="w-4 h-4 text-foreground" />
-      <span className="uppercase text-foreground">{locale}</span>
+      <Globe className="w-4 h-4 text-[#1D1D2B] group-hover:text-[#F9EFEF]" />
+      <span className="uppercase text-[#1D1D2B] group-hover:text-[#F9EFEF]">{locale}</span>
     </button>
   );
 }
