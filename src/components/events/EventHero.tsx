@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MapPin, Clock, Users, CalendarDays } from "lucide-react";
+import Link from "next/link";
+import { MapPin, Clock, Users, CalendarDays, LinkIcon } from "lucide-react";
 import MOCK_EVENTS from "@/data/mockEvents.json";
 import { useTranslations, useLocale } from "next-intl";
 import { formatDateRange, normalizeEvent, type Locale } from "@/lib/eventUtils";
@@ -104,9 +105,11 @@ export function EventHero() {
           </div>
 
           {/* Call to Action */}
-          <button className="bg-white text-teal-900 font-extrabold px-8 py-3.5 rounded-full shadow-xl hover:bg-teal-50 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 transform active:scale-95 flex items-center gap-2">
-            {t("view_details")}
-          </button>
+            <Link href={`/${locale}/events/${featuredEvent.id}`}>
+              <button className="bg-white text-teal-900 font-extrabold px-8 py-3.5 rounded-full shadow-xl hover:bg-teal-50 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 transform active:scale-95 flex items-center gap-2">
+                {t("view_details")}
+              </button>
+            </Link>
         </div>
       </div>
     </section>
