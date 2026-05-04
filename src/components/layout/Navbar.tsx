@@ -47,7 +47,7 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 text-sm font-medium text-[#1D1D2B] dark:text-neutral-300 hover:text-primary dark:hover:text-primary transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-sm font-medium text-[#1D1D2B] dark:text-neutral-300 hover:text-[#F9EFEF] dark:hover:text-primary transition-colors">
             <Home className="w-4 h-4" />
             {t("home")}
           </Link>
