@@ -74,12 +74,12 @@ export function ValueProposition() {
             transition={{ duration: 0.7 }}
           >
             {/* Eyebrow */}
-            <span className="inline-block text-[#AEADF0] font-bold uppercase tracking-widest text-xs mb-4">
+            <span className="inline-block text-[#1D1D2B] font-bold uppercase tracking-widest text-xs mb-4">
               {t("why_eyebrow")}
             </span>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-5xl font-black text-[#1D1D2B] leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-[#AEADF0] leading-tight mb-6">
               {t("why_title")}
             </h2>
 
@@ -89,7 +89,7 @@ export function ValueProposition() {
             </p>
 
             {/* Social icons */}
-            <div className="flex items-center gap-3 mb-12">
+            {/* <div className="flex items-center gap-3 mb-12">
               {socialLinks.map((s) => (
                 <a
                   key={s.label}
@@ -100,13 +100,13 @@ export function ValueProposition() {
                   {s.svg}
                 </a>
               ))}
-            </div>
+            </div> */}
 
             {/* Stats */}
             <div className="flex gap-8">
               {stats.map((s, i) => (
                 <div key={i} className="flex flex-col">
-                  <span className="text-4xl font-black text-[#1D1D2B]">{s.value}</span>
+                  <span className="text-4xl font-black text-[#AEADF0]">{s.value}</span>
                   <span className="text-sm font-semibold text-[#1D1D2B]/50 leading-tight mt-1">{s.label}</span>
                 </div>
               ))}
@@ -130,7 +130,7 @@ export function ValueProposition() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="flex items-start gap-4 bg-white/60 backdrop-blur-md border border-[#1D1D2B]/8 rounded-2xl p-6 hover:shadow-lg transition-shadow"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#AEADF0]/20 text-[#1D1D2B] flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 rounded-xl bg-[#AEADF0]/20 text-[#AEADF0] flex items-center justify-center shrink-0">
                   {f.icon}
                 </div>
                 <div>

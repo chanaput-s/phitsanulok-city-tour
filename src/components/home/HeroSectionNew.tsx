@@ -50,7 +50,7 @@ export function HeroSectionNew() {
         >
           {t("hero_headline_discover")}
           <br />
-          <span className="text-[#FCD091]">Mueang</span>
+          <span className="text-[#AEADF0]">Mueang</span>
           <br />
           {t("hero_headline_place")}
         </motion.h1>
@@ -76,12 +76,6 @@ export function HeroSectionNew() {
             <button className="group flex items-center gap-2 bg-[#FCD091] hover:bg-[#FCD091]/90 text-[#1D1D2B] font-bold px-8 py-4 rounded-full text-base shadow-2xl hover:shadow-[#FCD091]/30 hover:scale-105 active:scale-95 transition-all duration-300">
               {t("hero_plan_btn")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </Link>
-
-          <Link href="/explore">
-            <button className="flex items-center gap-2 bg-[#F9EFEF]/10 hover:bg-[#F9EFEF]/20 border border-[#F9EFEF]/40 hover:border-[#F9EFEF]/70 text-[#F9EFEF] font-bold px-8 py-4 rounded-full text-base backdrop-blur-md hover:scale-105 active:scale-95 transition-all duration-300">
-              {t("hero_explore_btn")}
             </button>
           </Link>
         </motion.div>

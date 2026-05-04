@@ -169,7 +169,7 @@ export function LocalEventsSection() {
           {/* CTA Group */}
           <div className="flex items-center gap-4">
             <Link href={`/events/${event.id}`}>
-              <button className="bg-[#FCD091] text-[#1D1D2B] font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#AEADF0] hover:scale-105 active:scale-95 transition-all shadow-xl">
+              <button className="bg-[#AEADF0] text-[#1D1D2B] font-bold px-8 py-3.5 rounded-full text-sm hover:bg-[#1D1D2B] hover:text-[#F9EFEF] hover:scale-105 active:scale-95 transition-all shadow-xl">
                 {joinBtn}
               </button>
             </Link>

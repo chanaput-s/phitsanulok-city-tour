@@ -70,8 +70,8 @@ export function TopSpotsCarousel() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="text-[#AEADF0] font-bold uppercase tracking-widest text-xs">{t("spots_eyebrow")}</span>
-            <h2 className="text-4xl md:text-5xl font-black text-[#1D1D2B] mt-2 leading-tight">
+            <span className="text-[#1D1D2B] font-bold uppercase tracking-widest text-xs">{t("spots_eyebrow")}</span>
+            <h2 className="text-4xl md:text-5xl font-black text-[#AEADF0] mt-2 leading-tight">
               {t("spots_title")}
             </h2>
           </div>
@@ -132,7 +132,7 @@ export function TopSpotsCarousel() {
         {/* Controls */}
         <div className="flex items-center justify-between mt-8">
           <Link href="/explore">
-            <button className="flex items-center gap-2 bg-[#1D1D2B] text-[#F9EFEF] font-bold px-6 py-3 rounded-full text-sm hover:bg-[#AEADF0] hover:text-[#1D1D2B] transition-colors">
+            <button className="flex items-center gap-2 bg-[#AEADF0] text-[#F9EFEF] font-bold px-6 py-3 rounded-full text-sm hover:bg-[#AEADF0] hover:text-[#1D1D2B] transition-colors">
               {t("spots_view_all")}
               <ArrowRight className="w-4 h-4" />
             </button>
@@ -147,7 +147,7 @@ export function TopSpotsCarousel() {
             </button>
             <button
               onClick={() => scroll("right")}
-              className="w-11 h-11 rounded-full bg-[#1D1D2B] flex items-center justify-center text-[#F9EFEF] hover:bg-[#AEADF0] hover:text-[#1D1D2B] transition-all"
+              className="w-11 h-11 rounded-full bg-[#AEADF0] flex items-center justify-center text-[#F9EFEF] hover:bg-[#AEADF0] hover:text-[#1D1D2B] transition-all"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
