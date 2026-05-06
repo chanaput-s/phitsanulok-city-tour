@@ -46,11 +46,15 @@ const spots = [
 ];
 
 const categoryColors: Record<string, string> = {
-  Temple: "bg-[#AEADF0] text-[#1D1D2B]",
-  "Street Food": "bg-[#FCD091] text-[#1D1D2B]",
-  Cafe: "bg-[#FCD091] text-[#1D1D2B]",
-  Park: "bg-[#AEADF0] text-[#1D1D2B]",
-  Workshop: "bg-[#1D1D2B] text-[#F9EFEF]",
+  Temple:       "bg-[#E68A58] text-white",
+  "Street Food":"bg-[#C3A05B] text-white",
+  Cafe:         "bg-[#884529] text-white",
+  Park:         "bg-[#818546] text-white",
+  Workshop:     "bg-[#4482A3] text-white",
+  Restaurant:   "bg-[#c4697a] text-white",
+  Bar:          "bg-[#C3A05B] text-white",
+  Museum:       "bg-[#6096a8] text-white",
+  "Local shop": "bg-[#6e9e8a] text-white",
 };
 
 export function TopSpotsCarousel() {

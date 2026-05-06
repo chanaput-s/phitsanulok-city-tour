@@ -19,14 +19,14 @@ type CategoryConfig = {
 };
 
 const CATEGORIES: Record<string, CategoryConfig> = {
-  Cafe:         { label: "Cafe",        icon: <Coffee size={13} />,          color: "bg-amber-500",   textColor: "text-amber-600",  bgLight: "bg-amber-50 dark:bg-amber-950/30" },
-  Temple:       { label: "Temple",      icon: <Landmark size={13} />,        color: "bg-yellow-500",  textColor: "text-yellow-600", bgLight: "bg-yellow-50 dark:bg-yellow-950/30" },
-  Restaurant:   { label: "Restaurant",  icon: <UtensilsCrossed size={13} />, color: "bg-red-500",     textColor: "text-red-600",    bgLight: "bg-red-50 dark:bg-red-950/30" },
-  Park:         { label: "Park",        icon: <TreePine size={13} />,        color: "bg-green-500",   textColor: "text-green-600",  bgLight: "bg-green-50 dark:bg-green-950/30" },
-  Bar:          { label: "Bar",         icon: <Wine size={13} />,            color: "bg-purple-500",  textColor: "text-purple-600", bgLight: "bg-purple-50 dark:bg-purple-950/30" },
-  Workshop:     { label: "Workshop",    icon: <Hammer size={13} />,          color: "bg-blue-500",    textColor: "text-blue-600",   bgLight: "bg-blue-50 dark:bg-blue-950/30" },
-  Museum:       { label: "Museum",      icon: <Building2 size={13} />,       color: "bg-indigo-500",  textColor: "text-indigo-600", bgLight: "bg-indigo-50 dark:bg-indigo-950/30" },
-  "Local shop": { label: "Local shop",  icon: <ShoppingBag size={13} />,     color: "bg-pink-500",    textColor: "text-pink-600",   bgLight: "bg-pink-50 dark:bg-pink-950/30" },
+  Cafe:         { label: "Cafe",        icon: <Coffee size={13} />,          color: "bg-[#884529]",   textColor: "text-[#884529]",  bgLight: "bg-[#f5ede8]" },
+  Temple:       { label: "Temple",      icon: <Landmark size={13} />,        color: "bg-[#E68A58]",   textColor: "text-[#c4623a]",  bgLight: "bg-[#fdf0e8]" },
+  Restaurant:   { label: "Restaurant",  icon: <UtensilsCrossed size={13} />, color: "bg-[#c4697a]",   textColor: "text-[#c4697a]",  bgLight: "bg-[#fef2f4]" },
+  Park:         { label: "Park",        icon: <TreePine size={13} />,        color: "bg-[#818546]",   textColor: "text-[#818546]",  bgLight: "bg-[#f0f1e4]" },
+  Bar:          { label: "Bar",         icon: <Wine size={13} />,            color: "bg-[#C3A05B]",   textColor: "text-[#9a7a38]",  bgLight: "bg-[#f9f4e6]" },
+  Workshop:     { label: "Workshop",    icon: <Hammer size={13} />,          color: "bg-[#4482A3]",   textColor: "text-[#4482A3]",  bgLight: "bg-[#e8f2f7]" },
+  Museum:       { label: "Museum",      icon: <Building2 size={13} />,       color: "bg-[#6096a8]",   textColor: "text-[#6096a8]",  bgLight: "bg-[#eef5f8]" },
+  "Local shop": { label: "Local shop",  icon: <ShoppingBag size={13} />,     color: "bg-[#6e9e8a]",   textColor: "text-[#6e9e8a]",  bgLight: "bg-[#eef4f1]" },
 };
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
@@ -110,7 +110,7 @@ export function ItinerarySplitView() {
               ? setSelectedCategories([...CATEGORY_KEYS])
               : setSelectedCategories([])
           }
-          className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm border transition-all active:scale-95 bg-neutral-800 dark:bg-white text-white dark:text-neutral-900 border-transparent"
+          className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm border transition-all active:scale-95 bg-[#FFE4D2] text-[#884529] border-[#884529]/30"
         >
           {selectedCategories.length === 0 ? "All" : "None"}
         </button>

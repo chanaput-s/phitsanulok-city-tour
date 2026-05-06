@@ -31,14 +31,14 @@ function BoundsController() {
 // ─── Category → pin color map ─────────────────────────────────────────────────
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Cafe:         "#f59e0b",
-  Temple:       "#eab308",
-  Restaurant:   "#ef4444",
-  Park:         "#22c55e",
-  Bar:          "#a855f7",
-  Workshop:     "#3b82f6",
-  Museum:       "#6366f1",
-  "Local shop": "#ec4899",
+  Cafe:         "#884529",
+  Temple:       "#E68A58",
+  Restaurant:   "#c4697a",
+  Park:         "#818546",
+  Bar:          "#C3A05B",
+  Workshop:     "#4482A3",
+  Museum:       "#6096a8",
+  "Local shop": "#6e9e8a",
 };
 
 const CATEGORY_ICONS: Record<string, string> = {

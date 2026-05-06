@@ -42,14 +42,14 @@ type CategoryConfig = {
 };
 
 const CATEGORIES: Record<string, CategoryConfig> = {
-  Cafe: { label: "Cafe", icon: <Coffee size={14} />, color: "bg-amber-500", pinColor: "bg-amber-500", textColor: "text-amber-600" },
-  Temple: { label: "Temple", icon: <Landmark size={14} />, color: "bg-yellow-500", pinColor: "bg-yellow-500", textColor: "text-yellow-600" },
-  Restaurant: { label: "Restaurant", icon: <UtensilsCrossed size={14} />, color: "bg-red-500", pinColor: "bg-red-500", textColor: "text-red-600" },
-  Park: { label: "Park", icon: <TreePine size={14} />, color: "bg-green-500", pinColor: "bg-green-500", textColor: "text-green-600" },
-  Bar: { label: "Bar", icon: <Wine size={14} />, color: "bg-purple-500", pinColor: "bg-purple-500", textColor: "text-purple-600" },
-  Workshop: { label: "Workshop", icon: <Hammer size={14} />, color: "bg-blue-500", pinColor: "bg-blue-500", textColor: "text-blue-600" },
-  Museum: { label: "Museum", icon: <Building2 size={14} />, color: "bg-indigo-500", pinColor: "bg-indigo-500", textColor: "text-indigo-600" },
-  "Local shop": { label: "Local shop", icon: <ShoppingBag size={14} />, color: "bg-pink-500", pinColor: "bg-pink-500", textColor: "text-pink-600" },
+  Cafe:         { label: "Cafe",        icon: <Coffee size={14} />,          color: "bg-[#884529]", pinColor: "bg-[#884529]", textColor: "text-[#884529]" },
+  Temple:       { label: "Temple",      icon: <Landmark size={14} />,        color: "bg-[#E68A58]", pinColor: "bg-[#E68A58]", textColor: "text-[#c4623a]" },
+  Restaurant:   { label: "Restaurant",  icon: <UtensilsCrossed size={14} />, color: "bg-[#c4697a]", pinColor: "bg-[#c4697a]", textColor: "text-[#c4697a]" },
+  Park:         { label: "Park",        icon: <TreePine size={14} />,        color: "bg-[#818546]", pinColor: "bg-[#818546]", textColor: "text-[#818546]" },
+  Bar:          { label: "Bar",         icon: <Wine size={14} />,            color: "bg-[#C3A05B]", pinColor: "bg-[#C3A05B]", textColor: "text-[#9a7a38]" },
+  Workshop:     { label: "Workshop",    icon: <Hammer size={14} />,          color: "bg-[#4482A3]", pinColor: "bg-[#4482A3]", textColor: "text-[#4482A3]" },
+  Museum:       { label: "Museum",      icon: <Building2 size={14} />,       color: "bg-[#6096a8]", pinColor: "bg-[#6096a8]", textColor: "text-[#6096a8]" },
+  "Local shop": { label: "Local shop",  icon: <ShoppingBag size={14} />,     color: "bg-[#6e9e8a]", pinColor: "bg-[#6e9e8a]", textColor: "text-[#6e9e8a]" },
 };
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
@@ -256,7 +256,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
                 ? setSelectedCategories([...CATEGORY_KEYS])
                 : setSelectedCategories([])
             }
-            className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 bg-neutral-800 dark:bg-white text-white dark:text-neutral-900 border-transparent"
+            className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 bg-[#FFE4D2] text-[#884529] border-[#884529]/30"
           >
             {selectedCategories.length === 0 ? "All" : "None"}
           </button>
