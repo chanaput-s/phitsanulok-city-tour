@@ -10,14 +10,14 @@ import {
 // ─── Category config ──────────────────────────────────────────────────────────
 
 const CATEGORIES: Record<string, { color: string; icon: React.ReactNode }> = {
-  Cafe:         { color: "bg-amber-500",  icon: <Coffee size={13} /> },
-  Temple:       { color: "bg-yellow-500", icon: <Landmark size={13} /> },
-  Restaurant:   { color: "bg-red-500",    icon: <UtensilsCrossed size={13} /> },
-  Park:         { color: "bg-green-500",  icon: <TreePine size={13} /> },
-  Bar:          { color: "bg-purple-500", icon: <Wine size={13} /> },
-  Workshop:     { color: "bg-blue-500",   icon: <Hammer size={13} /> },
-  Museum:       { color: "bg-indigo-500", icon: <Building2 size={13} /> },
-  "Local shop": { color: "bg-pink-500",   icon: <ShoppingBag size={13} /> },
+  Cafe:         { color: "bg-[#884529]",  icon: <Coffee size={13} /> },
+  Temple:       { color: "bg-[#E68A58]",  icon: <Landmark size={13} /> },
+  Restaurant:   { color: "bg-[#c4697a]",  icon: <UtensilsCrossed size={13} /> },
+  Park:         { color: "bg-[#818546]",  icon: <TreePine size={13} /> },
+  Bar:          { color: "bg-[#C3A05B]",  icon: <Wine size={13} /> },
+  Workshop:     { color: "bg-[#4482A3]",  icon: <Hammer size={13} /> },
+  Museum:       { color: "bg-[#6096a8]",  icon: <Building2 size={13} /> },
+  "Local shop": { color: "bg-[#6e9e8a]",  icon: <ShoppingBag size={13} /> },
 };
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
