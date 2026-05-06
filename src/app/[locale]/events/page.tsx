@@ -33,8 +33,8 @@ export default function EventsPage() {
       {/* Upcoming Events Carousel Section */}
       <section className="mb-10 w-full relative">
         <div className="flex items-center justify-between mb-4 px-2">
-          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-neutral-100">{t("upcoming_events")}</h2>
-          <span className="text-sm font-bold text-teal-600 dark:text-teal-400 cursor-pointer hover:underline">{t("see_all")}</span>
+          <h2 className="text-2xl font-extrabold text-[#1D1D2B]">{t("upcoming_events")}</h2>
+          {/* <span className="text-sm font-bold text-teal-600 dark:text-teal-400 cursor-pointer hover:underline">{t("see_all")}</span> */}
         </div>
         <UpcomingCarousel events={upcomingEvents} />
       </section>

@@ -246,8 +246,8 @@ export function EventCalendar() {
       {/* Bottom Row: Event List Details */}
       <div className="w-full flex flex-col">
         <div className="flex items-center justify-between mb-6">
-          <h3 className={`font-bold flex items-center gap-2 text-[#1D1D2B] ${isThai ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}>
-            <CalendarIcon className="w-5 h-5 text-[#AEADF0]" />
+          <h3 className={`font-bold flex items-center gap-3 text-[#1D1D2B] ${isThai ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}>
+            <CalendarIcon className="w-8 h-8 text-[#AEADF0]" />
             {selectedDate ? `${MONTH_NAMES[month]} ${selectedDate}, ${isThai ? year + 543 : year}` : `${t("all_events_in")} ${MONTH_NAMES[month]}`}
           </h3>
           <span className="bg-[#FCD091] text-[#1D1D2B] px-3 py-1 rounded-full text-xs font-bold shadow-sm">
@@ -259,7 +259,7 @@ export function EventCalendar() {
         <div className="flex flex-wrap gap-2 mb-6">
           <button
             onClick={() => setSelectedType(null)}
-            className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === null ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
+            className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${selectedType === null ? 'bg-[#AEADF0] text-white shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white hover:text-[#1D1D2B]'}`}
           >
             {t("all_types")}
           </button>
@@ -284,7 +284,7 @@ export function EventCalendar() {
               <button
                 key={typeKey}
                 onClick={() => setSelectedType(typeKey)}
-                className={`px-3 py-1.5 rounded-full text-sm font-bold transition-all ${selectedType === typeKey ? 'bg-[#1D1D2B] text-[#F9EFEF] shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white'}`}
+                className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${selectedType === typeKey ? 'bg-[#AEADF0] text-white shadow-md' : 'bg-[#F9EFEF] border border-[#1D1D2B]/10 text-[#1D1D2B]/70 hover:bg-white hover:text-[#1D1D2B]'}`}
               >
                 {displayType}
               </button>
@@ -304,31 +304,31 @@ export function EventCalendar() {
               <div key={event.id} className="group grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[#F9EFEF] border border-[#1D1D2B]/10 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300">
                 {/* Image */}
                 <div className="w-full h-48 sm:h-auto sm:aspect-video rounded-2xl bg-cover bg-center relative overflow-hidden sm:self-start" style={{ backgroundImage: `url(${event.img})` }}>
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-[#1D1D2B]/80 backdrop-blur-md rounded-lg text-[#F9EFEF] text-[10px] font-bold uppercase tracking-wider">{isThai ? event.type.th : event.type.en}</div>
+                  <div className="absolute top-3 left-3 px-3 py-1 bg-[#F5D6B4] rounded-lg text-[#1D1D2B] text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-sm">{isThai ? event.type.th : event.type.en}</div>
                 </div>
 
                 {/* Data */}
                 <div className="flex flex-col justify-center py-2">
                   <h4 className={`font-bold mb-3 text-[#1D1D2B] group-hover:text-[#AEADF0] transition-colors ${isThai ? 'text-2xl' : 'text-xl'}`}>{isThai ? event.title.th : event.title.en}</h4>
 
-                  <div className={`flex flex-col gap-2 text-[#1D1D2B]/60 ${isThai ? 'text-base' : 'text-sm'}`}>
-                    <div className="flex items-center gap-2">
-                      <CalendarIcon className="w-4 h-4 text-[#AEADF0]" />
-                      <span className="font-medium text-[#1D1D2B]">{formatDateRange(event, locale as Locale)}</span>
+                  <div className={`flex flex-col gap-2.5 text-[#1D1D2B] ${isThai ? 'text-base' : 'text-sm'}`}>
+                    <div className="flex items-center gap-2.5">
+                      <CalendarIcon className="w-5 h-5 text-[#1D1D2B]" />
+                      <span className="font-semibold text-[#1D1D2B]">{formatDateRange(event, locale as Locale)}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-[#FCD091]" />
-                      <span className="font-medium text-[#1D1D2B]">{isThai ? event.operatingHours.th : event.operatingHours.en}</span>
+                    <div className="flex items-center gap-2.5">
+                      <Clock className="w-5 h-5 text-[#1D1D2B]" />
+                      <span className="font-semibold text-[#1D1D2B]">{isThai ? event.operatingHours.th : event.operatingHours.en}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[#AEADF0]" />
-                      <span>{isThai ? event.locationName.th : event.locationName.en}</span>
+                    <div className="flex items-center gap-2.5">
+                      <MapPin className="w-5 h-5 text-[#1D1D2B]" />
+                      <span className="font-semibold text-[#1D1D2B]">{isThai ? event.locationName.th : event.locationName.en}</span>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-4 border-t border-[#1D1D2B]/10 flex justify-end">
+                  <div className="mt-5 pt-5 border-t border-[#1D1D2B]/10 flex justify-end">
                     <Link href={`/events/${event.id}`}>
-                      <button className="text-sm font-bold text-[#AEADF0] flex items-center gap-1 hover:text-[#1D1D2B] transition-colors">
+                      <button className="text-sm font-bold bg-[#AEADF0] text-white px-5 py-2.5 rounded-full flex items-center gap-1.5 hover:bg-[#9B98E7] transition-all shadow-md hover:shadow-lg active:scale-95">
                         {t("get_tickets")} <ChevronRight className="w-4 h-4" />
                       </button>
                     </Link>

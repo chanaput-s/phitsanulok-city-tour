@@ -20,6 +20,9 @@ function getLocalized(
   return value as string;
 }
 
+const FULL_MONTH_NAMES_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const FULL_MONTH_NAMES_TH = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
 export function EventHero() {
   const t = useTranslations("Events");
   const locale = useLocale();
@@ -59,17 +62,17 @@ export function EventHero() {
           style={{ backgroundImage: `url(${featuredEvent.img})`, filter: 'saturate(1.2) contrast(1.1)' }}
         ></div>
 
-        {/* Dark Teal Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-teal-900/70 to-transparent"></div>
+        {/* Purple Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D2B]/80 to-[#1D1D2B]/70 to-transparent"></div>
 
         {/* Content */}
         <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col items-center text-center">
 
           {/* Urgency Badge */}
-          <div className="flex items-center gap-2 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-extrabold tracking-wide uppercase mb-3 shadow-lg ring-2 ring-orange-500/30 backdrop-blur-sm">
+          <div className="flex items-center gap-2 bg-[#F5D6B4] text-[#1D1D2B] px-3 py-1 rounded-full text-xs font-extrabold tracking-wide uppercase mb-3 shadow-lg ring-2 ring-[#F5D6B4]/30 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1D1D2B] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1D1D2B]"></span>
             </span>
             {t("featured_event")}
           </div>
@@ -85,28 +88,28 @@ export function EventHero() {
           </p>
 
           {/* Quick Metadata Row */}
-          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-teal-50 text-xs md:text-sm font-medium mb-6">
-            <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
-              <CalendarDays className="w-4 h-4 text-orange-400 shrink-0" />
-              <span className="truncate leading-none relative">{formatDateRange(normalizeEvent(featuredEvent), locale as Locale)}</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-[#1D1D2B] text-xs md:text-sm font-bold mb-6">
+            <div className="flex items-center gap-1.5 bg-[#F9EFEF] px-3 py-1.5 rounded-lg shadow-sm max-w-full">
+              <CalendarDays className="w-4 h-4 text-[#1D1D2B] shrink-0" />
+              <span className="truncate leading-none relative">{`${featuredEvent.date} ${isThai ? FULL_MONTH_NAMES_TH[featuredEvent.month] : FULL_MONTH_NAMES_EN[featuredEvent.month]} ${isThai ? featuredEvent.year + 543 : featuredEvent.year}`}</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
-              <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
+            <div className="flex items-center gap-1.5 bg-[#F9EFEF] px-3 py-1.5 rounded-lg shadow-sm max-w-full">
+              <MapPin className="w-4 h-4 text-[#1D1D2B] shrink-0" />
               <span className="truncate leading-none relative">{getLocalized(isThai ? featuredEvent.location_th : featuredEvent.location, featuredEvent.locationName ?? featuredEvent.location, locale)}</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full">
-              <Clock className="w-4 h-4 text-orange-400 shrink-0" />
+            <div className="flex items-center gap-1.5 bg-[#F9EFEF] px-3 py-1.5 rounded-lg shadow-sm max-w-full">
+              <Clock className="w-4 h-4 text-[#1D1D2B] shrink-0" />
               <span className="truncate leading-none relative">{featuredEvent.time}</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-teal-950/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-teal-800/50 shadow-sm max-w-full hidden md:flex">
-              <Users className="w-4 h-4 text-orange-400 shrink-0" />
+            <div className="flex items-center gap-1.5 bg-[#F9EFEF] px-3 py-1.5 rounded-lg shadow-sm max-w-full hidden md:flex">
+              <Users className="w-4 h-4 text-[#1D1D2B] shrink-0" />
               <span className="truncate leading-none relative -top-[3px]">{t("high_turnout")}</span>
             </div>
           </div>
 
           {/* Call to Action */}
             <Link href={`/${locale}/events/${featuredEvent.id}`}>
-              <button className="bg-white text-teal-900 font-extrabold px-8 py-3.5 rounded-full shadow-xl hover:bg-teal-50 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 transform active:scale-95 flex items-center gap-2">
+              <button className="bg-[#AEADF0] text-white font-extrabold px-8 py-3.5 rounded-full shadow-xl hover:bg-[#9B98E7] hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 transform active:scale-95 flex items-center gap-2">
                 {t("view_details")}
               </button>
             </Link>
