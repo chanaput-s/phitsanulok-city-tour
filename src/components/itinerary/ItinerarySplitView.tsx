@@ -6,9 +6,10 @@ import {
   Hammer, Building2, ShoppingBag,
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { ACTIVITIES, type Activity } from "@/data/activities";
 
-// ─── Category config (same as Explore) ───────────────────────────────────────
+// ─── Category config ──────────────────────────────────────────────────────────
 
 type CategoryConfig = {
   label: string;
@@ -31,10 +32,28 @@ const CATEGORIES: Record<string, CategoryConfig> = {
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
 
+// Map category name → i18n key
+const CAT_I18N_KEY: Record<string, string> = {
+  Cafe: "cafe", Temple: "temple", Restaurant: "restaurant",
+  Park: "park", Bar: "bar", Workshop: "workshop",
+  Museum: "museum", "Local shop": "localshop",
+};
+
 // ─── Activity Card ────────────────────────────────────────────────────────────
 
-function ActivityCard({ activity }: { activity: Activity }) {
+function ActivityCard({
+  activity,
+  t,
+}: {
+  activity: Activity;
+  t: ReturnType<typeof useTranslations<"Itinerary">>;
+}) {
   const cfg = CATEGORIES[activity.category];
+
+  const name        = t.has(`activities.${activity.id}.name`)        ? t(`activities.${activity.id}.name`)        : activity.name;
+  const explanation = t.has(`activities.${activity.id}.explanation`) ? t(`activities.${activity.id}.explanation`) : activity.explanation;
+  const catI18nKey  = CAT_I18N_KEY[activity.category];
+  const catLabel    = catI18nKey && t.has(`categories.${catI18nKey}`) ? t(`categories.${catI18nKey}`) : activity.category;
 
   return (
     <Link
@@ -54,15 +73,15 @@ function ActivityCard({ activity }: { activity: Activity }) {
         {/* Category badge */}
         <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold text-white w-max mb-2 ${cfg?.color ?? "bg-neutral-500"}`}>
           {cfg?.icon}
-          {activity.category}
+          {catLabel}
         </span>
 
         {/* Name */}
         <h3 className="font-extrabold text-base md:text-lg leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
-          {activity.name}
+          {name}
         </h3>
 
-        {/* Hashtags */}
+        {/* Hashtags (untranslated — contextual tags) */}
         <div className="flex flex-wrap gap-1 mb-2">
           {activity.hashtags.map((tag) => (
             <span
@@ -76,7 +95,7 @@ function ActivityCard({ activity }: { activity: Activity }) {
 
         {/* Explanation */}
         <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed line-clamp-2 md:line-clamp-3">
-          {activity.explanation}
+          {explanation}
         </p>
       </div>
     </Link>
@@ -86,6 +105,7 @@ function ActivityCard({ activity }: { activity: Activity }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function ItinerarySplitView() {
+  const t = useTranslations("Itinerary");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([...CATEGORY_KEYS]);
 
   const toggleCategory = (cat: string) => {
@@ -112,12 +132,14 @@ export function ItinerarySplitView() {
           }
           className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm border transition-all active:scale-95 bg-[#FFE4D2] text-[#884529] border-[#884529]/30"
         >
-          {selectedCategories.length === 0 ? "All" : "None"}
+          {selectedCategories.length === 0 ? t("filter_all") : t("filter_none")}
         </button>
 
         {CATEGORY_KEYS.map((cat) => {
           const cfg = CATEGORIES[cat];
           const active = selectedCategories.includes(cat);
+          const catI18nKey = CAT_I18N_KEY[cat];
+          const label = catI18nKey && t.has(`categories.${catI18nKey}`) ? t(`categories.${catI18nKey}`) : cfg.label;
           return (
             <button
               key={cat}
@@ -129,7 +151,7 @@ export function ItinerarySplitView() {
               }`}
             >
               {cfg.icon}
-              {cfg.label}
+              {label}
             </button>
           );
         })}
@@ -138,12 +160,12 @@ export function ItinerarySplitView() {
       {/* ── Activity cards ── */}
       {visibleActivities.length === 0 ? (
         <div className="text-center text-neutral-400 py-20 text-sm font-medium">
-          No activities for the selected categories.
+          {t("no_activities")}
         </div>
       ) : (
         <div className="flex flex-col gap-4">
           {visibleActivities.map((activity) => (
-            <ActivityCard key={activity.id} activity={activity} />
+            <ActivityCard key={activity.id} activity={activity} t={t} />
           ))}
         </div>
       )}

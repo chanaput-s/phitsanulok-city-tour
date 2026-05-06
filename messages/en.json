@@ -37,6 +37,79 @@
     "no_events_today": "No events scheduled today.",
     "rating": "Rating"
   },
+  "Explore": {
+    "filter_all": "All",
+    "filter_none": "None",
+    "near_me": "Near Me",
+    "near_me_radius": "3 km",
+    "loading_map": "Loading Map...",
+    "gps_unsupported": "GPS not supported on this device",
+    "gps_denied": "Location access denied. Please allow location permission.",
+    "categories": {
+      "cafe": "Cafe",
+      "temple": "Temple",
+      "restaurant": "Restaurant",
+      "park": "Park",
+      "workshop": "Workshop",
+      "museum": "Museum",
+      "localshop": "Local shop"
+    }
+  },
+  "Itinerary": {
+    "page_title": "Itinerary",
+    "filter_all": "All",
+    "filter_none": "None",
+    "no_activities": "No activities for the selected categories.",
+    "about_heading": "About this activity",
+    "plan_heading": "Itinerary",
+    "download_plan": "Download Plan",
+    "categories": {
+      "cafe": "Cafe",
+      "temple": "Temple",
+      "restaurant": "Restaurant",
+      "park": "Park",
+      "bar": "Bar",
+      "workshop": "Workshop",
+      "museum": "Museum",
+      "localshop": "Local shop"
+    },
+    "activities": {
+      "cafe-trip-holiday": {
+        "name": "Cafe Trip on Holiday",
+        "explanation": "Start your holiday exploring beautiful cafes around the city — great atmosphere, aromatic coffee, perfect for relaxing or working.",
+        "about": "A carefully curated cafe trail across Phitsanulok — from minimalist riverside cafes to hidden alley gems and charming vintage shops. Each spot has its own character, perfect for relaxing, photography, or remote work. Enjoy a variety of fresh-brewed coffee, teas, and bakery items."
+      },
+      "temple-morning-visit": {
+        "name": "Morning Temple Trail",
+        "explanation": "Start your morning at Wat Phra Sri Rattana Mahathat — experience its sacred atmosphere and beautiful Thai architecture.",
+        "about": "A dawn temple trail beginning at Wat Phra Sri Rattana Mahathat, home to the revered Phra Buddha Chinarat — considered the most beautiful Buddha image in Thailand. Continue to the adjacent Wat Nang Phaya. Ideal for experiencing a peaceful morning filled with incense, bells, and the beauty of traditional Thai architecture."
+      },
+      "river-dinner": {
+        "name": "River Dinner Experience",
+        "explanation": "Dine along the Nan River watching the sunset — authentic Thai flavors with a breathtaking view."
+      },
+      "sunset-park-walk": {
+        "name": "Sunset Park Walk",
+        "explanation": "Stroll through Somdej Phra Naresuan Park at golden hour — lush greenery, perfect for unwinding."
+      },
+      "evening-bar-hop": {
+        "name": "Evening Bar Hopping",
+        "explanation": "Explore riverside bars along the Nan River — chill vibes, live music, and beautiful water views."
+      },
+      "craft-workshop-day": {
+        "name": "Local Craft Workshop Day",
+        "explanation": "Learn traditional Phitsanulok handicrafts and make your own souvenir to take home."
+      },
+      "heritage-museum-tour": {
+        "name": "Heritage Museum Tour",
+        "explanation": "Tour Sergeant Thawee Folk Museum — discover Phitsanulok's rich history and local culture."
+      },
+      "night-bazaar-shopping": {
+        "name": "Night Bazaar Shopping",
+        "explanation": "Shop for souvenirs and taste local street food at the lively Nan riverside night market."
+      }
+    }
+  },
   "Home": {
     "eyebrow": "Mueang Phitsanulok City Guide",
     "hero_headline_discover": "Discover",

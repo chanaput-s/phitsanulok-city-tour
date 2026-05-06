@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ACTIVITIES } from "@/data/activities";
 import { DownloadPlanButton } from "@/components/itinerary/DownloadPlanButton";
 import {
@@ -20,16 +20,26 @@ const CATEGORIES: Record<string, { color: string; icon: React.ReactNode }> = {
   "Local shop": { color: "bg-[#6e9e8a]",  icon: <ShoppingBag size={13} /> },
 };
 
+const CAT_I18N_KEY: Record<string, string> = {
+  Cafe: "cafe", Temple: "temple", Restaurant: "restaurant",
+  Park: "park", Bar: "bar", Workshop: "workshop",
+  Museum: "museum", "Local shop": "localshop",
+};
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
   return ACTIVITIES.map((a) => ({ id: a.id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
+  const { locale, id } = await params;
+  const t = await getTranslations({ locale, namespace: "Itinerary" });
   const activity = ACTIVITIES.find((a) => a.id === id);
-  return { title: activity ? `${activity.name} | CityGuide` : "Activity" };
+  const name = activity
+    ? (t.has(`activities.${id}.name`) ? t(`activities.${id}.name`) : activity.name)
+    : "Activity";
+  return { title: `${name} | CityGuide` };
 }
 
 export default async function ActivityDetailPage({
@@ -42,6 +52,15 @@ export default async function ActivityDetailPage({
 
   const activity = ACTIVITIES.find((a) => a.id === id);
   if (!activity) notFound();
+
+  const t = await getTranslations("Itinerary");
+
+  const displayName     = t.has(`activities.${id}.name`)  ? t(`activities.${id}.name`)  : activity.name;
+  const displayAbout    = t.has(`activities.${id}.about`) ? t(`activities.${id}.about`) : (activity.about ?? "");
+  const catI18nKey      = CAT_I18N_KEY[activity.category];
+  const displayCategory = catI18nKey && t.has(`categories.${catI18nKey}`)
+    ? t(`categories.${catI18nKey}`)
+    : activity.category;
 
   const catCfg = CATEGORIES[activity.category];
 
@@ -60,12 +79,12 @@ export default async function ActivityDetailPage({
           {/* Category badge */}
           <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white mb-3 ${catCfg?.color ?? "bg-neutral-500"}`}>
             {catCfg?.icon}
-            {activity.category}
+            {displayCategory}
           </span>
 
           {/* Title */}
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-lg mb-3">
-            {activity.name}
+            {displayName}
           </h1>
 
           {/* Hashtags */}
@@ -83,23 +102,23 @@ export default async function ActivityDetailPage({
       <div className="max-w-3xl mx-auto px-4 md:px-8 pt-8 flex flex-col gap-8">
 
         {/* About */}
-        {activity.about && (
+        {displayAbout && (
           <section>
-            <h2 className="text-xl font-extrabold mb-3 tracking-tight">About this activity</h2>
+            <h2 className="text-xl font-extrabold mb-3 tracking-tight">{t("about_heading")}</h2>
             <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm md:text-base">
-              {activity.about}
+              {displayAbout}
             </p>
           </section>
         )}
 
-        {activity.about && <hr className="border-neutral-200 dark:border-neutral-800" />}
+        {displayAbout && <hr className="border-neutral-200 dark:border-neutral-800" />}
 
         {/* Itinerary plan images + Download button */}
         {activity.planPngs && activity.planPngs.length > 0 && (
           <section>
-            <h2 className="text-xl font-extrabold mb-3 tracking-tight">Itinerary</h2>
+            <h2 className="text-xl font-extrabold mb-3 tracking-tight">{t("plan_heading")}</h2>
 
-            <DownloadPlanButton planPngs={activity.planPngs} />
+            <DownloadPlanButton planPngs={activity.planPngs} label={t("download_plan")} />
 
             {/* Plan images stacked */}
             <div className="flex flex-col gap-4">
@@ -108,7 +127,7 @@ export default async function ActivityDetailPage({
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/Plan_png/${file}`}
-                    alt={`${activity.name} plan`}
+                    alt={`${displayName} plan`}
                     className="w-full h-auto object-contain"
                   />
                 </div>
