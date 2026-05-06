@@ -2,7 +2,7 @@
 
 import { Download } from "lucide-react";
 
-export function DownloadPlanButton({ planPngs }: { planPngs: string[] }) {
+export function DownloadPlanButton({ planPngs, label = "Download Plan" }: { planPngs: string[]; label?: string }) {
   const handleDownload = () => {
     planPngs.forEach((file, i) => {
       setTimeout(() => {
@@ -22,7 +22,7 @@ export function DownloadPlanButton({ planPngs }: { planPngs: string[] }) {
       className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold px-5 py-2.5 rounded-xl hover:opacity-90 transition-opacity text-sm shadow-md mb-5"
     >
       <Download className="w-4 h-4" />
-      Download Plan
+      {label}
     </button>
   );
 }

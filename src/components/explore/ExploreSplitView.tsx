@@ -2,21 +2,27 @@
 
 import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import {
   Coffee, Landmark, UtensilsCrossed, TreePine, Palette,
   Building2, Store, X, Phone, Navigation, Send, MapPin, Trees
 } from "lucide-react";
 
-const MapView = dynamic(() => import("./MapView"), {
-  ssr: false,
-  loading: () => (
+function MapLoading() {
+  const t = useTranslations("Explore");
+  return (
     <div className="w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
       <div className="flex flex-col items-center gap-2">
         <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-        <span className="text-neutral-500 font-medium text-sm">Loading Map...</span>
+        <span className="text-neutral-500 font-medium text-sm">{t("loading_map")}</span>
       </div>
     </div>
-  ),
+  );
+}
+
+const MapView = dynamic(() => import("./MapView"), {
+  ssr: false,
+  loading: () => <MapLoading />,
 });
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -171,9 +177,18 @@ function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+// ─── Category → i18n key map ──────────────────────────────────────────────────
+
+const CAT_I18N_KEY: Record<string, string> = {
+  Cafe: "cafe", Temple: "temple", Restaurant: "restaurant",
+  Park: "park", Workshop: "workshop",
+  Museum: "museum", "Local shop": "localshop",
+};
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }) {
+  const t = useTranslations("Explore");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([...CATEGORY_KEYS]);
   const [nearMe, setNearMe] = useState(false);
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
@@ -196,7 +211,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
   const toggleNearMe = () => {
     if (!nearMe) {
       if (!navigator.geolocation) {
-        setGpsError("อุปกรณ์ไม่รองรับ GPS");
+        setGpsError(t("gps_unsupported"));
         return;
       }
       navigator.geolocation.getCurrentPosition(
@@ -205,7 +220,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
           setGpsError(null);
           setNearMe(true);
         },
-        () => setGpsError("ไม่สามารถเข้าถึง GPS ได้ กรุณาอนุญาตการเข้าถึงตำแหน่ง")
+        () => setGpsError(t("gps_denied"))
       );
     } else {
       setNearMe(false);
@@ -257,12 +272,16 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
                 : "bg-[#FDE1CF]/80 text-[#DE8C62]/80 hover:bg-[#FDE1CF]"
             }`}
           >
-            NONE
+            {t("filter_none")}
           </button>
 
           {CATEGORY_KEYS.map((cat) => {
             const cfg = CATEGORIES[cat];
             const active = selectedCategories.includes(cat);
+            const catI18nKey = CAT_I18N_KEY[cat];
+            const label = catI18nKey && t.has(`categories.${catI18nKey}`)
+              ? t(`categories.${catI18nKey}`)
+              : cfg.label;
             return (
               <button
                 key={cat}
@@ -273,7 +292,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
                   }`}
               >
                 {cfg.icon}
-                {cfg.label}
+                {label}
               </button>
             );
           })}
@@ -287,8 +306,8 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
               }`}
           >
             <Send size={16} className="rotate-45 -mt-1" />
-            NEAR ME
-            {nearMe && <span className="ml-1 text-[10px] opacity-80">3 km</span>}
+            {t("near_me")}
+            {nearMe && <span className="ml-1 text-[10px] opacity-80">{t("near_me_radius")}</span>}
           </button>
         </div>
 
@@ -330,7 +349,9 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
                 className={`absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-white ${catConfig.color}`}
               >
                 {catConfig.icon}
-                {selectedPlace.category}
+                {CAT_I18N_KEY[selectedPlace.category] && t.has(`categories.${CAT_I18N_KEY[selectedPlace.category]}`)
+                  ? t(`categories.${CAT_I18N_KEY[selectedPlace.category]}`)
+                  : selectedPlace.category}
               </span>
             </div>
 
