@@ -3,8 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
-  Coffee, Landmark, UtensilsCrossed, TreePine, Wine,
-  Hammer, Building2, ShoppingBag, X, Phone, Navigation,
+  Coffee, Landmark, UtensilsCrossed, TreePine, Palette,
+  Building2, Store, X, Phone, Navigation, Send, MapPin, Trees
 } from "lucide-react";
 
 const MapView = dynamic(() => import("./MapView"), {
@@ -42,14 +42,13 @@ type CategoryConfig = {
 };
 
 const CATEGORIES: Record<string, CategoryConfig> = {
-  Cafe: { label: "Cafe", icon: <Coffee size={14} />, color: "bg-amber-500", pinColor: "bg-amber-500", textColor: "text-amber-600" },
-  Temple: { label: "Temple", icon: <Landmark size={14} />, color: "bg-yellow-500", pinColor: "bg-yellow-500", textColor: "text-yellow-600" },
-  Restaurant: { label: "Restaurant", icon: <UtensilsCrossed size={14} />, color: "bg-red-500", pinColor: "bg-red-500", textColor: "text-red-600" },
-  Park: { label: "Park", icon: <TreePine size={14} />, color: "bg-green-500", pinColor: "bg-green-500", textColor: "text-green-600" },
-  Bar: { label: "Bar", icon: <Wine size={14} />, color: "bg-purple-500", pinColor: "bg-purple-500", textColor: "text-purple-600" },
-  Workshop: { label: "Workshop", icon: <Hammer size={14} />, color: "bg-blue-500", pinColor: "bg-blue-500", textColor: "text-blue-600" },
-  Museum: { label: "Museum", icon: <Building2 size={14} />, color: "bg-indigo-500", pinColor: "bg-indigo-500", textColor: "text-indigo-600" },
-  "Local shop": { label: "Local shop", icon: <ShoppingBag size={14} />, color: "bg-pink-500", pinColor: "bg-pink-500", textColor: "text-pink-600" },
+  Cafe: { label: "CAFE", icon: <Coffee size={16} />, color: "bg-[#92533C]", pinColor: "bg-[#92533C]", textColor: "text-[#D49D7E]" },
+  Temple: { label: "TEMPLE", icon: <Landmark size={16} />, color: "bg-[#E68859]", pinColor: "bg-[#E68859]", textColor: "text-[#FCE6D2]" },
+  Restaurant: { label: "RESTAURANT", icon: <UtensilsCrossed size={16} />, color: "bg-[#ECA1A5]", pinColor: "bg-[#ECA1A5]", textColor: "text-[#9B494F]" },
+  Workshop: { label: "WORKSHOP", icon: <Palette size={16} />, color: "bg-[#9CC1D1]", pinColor: "bg-[#9CC1D1]", textColor: "text-[#4F7E94]" },
+  Museum: { label: "MUSEUM", icon: <Building2 size={16} />, color: "bg-[#4B82A3]", pinColor: "bg-[#4B82A3]", textColor: "text-[#B0D0E2]" },
+  Park: { label: "PARK", icon: <Trees size={16} />, color: "bg-[#848B55]", pinColor: "bg-[#848B55]", textColor: "text-[#F4F2D3]" },
+  "Local shop": { label: "LOCAL SHOP", icon: <Store size={16} />, color: "bg-[#9BBCA0]", pinColor: "bg-[#9BBCA0]", textColor: "text-[#E7F1E8]" },
 };
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
@@ -249,16 +248,16 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
       {/* ── Category chips + Near Me (top overlay) ── */}
       <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-wrap md:flex-nowrap">
-          {/* All / None toggle */}
+          {/* None toggle */}
           <button
-            onClick={() =>
+            onClick={() => setSelectedCategories([])}
+            className={`flex items-center justify-center px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${
               selectedCategories.length === 0
-                ? setSelectedCategories([...CATEGORY_KEYS])
-                : setSelectedCategories([])
-            }
-            className="flex items-center px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 bg-neutral-800 dark:bg-white text-white dark:text-neutral-900 border-transparent"
+                ? "bg-[#FDE1CF] text-[#DE8C62]"
+                : "bg-[#FDE1CF]/80 text-[#DE8C62]/80 hover:bg-[#FDE1CF]"
+            }`}
           >
-            {selectedCategories.length === 0 ? "All" : "None"}
+            NONE
           </button>
 
           {CATEGORY_KEYS.map((cat) => {
@@ -268,9 +267,9 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
               <button
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${active
-                  ? `${cfg.color} text-white border-transparent`
-                  : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${active
+                  ? `${cfg.color} ${cfg.textColor}`
+                  : "bg-white/90 dark:bg-neutral-900/90 text-neutral-500 dark:text-neutral-400 backdrop-blur-md"
                   }`}
               >
                 {cfg.icon}
@@ -282,13 +281,13 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
           {/* Near Me */}
           <button
             onClick={toggleNearMe}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md border transition-all active:scale-95 ${nearMe
-              ? "bg-primary text-white border-transparent"
-              : "bg-white/90 dark:bg-neutral-900/90 border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 backdrop-blur-md"
+            className={`flex items-center justify-center gap-2 px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${nearMe
+              ? "bg-white text-[#3A404F] ring-2 ring-[#3A404F]"
+              : "bg-white text-[#3A404F] hover:bg-gray-50"
               }`}
           >
-            <Navigation size={13} className={nearMe ? "text-white" : "text-primary"} />
-            Near Me
+            <Send size={16} className="rotate-45 -mt-1" />
+            NEAR ME
             {nearMe && <span className="ml-1 text-[10px] opacity-80">3 km</span>}
           </button>
         </div>

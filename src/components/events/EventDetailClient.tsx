@@ -122,16 +122,16 @@ export function EventDetailClient({ event: rawEvent, related: rawRelated }: Prop
                 {isThai ? "กำลังเกิดขึ้น" : "Happening Now"}
               </span>
             ) : status === "soon" ? (
-              <span className="inline-flex items-center gap-2 bg-[#FCD091]/20 border border-[#FCD091]/50 backdrop-blur-md text-[#FCD091] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
-                <span className="inline-flex rounded-full h-2 w-2 bg-[#FCD091]" />
+              <span className="inline-flex items-center gap-2 bg-[#FCD091] border border-[#FCD091]/50 backdrop-blur-md text-[#1D1D2B] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+                <span className="inline-flex rounded-full h-2 w-2 bg-[#1D1D2B]" />
                 {isThai ? "เร็วๆ นี้" : "Coming Soon"}
               </span>
             ) : null}
 
             {/* Price badge */}
             {priceStr && (
-              <span className="inline-flex items-center gap-1 bg-white/20 border border-white/30 backdrop-blur-md text-[#F9EFEF] text-xs font-bold px-3 py-2 rounded-full">
-                {event.isFree ? "🎟️ " : "💰 "}{priceStr}
+              <span className="inline-flex items-center gap-1 bg-[#FCD091] border border-white/30 backdrop-blur-md text-[#1D1D2B] text-xs font-bold px-3 py-2 rounded-full">
+                {priceStr}
               </span>
             )}
           </div>

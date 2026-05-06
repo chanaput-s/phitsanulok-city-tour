@@ -78,7 +78,7 @@ export function UpcomingCarousel({ events }: CarouselProps) {
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/40 to-transparent"></div>
 
                 {/* Category Badge Overlay */}
-                <div className="absolute top-3 left-3 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-teal-900 dark:text-teal-300 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-sm">
+                <div className="absolute top-3 left-3 bg-[#F5D6B4] text-[#1D1D2B] text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-sm">
                   {isThai ? event.type_th : event.type}
                 </div>
               </div>
@@ -123,7 +123,7 @@ export function UpcomingCarousel({ events }: CarouselProps) {
       {events.length > 1 && (
         <div className="w-16 h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full mx-auto mt-3 relative overflow-hidden">
           <div
-            className="absolute top-0 bottom-0 bg-teal-800 dark:bg-teal-500 rounded-full transition-all duration-100 ease-linear"
+            className="absolute top-0 bottom-0 bg-[#adacee] dark:bg-teal-500 rounded-full transition-all duration-100 ease-linear"
             style={{
               width: `${100 / events.length}%`,
               left: `${scrollProgress * (1 - 1 / events.length)}%`
