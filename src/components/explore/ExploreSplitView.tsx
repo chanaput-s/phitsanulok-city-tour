@@ -53,7 +53,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
   Restaurant: { label: "RESTAURANT", icon: <UtensilsCrossed size={16} />, color: "bg-[#ECA1A5]", pinColor: "bg-[#ECA1A5]", textColor: "text-[#9B494F]" },
   Workshop: { label: "WORKSHOP", icon: <Palette size={16} />, color: "bg-[#9CC1D1]", pinColor: "bg-[#9CC1D1]", textColor: "text-[#4F7E94]" },
   Museum: { label: "MUSEUM", icon: <Building2 size={16} />, color: "bg-[#4B82A3]", pinColor: "bg-[#4B82A3]", textColor: "text-[#B0D0E2]" },
-  Park: { label: "PARK", icon: <Trees size={16} />, color: "bg-[#848B55]", pinColor: "bg-[#848B55]", textColor: "text-[#F4F2D3]" },
+  Park: { label: "PARK", icon: <Trees size={16} />, color: "bg-[#848B55]", pinColor: "bg-[#A8B072]", textColor: "text-[#F4F2D3]" },
   "Local shop": { label: "LOCAL SHOP", icon: <Store size={16} />, color: "bg-[#9BBCA0]", pinColor: "bg-[#9BBCA0]", textColor: "text-[#E7F1E8]" },
 };
 
@@ -126,40 +126,40 @@ const PLACES: Place[] = [
     position: [16.8200, 100.2640],
   },
   {
-  id: "temple-001",           // ห้ามซ้ำกับอันอื่น
-  name: "วัดพระศรีรัตนมหาธาตุวรมหาวิหาร",
-  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-  hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
-  phone: "055258966",
-  img: "https://image-tc.galaxy.tf/wijpeg-3fvrgksxjmddlgex2zime0tve/temple-of-wat-phra-si-rattana-mahathat-hop-inn-hotel_standard.jpg?crop=0%2C0%2C555%2C416",        // URL รูปภาพ
-  position: [16.823680921126684, 100.26191685462676],  // [latitude, longitude]
+    id: "temple-001",           // ห้ามซ้ำกับอันอื่น
+    name: "วัดพระศรีรัตนมหาธาตุวรมหาวิหาร",
+    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+    hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
+    phone: "055258966",
+    img: "https://image-tc.galaxy.tf/wijpeg-3fvrgksxjmddlgex2zime0tve/temple-of-wat-phra-si-rattana-mahathat-hop-inn-hotel_standard.jpg?crop=0%2C0%2C555%2C416",        // URL รูปภาพ
+    position: [16.823680921126684, 100.26191685462676],  // [latitude, longitude]
   },
   {
-  id: "temple-002",           // ห้ามซ้ำกับอันอื่น
-  name: "วัดนางพญา",
-  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-  hashtags: ["#วัดพิษณุโลก", "#unseen"],
-  phone: "No contact number",
-  img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGscDrVIz21hoBsWNi3tjQOHwDmht-g2Ad9UG59jzavArFmNqX1AQexlOWeTlEUveha7Pf_ryyGNFdVgQak_9Qk5O2NsOb0LjmqGPn_cAslVEzHeREo4M4UR7jlGeloSf1Sq-gIUvFK8w=w408-h306-k-no",        // URL รูปภาพ
-  position: [16.822688075959178, 100.2619532168755],  // [latitude, longitude]
+    id: "temple-002",           // ห้ามซ้ำกับอันอื่น
+    name: "วัดนางพญา",
+    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+    hashtags: ["#วัดพิษณุโลก", "#unseen"],
+    phone: "No contact number",
+    img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGscDrVIz21hoBsWNi3tjQOHwDmht-g2Ad9UG59jzavArFmNqX1AQexlOWeTlEUveha7Pf_ryyGNFdVgQak_9Qk5O2NsOb0LjmqGPn_cAslVEzHeREo4M4UR7jlGeloSf1Sq-gIUvFK8w=w408-h306-k-no",        // URL รูปภาพ
+    position: [16.822688075959178, 100.2619532168755],  // [latitude, longitude]
   },
   {
-  id: "temple-003",           // ห้ามซ้ำกับอันอื่น
-  name: "วัดจันทร์ตะวันตก",
-  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-  hashtags: ["#วัดพิษณุโลก", "#unseen"],
-  phone: "055251729",
-  img: "https://ik.imagekit.io/tvlk/blog/2024/11/background-religious-attractions-phitsanulok-province-wat-1024x683.jpg?tr=q-70,c-at_max,w-1000,h-600",        // URL รูปภาพ
-  position: [16.807252424523515, 100.24638104171648],  // [latitude, longitude]
+    id: "temple-003",           // ห้ามซ้ำกับอันอื่น
+    name: "วัดจันทร์ตะวันตก",
+    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+    hashtags: ["#วัดพิษณุโลก", "#unseen"],
+    phone: "055251729",
+    img: "https://ik.imagekit.io/tvlk/blog/2024/11/background-religious-attractions-phitsanulok-province-wat-1024x683.jpg?tr=q-70,c-at_max,w-1000,h-600",        // URL รูปภาพ
+    position: [16.807252424523515, 100.24638104171648],  // [latitude, longitude]
   },
   {
-  id: "temple-004",           // ห้ามซ้ำกับอันอื่น
-  name: "วัดจันทร์ตะวันออก",
-  category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-  hashtags: ["#วัดพิษณุโลก", "#unseen"],
-  phone: "06101483",
-  img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1wQzuvEvZX4rcOSr5pjQnsU96u0Pwxu2K_oS24zDhNo8u0wzlFy5AzHPtiK6IssiaUT31FKpw3roeDkRJTmT9oelKs3FhKjlCvEZllSzMtdgXNOA3y_gaGk8BDyrWn_FWFZc62A=w408-h306-k-no",        // URL รูปภาพ
-  position: [16.8046704601266, 100.2450000975198],  // [latitude, longitude]
+    id: "temple-004",           // ห้ามซ้ำกับอันอื่น
+    name: "วัดจันทร์ตะวันออก",
+    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
+    hashtags: ["#วัดพิษณุโลก", "#unseen"],
+    phone: "06101483",
+    img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1wQzuvEvZX4rcOSr5pjQnsU96u0Pwxu2K_oS24zDhNo8u0wzlFy5AzHPtiK6IssiaUT31FKpw3roeDkRJTmT9oelKs3FhKjlCvEZllSzMtdgXNOA3y_gaGk8BDyrWn_FWFZc62A=w408-h306-k-no",        // URL รูปภาพ
+    position: [16.8046704601266, 100.2450000975198],  // [latitude, longitude]
   },
 ];
 
@@ -230,13 +230,13 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
   const visiblePlaces = initialPlaceId
     ? PLACES.filter((p) => p.id === initialPlaceId)
     : PLACES.filter((p) => {
-        const categoryMatch = selectedCategories.includes(p.category);
-        if (!categoryMatch) return false;
-        if (nearMe && userPos) {
-          return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
-        }
-        return true;
-      });
+      const categoryMatch = selectedCategories.includes(p.category);
+      if (!categoryMatch) return false;
+      if (nearMe && userPos) {
+        return getDistanceKm(userPos[0], userPos[1], p.position[0], p.position[1]) <= 3;
+      }
+      return true;
+    });
 
   const handleSelectId = useCallback(
     (id: string) => {
@@ -266,11 +266,10 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
           {/* None toggle */}
           <button
             onClick={() => setSelectedCategories([])}
-            className={`flex items-center justify-center px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${
-              selectedCategories.length === 0
-                ? "bg-[#FDE1CF] text-[#DE8C62]"
-                : "bg-[#FDE1CF]/80 text-[#DE8C62]/80 hover:bg-[#FDE1CF]"
-            }`}
+            className={`flex items-center justify-center px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${selectedCategories.length === 0
+              ? "bg-[#FDE1CF] text-[#DE8C62]"
+              : "bg-[#FDE1CF]/80 text-[#DE8C62]/80 hover:bg-[#FDE1CF]"
+              }`}
           >
             {t("filter_none")}
           </button>
@@ -366,7 +365,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
                 {selectedPlace.hashtags.map((tag) => (
                   <span
                     key={tag}
-                    className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 ${catConfig.textColor}`}
+                    className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#F9EFEF] text-[#1D1D2B]/80 dark:bg-neutral-800 dark:text-neutral-300 border border-[#1D1D2B]/10"
                   >
                     {tag}
                   </span>
@@ -376,9 +375,9 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
               {/* Phone */}
               <a
                 href={`tel:${selectedPlace.phone}`}
-                className="flex items-center gap-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm font-semibold text-[#AEADF0] dark:text-neutral-300 hover:text-primary transition-colors"
               >
-                <div className="w-7 h-7 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 bg-[#AEADF0] text-[#F9EFEF] rounded-full flex items-center justify-center shrink-0">
                   <Phone size={14} />
                 </div>
                 {selectedPlace.phone}

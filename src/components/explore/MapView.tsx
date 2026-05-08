@@ -31,22 +31,22 @@ function BoundsController() {
 // ─── Category → pin color map ─────────────────────────────────────────────────
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Cafe:         "#92533C",
-  Temple:       "#E68859",
-  Restaurant:   "#ECA1A5",
-  Park:         "#848B55",
-  Workshop:     "#9CC1D1",
-  Museum:       "#4B82A3",
+  Cafe: "#92533C",
+  Temple: "#E68859",
+  Restaurant: "#ECA1A5",
+  Park: "#848B55",
+  Workshop: "#9CC1D1",
+  Museum: "#4B82A3",
   "Local shop": "#9BBCA0",
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
-  Cafe:         '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/>',
-  Temple:       '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
-  Restaurant:   '<path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"/><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"/><path d="m2.1 21.8 6.4-6.3"/>',
-  Park:         '<path d="M11 20a7 7 0 0 1-7-7 4 4 0 0 1 4-4 4 4 0 0 1 4 4"/><path d="M11 20V8"/><path d="M16.5 8.5a4 4 0 0 1 1.5 7.5"/><path d="M16.5 8.5 17 20"/>',
-  Workshop:     '<path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 5.6a5.009 5.009 0 0 0-6.16.88l3.26 3.26 1.79 1.79 1.73 1.73L20.91 11.7Z"/>',
-  Museum:       '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
+  Cafe: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/>',
+  Temple: '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  Restaurant: '<path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"/><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"/><path d="m2.1 21.8 6.4-6.3"/>',
+  Park: '<path d="M11 20a7 7 0 0 1-7-7 4 4 0 0 1 4-4 4 4 0 0 1 4 4"/><path d="M11 20V8"/><path d="M16.5 8.5a4 4 0 0 1 1.5 7.5"/><path d="M16.5 8.5 17 20"/>',
+  Workshop: '<path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 5.6a5.009 5.009 0 0 0-6.16.88l3.26 3.26 1.79 1.79 1.73 1.73L20.91 11.7Z"/>',
+  Museum: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
   "Local shop": '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
 };
 
