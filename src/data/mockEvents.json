@@ -40,7 +40,7 @@
       "lat": 16.8234,
       "lng": 100.26
     },
-    "img": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=1800",
+    "img": "https://picsum.photos/seed/ptk-boat/800/600",
     "rating": "4.9",
     "contactFacebook": "https://www.facebook.com/phitsanulok.events",
     "color": "bg-blue-500",
@@ -100,7 +100,7 @@
       "lat": 16.8188,
       "lng": 100.2605
     },
-    "img": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=1800",
+    "img": "https://picsum.photos/seed/ptk-lantern/800/600",
     "rating": "5.0",
     "contactFacebook": "https://www.facebook.com/phitsanulok.events",
     "color": "bg-amber-500",
@@ -160,7 +160,7 @@
       "lat": 16.8188,
       "lng": 100.261
     },
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "rating": "4.7",
     "contactFacebook": "https://www.facebook.com/phitsanulok.nightbazaar",
     "color": "bg-amber-400",
@@ -220,7 +220,7 @@
       "lat": 16.821,
       "lng": 100.262
     },
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "rating": "4.8",
     "contactFacebook": "https://www.facebook.com/phitsanulok.wellness",
     "color": "bg-rose-400",
@@ -251,7 +251,7 @@
       100.2625
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.9",
     "isHighlight": false,
@@ -276,7 +276,7 @@
       100.2605
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.7",
     "isHighlight": true,
@@ -301,7 +301,7 @@
       100.2625
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -326,7 +326,7 @@
       100.2605
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.2",
     "isHighlight": true,
@@ -351,7 +351,7 @@
       100.263
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -376,7 +376,7 @@
       100.265
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.2",
     "isHighlight": false,
@@ -401,7 +401,7 @@
       100.265
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.7",
     "isHighlight": true,
@@ -426,7 +426,7 @@
       100.2605
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -451,7 +451,7 @@
       100.255
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.3",
     "isHighlight": true,
@@ -476,7 +476,7 @@
       100.265
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -501,7 +501,7 @@
       100.2625
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.0",
     "isHighlight": false,
@@ -526,7 +526,7 @@
       100.2625
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -551,7 +551,7 @@
       100.255
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.7",
     "isHighlight": true,
@@ -576,7 +576,7 @@
       100.263
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -601,7 +601,7 @@
       100.265
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -626,7 +626,7 @@
       100.2625
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.2",
     "isHighlight": false,
@@ -651,7 +651,7 @@
       100.2625
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.7",
     "isHighlight": false,
@@ -676,7 +676,7 @@
       100.2625
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.4",
     "isHighlight": false,
@@ -701,7 +701,7 @@
       100.255
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.7",
     "isHighlight": true,
@@ -726,7 +726,7 @@
       100.258
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.0",
     "isHighlight": false,
@@ -751,7 +751,7 @@
       100.255
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "5.0",
     "isHighlight": false,
@@ -776,7 +776,7 @@
       100.263
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "5.0",
     "isHighlight": true,
@@ -801,7 +801,7 @@
       100.263
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "5.0",
     "isHighlight": true,
@@ -826,7 +826,7 @@
       100.255
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.9",
     "isHighlight": true,
@@ -851,7 +851,7 @@
       100.255
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.4",
     "isHighlight": false,
@@ -876,7 +876,7 @@
       100.2625
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.4",
     "isHighlight": false,
@@ -901,7 +901,7 @@
       100.265
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.7",
     "isHighlight": false,
@@ -926,7 +926,7 @@
       100.2625
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.3",
     "isHighlight": false,
@@ -951,7 +951,7 @@
       100.255
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.7",
     "isHighlight": false,
@@ -976,7 +976,7 @@
       100.263
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.4",
     "isHighlight": false,
@@ -1001,7 +1001,7 @@
       100.265
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.9",
     "isHighlight": true,
@@ -1026,7 +1026,7 @@
       100.258
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1051,7 +1051,7 @@
       100.255
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.3",
     "isHighlight": false,
@@ -1076,7 +1076,7 @@
       100.263
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.2",
     "isHighlight": false,
@@ -1101,7 +1101,7 @@
       100.263
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -1126,7 +1126,7 @@
       100.2605
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1151,7 +1151,7 @@
       100.2605
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.9",
     "isHighlight": false,
@@ -1176,7 +1176,7 @@
       100.265
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.7",
     "isHighlight": false,
@@ -1201,7 +1201,7 @@
       100.2625
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1226,7 +1226,7 @@
       100.265
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.1",
     "isHighlight": true,
@@ -1251,7 +1251,7 @@
       100.265
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.9",
     "isHighlight": false,
@@ -1276,7 +1276,7 @@
       100.258
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.3",
     "isHighlight": true,
@@ -1301,7 +1301,7 @@
       100.255
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.3",
     "isHighlight": true,
@@ -1326,7 +1326,7 @@
       100.2625
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.6",
     "isHighlight": true,
@@ -1351,7 +1351,7 @@
       100.2625
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.9",
     "isHighlight": false,
@@ -1376,7 +1376,7 @@
       100.265
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.9",
     "isHighlight": false,
@@ -1401,7 +1401,7 @@
       100.263
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.5",
     "isHighlight": true,
@@ -1426,7 +1426,7 @@
       100.255
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.0",
     "isHighlight": true,
@@ -1451,7 +1451,7 @@
       100.2625
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1476,7 +1476,7 @@
       100.255
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -1501,7 +1501,7 @@
       100.263
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -1526,7 +1526,7 @@
       100.265
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.7",
     "isHighlight": false,
@@ -1551,7 +1551,7 @@
       100.2625
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.0",
     "isHighlight": false,
@@ -1576,7 +1576,7 @@
       100.263
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.4",
     "isHighlight": false,
@@ -1601,7 +1601,7 @@
       100.258
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -1626,7 +1626,7 @@
       100.265
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.9",
     "isHighlight": true,
@@ -1651,7 +1651,7 @@
       100.258
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -1676,7 +1676,7 @@
       100.258
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.8",
     "isHighlight": false,
@@ -1701,7 +1701,7 @@
       100.255
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1726,7 +1726,7 @@
       100.265
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.3",
     "isHighlight": false,
@@ -1751,7 +1751,7 @@
       100.2605
     ],
     "type": "Education",
-    "img": "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-education/800/600",
     "color": "bg-emerald-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -1776,7 +1776,7 @@
       100.263
     ],
     "type": "Sports",
-    "img": "https://images.unsplash.com/photo-1520626337972-00ab56cbd5e5?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-sports/800/600",
     "color": "bg-blue-500",
     "rating": "4.5",
     "isHighlight": false,
@@ -1801,7 +1801,7 @@
       100.265
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.0",
     "isHighlight": false,
@@ -1826,7 +1826,7 @@
       100.263
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.6",
     "isHighlight": false,
@@ -1851,7 +1851,7 @@
       100.255
     ],
     "type": "Art & Culture",
-    "img": "https://images.unsplash.com/photo-1540610996881-1bc54ee5512b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-temple/800/600",
     "color": "bg-purple-500",
     "rating": "4.3",
     "isHighlight": false,
@@ -1876,7 +1876,7 @@
       100.2605
     ],
     "type": "Food & Dining",
-    "img": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-food/800/600",
     "color": "bg-amber-500",
     "rating": "4.1",
     "isHighlight": false,
@@ -1901,7 +1901,7 @@
       100.2605
     ],
     "type": "Health & Wellness",
-    "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+    "img": "https://picsum.photos/seed/ptk-wellness/800/600",
     "color": "bg-rose-500",
     "rating": "4.3",
     "isHighlight": true,
