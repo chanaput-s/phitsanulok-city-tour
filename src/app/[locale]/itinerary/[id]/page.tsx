@@ -28,9 +28,6 @@ const CAT_I18N_KEY: Record<string, string> = {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export async function generateStaticParams() {
-  return ACTIVITIES.map((a) => ({ id: a.id }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;

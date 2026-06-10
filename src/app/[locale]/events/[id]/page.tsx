@@ -7,9 +7,6 @@ interface Props {
   params: Promise<{ locale: string; id: string }>;
 }
 
-export async function generateStaticParams() {
-  return (MOCK_EVENTS as any[]).map((e) => ({ id: String(e.id) }));
-}
 
 export default async function EventDetailPage({ params }: Props) {
   const { locale, id } = await params;

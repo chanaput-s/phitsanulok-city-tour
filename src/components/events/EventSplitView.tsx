@@ -12,11 +12,12 @@ const MONTH_NAMES_TH = ["มกราคม", "กุมภาพันธ์", 
 const DAYS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const DAYS_TH = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
 
-// Dynamically import MapView to avoid SSR issues with Leaflet
-const MapView = dynamic(
-  () => import('@/components/explore/MapView'),
-  { ssr: false, loading: () => <div className="w-full h-full bg-neutral-100 dark:bg-neutral-800 animate-pulse flex items-center justify-center text-neutral-400 font-medium">Loading Interactive Map...</div> }
-);
+/** Resolve a field that may be a plain string or a { en, th } object */
+function loc(val: string | { en: string; th: string } | undefined, isThai: boolean): string {
+  if (!val) return "";
+  if (typeof val === "object") return isThai ? val.th : val.en;
+  return val;
+}
 
 // Dynamically import MapView to avoid SSR issues with Leaflet
 const MapView = dynamic(
@@ -68,7 +69,7 @@ export function EventSplitView() {
   // Map activeEvents to generic PLACES structure for MapView compatibility
   const mapLocations = activeEvents.map(e => ({
     id: e.id,
-    name: e.title,
+    name: loc(e.title, isThai),
     position: e.position as [number, number]
   }));
 
@@ -107,7 +108,7 @@ export function EventSplitView() {
               <div key={`empty-${i}`} className="h-10 pointer-events-none"></div>
             ))}
 
-            {/* Actual Days */}
+            {/* Actual Days */} 
             {Array.from({ length: daysInMonth }).map((_, i) => {
               const date = i + 1;
               const dayEvents = MOCK_EVENTS.filter(e => e.year === year && e.month === month && e.date === date);
@@ -166,12 +167,12 @@ export function EventSplitView() {
               >
                 {/* Image */}
                 <div className="w-full h-32 rounded-xl bg-cover bg-center shrink-0 relative overflow-hidden shadow-inner" style={{ backgroundImage: `url(${event.img})` }}>
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-md text-white text-[10px] font-bold uppercase tracking-wider">{isThai ? event.type_th : event.type}</div>
+                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-md text-white text-[10px] font-bold uppercase tracking-wider">{loc(event.type, isThai)}</div>
                 </div>
 
                 {/* Data */}
                 <div className="flex flex-col">
-                  <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors leading-tight">{isThai ? event.title_th : event.title}</h4>
+                  <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors leading-tight">{loc(event.title, isThai)}</h4>
                   <div className="flex flex-col gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-3.5 h-3.5 text-primary" />
@@ -183,7 +184,7 @@ export function EventSplitView() {
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-3.5 h-3.5 text-secondary" />
-                      <span>{isThai ? event.location_th : event.location}</span>
+                      <span>{loc(event.location, isThai)}</span>
                     </div>
                   </div>
                 </div>
@@ -223,8 +224,8 @@ export function EventSplitView() {
               >
                 <div className="w-20 h-20 shrink-0 rounded-xl bg-cover bg-center shadow-md relative overflow-hidden" style={{ backgroundImage: `url(${event.img})` }}></div>
                 <div className="flex flex-col py-1 flex-grow">
-                  <span className="text-[10px] font-bold text-primary uppercase bg-primary/10 px-1.5 py-0.5 rounded-full inline-block w-max mb-1">{isThai ? event.type_th : event.type}</span>
-                  <h3 className="font-extrabold text-sm leading-tight line-clamp-2 md:line-clamp-1 mb-1">{isThai ? event.title_th : event.title}</h3>
+                  <span className="text-[10px] font-bold text-primary uppercase bg-primary/10 px-1.5 py-0.5 rounded-full inline-block w-max mb-1">{loc(event.type, isThai)}</span>
+                  <h3 className="font-extrabold text-sm leading-tight line-clamp-2 md:line-clamp-1 mb-1">{loc(event.title, isThai)}</h3>
                   <div className="mt-auto flex items-center justify-between text-xs text-neutral-500 gap-2">
                     <span className="flex items-center gap-1 min-w-0"><CalendarIcon className="w-3 h-3 text-primary shrink-0" /><span className="truncate">{event.date} {MONTH_NAMES[event.month]}</span></span>
                     <span className="flex items-center gap-1 shrink-0"><Clock className="w-3 h-3 text-emerald-500" />{event.time}</span>
@@ -238,7 +239,7 @@ export function EventSplitView() {
 
       {/* Right Panel: Map */}
       <div className="w-full h-[100dvh] md:h-full md:flex-1 relative bg-neutral-200 dark:bg-neutral-800 z-0">
-        <MapView locations={mapLocations} activeLocation={activeLocation} />
+        <MapView locations={mapLocations} />
       </div>
 
     </div>
