@@ -193,7 +193,11 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
   const [nearMe, setNearMe] = useState(false);
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [gpsError, setGpsError] = useState<string | null>(null);
+  const [nearMeNotice, setNearMeNotice] = useState<string | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
+
+  // Phitsanulok province bounding box (generous coverage)
+  const CITY_BOUNDS = { minLat: 16.70, maxLat: 16.95, minLng: 100.10, maxLng: 100.45 };
 
   useEffect(() => {
     if (initialPlaceId) {
@@ -212,18 +216,35 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
     if (!nearMe) {
       if (!navigator.geolocation) {
         setGpsError(t("gps_unsupported"));
+        setNearMeNotice(null);
         return;
       }
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          setUserPos([pos.coords.latitude, pos.coords.longitude]);
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          const inCity =
+            lat >= CITY_BOUNDS.minLat && lat <= CITY_BOUNDS.maxLat &&
+            lng >= CITY_BOUNDS.minLng && lng <= CITY_BOUNDS.maxLng;
+          if (!inCity) {
+            setGpsError(t("gps_out_of_bounds"));
+            setNearMeNotice(null);
+            return;
+          }
+          setUserPos([lat, lng]);
           setGpsError(null);
+          setNearMeNotice(t("near_me_active"));
           setNearMe(true);
         },
-        () => setGpsError(t("gps_denied"))
+        () => {
+          setGpsError(t("gps_denied"));
+          setNearMeNotice(null);
+        }
       );
     } else {
       setNearMe(false);
+      setNearMeNotice(null);
+      setGpsError(null);
     }
   };
 
@@ -261,12 +282,12 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
       </div>
 
       {/* ── Category chips + Near Me (top overlay) ── */}
-      <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none">
-        <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-wrap md:flex-nowrap">
+      <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none overflow-hidden">
+        <div className="flex items-center gap-1.5 md:gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-nowrap">
           {/* None toggle */}
           <button
             onClick={() => setSelectedCategories([])}
-            className={`flex items-center justify-center px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${selectedCategories.length === 0
+            className={`flex items-center justify-center px-3 py-1.5 md:px-5 md:py-2.5 rounded-[10px] md:rounded-[12px] text-xs md:text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${selectedCategories.length === 0
               ? "bg-[#FDE1CF] text-[#DE8C62]"
               : "bg-[#FDE1CF]/80 text-[#DE8C62]/80 hover:bg-[#FDE1CF]"
               }`}
@@ -285,7 +306,7 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
               <button
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${active
+                className={`flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-4 md:py-2.5 rounded-[10px] md:rounded-[12px] text-xs md:text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${active
                   ? `${cfg.color} ${cfg.textColor}`
                   : "bg-white/90 dark:bg-neutral-900/90 text-neutral-500 dark:text-neutral-400 backdrop-blur-md"
                   }`}
@@ -299,21 +320,27 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
           {/* Near Me */}
           <button
             onClick={toggleNearMe}
-            className={`flex items-center justify-center gap-2 px-5 py-2.5 rounded-[12px] text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${nearMe
-              ? "bg-white text-[#3A404F] ring-2 ring-[#3A404F]"
-              : "bg-white text-[#3A404F] hover:bg-gray-50"
+            className={`flex items-center justify-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-5 md:py-2.5 rounded-[10px] md:rounded-[12px] text-xs md:text-sm font-black whitespace-nowrap shadow-sm transition-all active:scale-95 ${nearMe
+              ? "bg-[#3A404F] text-white"
+              : "bg-white text-[#3A404F] hover:bg-neutral-100"
               }`}
           >
-            <Send size={16} className="rotate-45 -mt-1" />
+            <Navigation size={14} className="shrink-0" />
             {t("near_me")}
-            {nearMe && <span className="ml-1 text-[10px] opacity-80">{t("near_me_radius")}</span>}
           </button>
         </div>
 
-        {/* GPS error */}
+        {/* Status banners — error or active notice */}
         {gpsError && (
-          <div className="pointer-events-auto bg-red-500/90 text-white text-xs px-3 py-1.5 rounded-full shadow-md w-max backdrop-blur-md">
-            {gpsError}
+          <div className="pointer-events-auto flex items-start gap-2 bg-red-500/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md self-start max-w-full">
+            <span className="shrink-0">⚠️</span>
+            <span className="leading-snug">{gpsError}</span>
+          </div>
+        )}
+        {nearMeNotice && !gpsError && (
+          <div className="pointer-events-auto flex items-start gap-2 bg-[#3A404F]/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md self-start max-w-full">
+            <Navigation size={12} className="shrink-0 mt-0.5" />
+            <span className="leading-snug">{nearMeNotice}</span>
           </div>
         )}
       </div>

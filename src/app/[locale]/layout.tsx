@@ -37,12 +37,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${ibmPlexSansThai.variable} antialiased min-h-screen bg-background text-foreground`}>
+      <body suppressHydrationWarning className={`${ibmPlexSansThai.variable} antialiased min-h-screen bg-background text-foreground`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="light"
+            forcedTheme="light"
+            enableSystem={false}
             disableTransitionOnChange
           >
             <Navbar />

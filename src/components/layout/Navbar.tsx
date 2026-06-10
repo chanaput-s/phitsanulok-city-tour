@@ -68,7 +68,10 @@ export function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          {/* <ThemeToggle /> */}
+          {/* Toggle kept in DOM but hidden; theme is forced to light */}
+          <div className="hidden" aria-hidden="true">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>
