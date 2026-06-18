@@ -5,7 +5,7 @@ import { CalendarDays, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useMemo } from "react";
 import { useLocale } from "next-intl";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import {
   selectFeaturedEvent,
   formatDateRange,

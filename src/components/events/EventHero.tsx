@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MapPin, Clock, Users, CalendarDays, LinkIcon } from "lucide-react";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import { useTranslations, useLocale } from "next-intl";
 import { formatDateRange, normalizeEvent, type Locale } from "@/lib/eventUtils";
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, Clock } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Link } from "@/i18n/routing";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import { useTranslations, useLocale } from "next-intl";
 
 const MONTH_NAMES_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

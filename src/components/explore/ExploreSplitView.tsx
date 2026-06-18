@@ -7,6 +7,21 @@ import {
   Coffee, Landmark, UtensilsCrossed, TreePine, Palette,
   Building2, Store, X, Phone, Navigation, Send, MapPin, Trees
 } from "lucide-react";
+import PLACES_DATA from "@/data/explorePlaceData.json";
+
+export type Place = {
+  id: string;
+  name: string;
+  category: string;
+  location: string;
+  highlightSpot: boolean;
+  hashtags: string[];
+  phone: string;
+  img: string;
+  position: [number, number];
+};
+
+const PLACES = PLACES_DATA as Place[];
 
 function MapLoading() {
   const t = useTranslations("Explore");
@@ -24,18 +39,6 @@ const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
   loading: () => <MapLoading />,
 });
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type Place = {
-  id: string;
-  name: string;
-  category: string;
-  hashtags: string[];
-  phone: string;
-  img: string;
-  position: [number, number];
-};
 
 // ─── Category config ──────────────────────────────────────────────────────────
 
@@ -58,110 +61,6 @@ const CATEGORIES: Record<string, CategoryConfig> = {
 };
 
 const CATEGORY_KEYS = Object.keys(CATEGORIES);
-
-// ─── Mock places (1 per category) ────────────────────────────────────────────
-
-const PLACES: Place[] = [
-  {
-    id: "cafe-1",
-    name: "Made for Mouth Cafe",
-    category: "Cafe",
-    hashtags: ["#คาเฟ่พิษณุโลก", "#ร้านดัง", "#minimalist"],
-    phone: "055-123-456",
-    img: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=800",
-    position: [16.8210, 100.2550],
-  },
-  {
-    id: "restaurant-1",
-    name: "Pae the River",
-    category: "Restaurant",
-    hashtags: ["#ริมน้ำน่าน", "#อาหารไทย", "#วิวสวย"],
-    phone: "055-301-789",
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800",
-    position: [16.8150, 100.2670],
-  },
-  {
-    id: "park-1",
-    name: "สวนสมเด็จพระนเรศวร",
-    category: "Park",
-    hashtags: ["#สวนสาธารณะ", "#พักผ่อน", "#ออกกำลังกาย"],
-    phone: "055-244-100",
-    img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=800",
-    position: [16.8300, 100.2620],
-  },
-  {
-    id: "bar-1",
-    name: "Riverside Bar & Lounge",
-    category: "Bar",
-    hashtags: ["#barพิษณุโลก", "#ริมน้ำ", "#nightlife"],
-    phone: "092-456-7890",
-    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800",
-    position: [16.8185, 100.2635],
-  },
-  {
-    id: "workshop-1",
-    name: "Phitsanulok Craft Workshop",
-    category: "Workshop",
-    hashtags: ["#handmade", "#งานฝีมือ", "#DIY"],
-    phone: "081-234-5678",
-    img: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=800",
-    position: [16.8170, 100.2590],
-  },
-  {
-    id: "museum-1",
-    name: "พิพิธภัณฑ์พื้นบ้านจ่าทวี",
-    category: "Museum",
-    hashtags: ["#museum", "#ประวัติศาสตร์", "#วัฒนธรรม"],
-    phone: "055-258-858",
-    img: "https://images.unsplash.com/photo-1563294336-16d7a4cb88dd?q=80&w=800",
-    position: [16.8120, 100.2740],
-  },
-  {
-    id: "localshop-1",
-    name: "ตลาดริมน้ำน่าน",
-    category: "Local shop",
-    hashtags: ["#ตลาดพิษณุโลก", "#ของฝาก", "#streetfood"],
-    phone: "086-789-0123",
-    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800",
-    position: [16.8200, 100.2640],
-  },
-  {
-    id: "temple-001",           // ห้ามซ้ำกับอันอื่น
-    name: "วัดพระศรีรัตนมหาธาตุวรมหาวิหาร",
-    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-    hashtags: ["#วัดพิษณุโลก", "#พระพุทธชินราช", "#unseen"],
-    phone: "055258966",
-    img: "https://image-tc.galaxy.tf/wijpeg-3fvrgksxjmddlgex2zime0tve/temple-of-wat-phra-si-rattana-mahathat-hop-inn-hotel_standard.jpg?crop=0%2C0%2C555%2C416",        // URL รูปภาพ
-    position: [16.823680921126684, 100.26191685462676],  // [latitude, longitude]
-  },
-  {
-    id: "temple-002",           // ห้ามซ้ำกับอันอื่น
-    name: "วัดนางพญา",
-    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-    hashtags: ["#วัดพิษณุโลก", "#unseen"],
-    phone: "No contact number",
-    img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGscDrVIz21hoBsWNi3tjQOHwDmht-g2Ad9UG59jzavArFmNqX1AQexlOWeTlEUveha7Pf_ryyGNFdVgQak_9Qk5O2NsOb0LjmqGPn_cAslVEzHeREo4M4UR7jlGeloSf1Sq-gIUvFK8w=w408-h306-k-no",        // URL รูปภาพ
-    position: [16.822688075959178, 100.2619532168755],  // [latitude, longitude]
-  },
-  {
-    id: "temple-003",           // ห้ามซ้ำกับอันอื่น
-    name: "วัดจันทร์ตะวันตก",
-    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-    hashtags: ["#วัดพิษณุโลก", "#unseen"],
-    phone: "055251729",
-    img: "https://ik.imagekit.io/tvlk/blog/2024/11/background-religious-attractions-phitsanulok-province-wat-1024x683.jpg?tr=q-70,c-at_max,w-1000,h-600",        // URL รูปภาพ
-    position: [16.807252424523515, 100.24638104171648],  // [latitude, longitude]
-  },
-  {
-    id: "temple-004",           // ห้ามซ้ำกับอันอื่น
-    name: "วัดจันทร์ตะวันออก",
-    category: "Temple",          // ต้องตรงกับ category ที่มี (ดูด้านล่าง)
-    hashtags: ["#วัดพิษณุโลก", "#unseen"],
-    phone: "06101483",
-    img: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1wQzuvEvZX4rcOSr5pjQnsU96u0Pwxu2K_oS24zDhNo8u0wzlFy5AzHPtiK6IssiaUT31FKpw3roeDkRJTmT9oelKs3FhKjlCvEZllSzMtdgXNOA3y_gaGk8BDyrWn_FWFZc62A=w408-h306-k-no",        // URL รูปภาพ
-    position: [16.8046704601266, 100.2450000975198],  // [latitude, longitude]
-  },
-];
 
 // ─── Haversine distance (km) ──────────────────────────────────────────────────
 
@@ -282,8 +181,11 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
       </div>
 
       {/* ── Category chips + Near Me (top overlay) ── */}
-      <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none overflow-hidden">
-        <div className="flex items-center gap-1.5 md:gap-2 overflow-x-auto hide-scrollbar pointer-events-auto flex-nowrap">
+      <div className="absolute top-0 left-0 right-0 z-[500] pt-3 pb-2 px-3 flex flex-col gap-2 pointer-events-none">
+        {/* Mobile: horizontal slide bar. Desktop/tablet: wrap to next line */}
+        <div className="flex items-center gap-1.5 md:gap-2 pointer-events-auto
+          flex-nowrap overflow-x-auto hide-scrollbar
+          md:flex-wrap md:overflow-x-visible">
           {/* None toggle */}
           <button
             onClick={() => setSelectedCategories([])}
@@ -332,15 +234,15 @@ export function ExploreSplitView({ initialPlaceId }: { initialPlaceId?: string }
 
         {/* Status banners — error or active notice */}
         {gpsError && (
-          <div className="pointer-events-auto flex items-start gap-2 bg-red-500/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md self-start max-w-full">
+          <div className="pointer-events-auto flex items-start gap-2 bg-red-500/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md" style={{ maxWidth: 'calc(100vw - 1.5rem)' }}>
             <span className="shrink-0">⚠️</span>
-            <span className="leading-snug">{gpsError}</span>
+            <span className="leading-snug break-words">{gpsError}</span>
           </div>
         )}
         {nearMeNotice && !gpsError && (
-          <div className="pointer-events-auto flex items-start gap-2 bg-[#3A404F]/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md self-start max-w-full">
+          <div className="pointer-events-auto flex items-start gap-2 bg-[#3A404F]/90 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-md backdrop-blur-md" style={{ maxWidth: 'calc(100vw - 1.5rem)' }}>
             <Navigation size={12} className="shrink-0 mt-0.5" />
-            <span className="leading-snug">{nearMeNotice}</span>
+            <span className="leading-snug break-words">{nearMeNotice}</span>
           </div>
         )}
       </div>

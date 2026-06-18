@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, Clock } fr
 import { Link } from "@/i18n/routing";
 import { normalizeEvent, formatDateRange, type Locale } from "@/lib/eventUtils";
 
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import { useTranslations, useLocale } from "next-intl";
 
 const DAYS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

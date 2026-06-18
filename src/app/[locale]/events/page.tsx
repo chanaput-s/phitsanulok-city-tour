@@ -1,7 +1,7 @@
 import { EventCalendar } from "@/components/events/EventCalendar";
 import { EventHero } from "@/components/events/EventHero";
 import { UpcomingCarousel } from "@/components/events/UpcomingCarousel";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import { useTranslations } from "next-intl";
 import { normalizeEvent } from "@/lib/eventUtils";
 
