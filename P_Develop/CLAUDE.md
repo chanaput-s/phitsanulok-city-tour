@@ -5,6 +5,53 @@ Each entry includes: date, branch, files changed, and a summary of changes.
 
 ---
 
+## Project Overview (inspected 2026-06-21)
+
+### Tech Stack
+- **Framework:** Next.js 16 (App Router) + React 19 + TypeScript
+- **Styling:** Tailwind CSS v4 + clsx/tailwind-merge
+- **i18n:** next-intl — locales: `en`, `th` (files in `/messages/`)
+- **Map:** Leaflet + react-leaflet (dynamic import, SSR disabled)
+- **Animation:** framer-motion
+- **Font:** IBM Plex Sans Thai (all weights)
+- **Deployment:** Cloudflare via OpenNext (`wrangler.toml`, `open-next.config.ts`)
+
+### Color Palette
+| Name | Hex | Usage |
+|------|-----|-------|
+| Dark navy | `#1D1D2B` | BottomNav bg, text |
+| Lavender | `#AEADF0` | Navbar bg, accents |
+| Cream pink | `#F9EFEF` | Page bg, light text |
+| Gold | `#FCD091` | CTA buttons |
+
+### Routes
+| Path | Page | Notes |
+|------|------|-------|
+| `/` | Home | HeroSectionNew → TopSpotsCarousel → LocalEventsSection → ValueProposition |
+| `/explore` | Explore | Full-screen Leaflet map + category chips + Place Card slide-up |
+| `/events` | Events | EventCalendar + EventCard list |
+| `/events/[id]` | Event detail | — |
+| `/itinerary` | Itinerary | Activity card list with category filter |
+| `/itinerary/[id]` | Activity detail | Hero + about + amenities + gallery + contact |
+| `/place/[id]` | Place detail | — |
+
+### Key Data Files
+- `src/data/activities.ts` — 8 activities (Cafe, Temple, Restaurant, Park, Bar, Workshop, Museum, Local shop)
+- `src/data/mockEvents.json` — mock event data
+- `src/components/explore/ExploreSplitView.tsx` — PLACES array (11 places) inline
+
+### Public Assets
+- `/public/Plan_png/` — activity plan PNGs (named `{id}.png`); `Cafe_Plan_1.png`, `History_Plan_1.png`, `History_Plan_2.png` exist
+- `/public/images/events/` — SVG event images per category
+
+### Edit Log Convention
+Every time Claude Code makes edits, a new section is appended below with:
+- Date + session number and branch
+- Files changed (with brief description)
+- Summary of what was done and why
+
+---
+
 ## 2026-05-01 (session 1) — Branch: `P_branch1_Map`
 
 ### Files Changed
@@ -159,3 +206,178 @@ Each entry includes: date, branch, files changed, and a summary of changes.
 - Added `initialPlaceId?: string` prop
 - `useEffect` on mount: if `initialPlaceId` is set, finds the matching place and calls `setSelectedPlace` to auto-open its Place Card
 - `visiblePlaces` override: when `initialPlaceId` is provided, shows only that single place on the map (ignores category filter and Near Me)
+
+---
+
+## 2026-06-21 (session 1) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Added new temple place (วัดอรัญญิก)
+
+### Summary
+**Added วัดอรัญญิก (Wat Aranyik) to the Explore map**
+
+**ExploreSplitView.tsx:**
+- Appended new `temple-005` entry to the `PLACES` array
+- Source: Google Maps share link `https://maps.app.goo.gl/kjxhC9VNEuqLfwjU7`
+- Coordinates set to exact Google Maps position: `[16.8262453, 100.277955]`
+- Category: `Temple` (matches existing category)
+- Hashtags: `#วัดพิษณุโลก`, `#unseen`, `#วัดเก่าแก่`
+- Coordinates fall within map `maxBounds` ([16.78, 100.20] → [16.87, 100.33]) — pin visible on map
+
+---
+
+## 2026-06-21 (session 2) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Real image for วัดอรัญญิก
+
+### Summary
+**Added real photo to วัดอรัญญิก Place Card**
+
+**ExploreSplitView.tsx:**
+- Replaced placeholder image URL on `temple-005` with a real photo from Wikimedia Commons (March 2022, 800px width)
+- Image rendered via inline `background-image` on Place Card — no `next.config` image domain whitelist needed
+
+---
+
+## 2026-06-22 (session 1) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Fixed broken image URL for วัดอรัญญิก
+
+### Summary
+**Image URL fix — `temple-005` photo was returning HTTP 400**
+
+**ExploreSplitView.tsx:**
+- The previous Wikimedia `thumb/.../800px-` URL returned HTTP 400 (the source file is smaller than 800px so that variant doesn't exist)
+- Replaced with the direct full-resolution Commons URL (`commons/3/35/...`) which returns HTTP 200
+- Verified via `curl` before committing
+
+---
+
+## 2026-06-22 (session 2) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Added 4 museum places
+
+### Summary
+**Added 4 museums to Explore map (category: Museum)**
+
+**ExploreSplitView.tsx:** appended 4 new entries to `PLACES`:
+- `museum-002` ศูนย์ประวัติศาสตร์พระราชวังจันทน์ — `[16.828452, 100.2617166]`
+- `museum-003` พิพิธภัณฑ์ทหารกลางแจ้ง กองทัพภาคที่ 3 — `[16.8369684, 100.2616398]`
+- `museum-004` พิพิธภัณฑ์เมืองพิษณุโลก — `[16.8185755, 100.257165]`
+- `museum-005` พิพิธภัณฑ์ทหาร กองทัพภาคที่ 3 — `[16.8355592, 100.2625132]`
+
+All coordinates extracted from user-provided Google Maps share URLs (`!3d{lat}!4d{lng}` segment) and fall within map `maxBounds`. Images use a generic museum Unsplash placeholder — replace with real photos when available.
+
+---
+
+## 2026-06-22 (session 3) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Real photos for 4 museum places
+
+### Summary
+**Replaced Unsplash placeholders with real Wikimedia Commons photos**
+
+Searched Wikimedia Commons via MediaWiki API (with proper User-Agent header to avoid 403). All 3 image URLs verified HTTP 200 via curl.
+
+- `museum-002` ศูนย์ประวัติศาสตร์พระราชวังจันทน์ → `Chan_Royal_Palace_Historical_Center_(March_2022).jpg` (exact match)
+- `museum-003` พิพิธภัณฑ์ทหารกลางแจ้ง กองทัพภาคที่ 3 → `King_Naresuan_Maharat_Camp,_Phitsanulok.jpg` (same army camp where the outdoor museum is located)
+- `museum-004` พิพิธภัณฑ์เมืองพิษณุโลก → `ศาลสมเด็จพระนเรศวรที่วังจันทร์ - panoramio.jpg` (closest Phitsanulok heritage shot available; no exact Wikimedia match found for the city museum)
+- `museum-005` พิพิธภัณฑ์ทหาร กองทัพภาคที่ 3 → same `King_Naresuan_Maharat_Camp` photo (located inside this camp)
+
+---
+
+## 2026-06-22 (session 4) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Fixed 3 broken/missing images
+
+### Summary
+**Replaced broken Google Maps user-photo URLs and stale placeholder with real Wikimedia photos**
+
+The original `lh3.googleusercontent.com/gps-cs-s/...` URLs for `temple-002` and `temple-004` were Google Maps user-contributed photo references that had expired/changed and stopped returning images. `museum-001` was still using the Unsplash generic museum placeholder.
+
+- `temple-002` วัดนางพญา → `Wat_Nang_Phaya,_Phitsanulok_(March_2022)_-_img_04.jpg`
+- `temple-004` วัดจันทร์ตะวันออก → `Wat_Chan_Tawan-ok_-_img_01.jpg`
+- `museum-001` พิพิธภัณฑ์พื้นบ้านจ่าทวี → `Sgt._Maj._Thawee_Folk_Museum,_Phitsanulok,_Sukhothai,_Thailand.JPG`
+
+All 3 URLs verified HTTP 200 via curl.
+
+---
+
+## 2026-06-22 (session 5) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Added 5 cafe places
+
+### Summary
+**Added 5 cafes to Explore map (category: Cafe)**
+
+Coordinates extracted from user-provided Google Maps share URLs.
+
+- `cafe-002` Churn Cafe Phitsanulok (เชิญคาเฟ่) — `[16.8279362, 100.2654858]`
+- `cafe-003` หลง คาเฟ่ — `[16.8265984, 100.2635209]`
+- `cafe-004` Finally Coffee Co. — `[16.8120838, 100.2595145]`
+- `cafe-005` Jipiti (Coffee and friends) — `[16.8177603, 100.2630715]`
+- `cafe-006` Ruma Cafe & Co-Working Space — `[16.8096919, 100.2568048]`
+
+Images are diverse Unsplash cafe photos (no Wikimedia matches for individual cafes). Replace with real photos when available.
+
+---
+
+## 2026-06-22 (session 6) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Added 3 more cafe places
+
+### Summary
+**Added 3 cafes to Explore map (category: Cafe)**
+
+Coordinates extracted from user-provided Google Maps share URLs.
+
+- `cafe-007` The Key Café & Roaster — `[16.8287381, 100.2514281]`
+- `cafe-008` Hashtag coffee & cafe — `[16.8221945, 100.253567]`
+- `cafe-009` Carb and Cof. — `[16.8203643, 100.2550174]`
+
+Images are Unsplash cafe placeholders.
+
+---
+
+## 2026-06-22 (session 7) — Branch: `P_Fix21-06-2026`
+
+### Files Changed
+- `src/components/explore/ExploreSplitView.tsx` — Added 5 park places
+
+### Summary
+**Added 5 public parks to Explore map (category: Park)**
+
+Coordinates extracted from user-provided Google Maps share URLs.
+
+- `park-002` สวนชมน่านเฉลิมพระเกียรติ หน้าวัดราชบูรณะ — `[16.8220341, 100.2600966]`
+- `park-003` สวนชมน่าน (วังจันทน์) — `[16.8194115, 100.257869]`
+- `park-004` สวนสาธารณะเทศบาลพิษณุโลก — `[16.8181684, 100.2594343]`
+- `park-005` สวนสาธารณะริมน้ำน่าน — `[16.8157262, 100.2611198]`
+- `park-006` ลานคนเมือง — `[16.8155243, 100.2627074]`
+
+Images are diverse Unsplash park photos (no Wikimedia matches for these specific parks).
+
+---
+
+## 2026-06-22 (session 8) — Branch: `P_Fix21-06-2026`
+
+### Summary
+**Replaced Unsplash placeholders on 5 parks with real Wikimedia photos of the actual area**
+
+Searched Wikimedia Commons with multiple Thai/English queries. No photos exist for the specific park names, but several authentic photos of the Nan River and surrounding landmarks (where these parks are located) were found.
+
+- `park-002` หน้าวัดราชบูรณะ → `Wat_Ratchaburana,_Phitsanulok.jpg` (park is in front of this temple — exact location match)
+- `park-003` สวนชมน่าน วังจันทน์ → `Nan_River_in_Phitsanulok_2.jpg` (riverside)
+- `park-004` สวนสาธารณะเทศบาล → `Nan_River_in_Phitsanulok_3.jpg`
+- `park-005` สวนสาธารณะริมน้ำน่าน → `Nan_River_in_Phitsanulok_5.jpg` (literal riverside)
+- `park-006` ลานคนเมือง → `Phitsanulok_skyline.JPG` (downtown plaza)
+
+All URLs verified HTTP 200. Photos are area-accurate even when not name-specific.
