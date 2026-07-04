@@ -36,16 +36,10 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className="light">
       <body className={`${ibmPlexSansThai.variable} antialiased min-h-screen bg-background text-foreground`}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            forcedTheme="light"
-            enableSystem={false}
-            disableTransitionOnChange
-          >
+          <ThemeProvider>
             <Navbar />
             {children}
             <BottomNav />

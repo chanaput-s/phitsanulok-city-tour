@@ -5,56 +5,28 @@ import { MapPin, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import PLACES_DATA from "@/data/explorePlaceData.json";
 
-const spots = [
-  {
-    id: 1,
-    exploreId: "temple-001",
-    title: "Wat Phra Si Rattana Mahathat",
-    category: "Temple",
-    price: "Free",
-    location: "Nai Mueang District",
-    image: "https://image-tc.galaxy.tf/wijpeg-3fvrgksxjmddlgex2zime0tve/temple-of-wat-phra-si-rattana-mahathat-hop-inn-hotel_standard.jpg?crop=0%2C0%2C555%2C416",
-  },
-  {
-    id: 2,
-    exploreId: "temple-002",
-    title: "วัดนางพญา",
-    category: "Temple",
-    price: "Free",
-    location: "xxx, xxx",
-    image: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGscDrVIz21hoBsWNi3tjQOHwDmht-g2Ad9UG59jzavArFmNqX1AQexlOWeTlEUveha7Pf_ryyGNFdVgQak_9Qk5O2NsOb0LjmqGPn_cAslVEzHeREo4M4UR7jlGeloSf1Sq-gIUvFK8w=w408-h306-k-no",
-  },
-  {
-    id: 3,
-    exploreId: "temple-003",
-    title: "วัดจันทร์ตะวันตก",
-    category: "Temple",
-    price: "Free",
-    location: "xxx, xxx",
-    image: "https://ik.imagekit.io/tvlk/blog/2024/11/background-religious-attractions-phitsanulok-province-wat-1024x683.jpg?tr=q-70,c-at_max,w-1000,h-600",
-  },
-  {
-    id: 4,
-    exploreId: "temple-004",
-    title: "วัดจันทร์ตะวันออก",
-    category: "Temple",
-    price: "Free",
-    location: "xxx, xxx",
-    image: "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG1wQzuvEvZX4rcOSr5pjQnsU96u0Pwxu2K_oS24zDhNo8u0wzlFy5AzHPtiK6IssiaUT31FKpw3roeDkRJTmT9oelKs3FhKjlCvEZllSzMtdgXNOA3y_gaGk8BDyrWn_FWFZc62A=w408-h306-k-no",
-  },
-];
+const spots = PLACES_DATA
+  .filter((place) => place.highlightSpot)
+  .map((place) => ({
+    id: place.id,
+    title: place.name,
+    category: place.category,
+    location: place.location,
+    image: place.img,
+  }));
 
 const categoryColors: Record<string, string> = {
-  Temple:       "bg-[#E68A58] text-white",
-  "Street Food":"bg-[#C3A05B] text-white",
-  Cafe:         "bg-[#884529] text-white",
-  Park:         "bg-[#818546] text-white",
-  Workshop:     "bg-[#4482A3] text-white",
-  Restaurant:   "bg-[#c4697a] text-white",
-  Bar:          "bg-[#C3A05B] text-white",
-  Museum:       "bg-[#6096a8] text-white",
-  "Local shop": "bg-[#6e9e8a] text-white",
+  Temple:        "bg-[#E68A58] text-white",
+  "Street Food": "bg-[#C3A05B] text-white",
+  Cafe:          "bg-[#884529] text-white",
+  Park:          "bg-[#818546] text-white",
+  Workshop:      "bg-[#4482A3] text-white",
+  Restaurant:    "bg-[#c4697a] text-white",
+  Bar:           "bg-[#C3A05B] text-white",
+  Museum:        "bg-[#6096a8] text-white",
+  "Local shop":  "bg-[#6e9e8a] text-white",
 };
 
 export function TopSpotsCarousel() {
@@ -90,7 +62,7 @@ export function TopSpotsCarousel() {
           className="flex gap-5 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6"
         >
           {spots.map((spot, i) => (
-            <Link key={spot.id} href={`/explore?place=${spot.exploreId}`}>
+            <Link key={spot.id} href={`/explore?place=${spot.id}`}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -104,11 +76,6 @@ export function TopSpotsCarousel() {
                   style={{ backgroundImage: `url(${spot.image})` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D2B]/90 via-[#1D1D2B]/30 to-transparent" />
-
-                {/* Price badge */}
-                <div className="absolute top-4 right-4 bg-[#FCD091] text-[#1D1D2B] text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
-                  {spot.price}
-                </div>
 
                 {/* Bottom content */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">

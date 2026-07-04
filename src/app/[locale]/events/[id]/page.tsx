@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import MOCK_EVENTS from "@/data/mockEvents.json";
+import MOCK_EVENTS from "@/data/Events.json";
 import { EventDetailClient } from "@/components/events/EventDetailClient";
 
 interface Props {

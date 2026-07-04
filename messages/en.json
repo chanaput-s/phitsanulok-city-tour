@@ -45,6 +45,8 @@
     "loading_map": "Loading Map...",
     "gps_unsupported": "GPS not supported on this device",
     "gps_denied": "Location access denied. Please allow location permission.",
+    "gps_out_of_bounds": "You appear to be outside Phitsanulok. Near Me only works within the city.",
+    "near_me_active": "Showing places within 3 km of your location",
     "categories": {
       "cafe": "Cafe",
       "temple": "Temple",

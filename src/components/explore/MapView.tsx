@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMap, CircleMarker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, CircleMarker, ZoomControl } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -88,13 +88,14 @@ export default function MapView({ locations, onSelectId, userPosition }: MapView
         zoom={14}
         minZoom={13}
         scrollWheelZoom
-        zoomControl
+        zoomControl={false}
         className="w-full h-full z-0 font-sans"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
+        <ZoomControl position="bottomright" />
         <BoundsController />
 
         {/* Place markers */}
